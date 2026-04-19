@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-s-s-o-identity-schema.json",
+  "title": "SSOIdentity",
+  "description": "Contains information about your identity source in AWS Single Sign-On. For more information, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">AWS Single Sign-On User Guide</a>.",
+  "type": "object",
+  "properties": {
+    "identityStoreId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/IdentityStoreId"
+        },
+        {
+          "description": "The ID of the AWS SSO identity store."
+        }
+      ]
+    },
+    "userId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SSOReferenceId"
+        },
+        {
+          "description": "The user ID."
+        }
+      ]
+    }
+  },
+  "required": [
+    "identityStoreId"
+  ]
+}

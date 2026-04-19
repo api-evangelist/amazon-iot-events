@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-describe-input-request-schema.json",
+  "title": "DescribeInputRequest",
+  "description": "DescribeInputRequest schema",
+  "type": "object",
+  "properties": {}
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-alarm-model-summaries-structure.json",
+  "name": "AlarmModelSummaries",
+  "description": "AlarmModelSummaries schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "creationTime": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Timestamp"
+          },
+          {
+            "description": "The time the alarm model was created, in the Unix epoch format."
+          }
+        ]
+      },
+      "alarmModelDescription": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AlarmModelDescription"
+          },
+          {
+            "description": "The description of the alarm model."
+          }
+        ]
+      },
+      "alarmModelName": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AlarmModelName"
+          },
+          {
+            "description": "The name of the alarm model."
+          }
+        ]
+      }
+    },
+    "description": "Contains a summary of an alarm model."
+  }
+}

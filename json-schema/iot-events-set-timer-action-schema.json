@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-set-timer-action-schema.json",
+  "title": "SetTimerAction",
+  "description": "Information needed to set the timer.",
+  "type": "object",
+  "properties": {
+    "timerName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TimerName"
+        },
+        {
+          "description": "The name of the timer."
+        }
+      ]
+    },
+    "seconds": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Seconds"
+        },
+        {
+          "deprecated": true,
+          "description": "The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy. The maximum value is 31622400 seconds. seconds is deprecated. You can use durationExpression for SetTimerAction. The value of seconds can be used as a string expression for durationExpression."
+        }
+      ]
+    },
+    "durationExpression": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/VariableValue"
+        },
+        {
+          "description": "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (<code>$variable.&lt;variable-name&gt;</code>), and input values (<code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>) as the duration. The range of the duration is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration is rounded down to the nearest whole number. "
+        }
+      ]
+    }
+  },
+  "required": [
+    "timerName"
+  ]
+}

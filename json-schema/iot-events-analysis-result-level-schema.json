@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-analysis-result-level-schema.json",
+  "title": "AnalysisResultLevel",
+  "description": "AnalysisResultLevel schema",
+  "type": "string",
+  "enum": [
+    "INFO",
+    "WARNING",
+    "ERROR"
+  ]
+}

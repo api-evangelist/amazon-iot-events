@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-detector-model-version-summary-schema.json",
+  "title": "DetectorModelVersionSummary",
+  "description": "Information about the detector model version.",
+  "type": "object",
+  "properties": {
+    "detectorModelName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelName"
+        },
+        {
+          "description": "The name of the detector model."
+        }
+      ]
+    },
+    "detectorModelVersion": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelVersion"
+        },
+        {
+          "description": "The ID of the detector model version."
+        }
+      ]
+    },
+    "detectorModelArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelArn"
+        },
+        {
+          "description": "The ARN of the detector model version."
+        }
+      ]
+    },
+    "roleArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AmazonResourceName"
+        },
+        {
+          "description": "The ARN of the role that grants the detector model permission to perform its tasks."
+        }
+      ]
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The time the detector model version was created."
+        }
+      ]
+    },
+    "lastUpdateTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The last time the detector model version was updated."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelVersionStatus"
+        },
+        {
+          "description": "The status of the detector model version."
+        }
+      ]
+    },
+    "evaluationMethod": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EvaluationMethod"
+        },
+        {
+          "description": "Information about the order in which events are evaluated and how actions are executed. "
+        }
+      ]
+    }
+  }
+}

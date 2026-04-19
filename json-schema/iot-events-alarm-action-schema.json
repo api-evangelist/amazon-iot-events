@@ -1,0 +1,385 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-alarm-action-schema.json",
+  "title": "AlarmAction",
+  "description": "Specifies one of the following actions to receive notifications when the alarm state changes.",
+  "type": "object",
+  "properties": {
+    "sns": {
+      "type": "object",
+      "required": [
+        "targetArn"
+      ],
+      "properties": {
+        "targetArn": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/AmazonResourceName"
+            },
+            {
+              "description": "The ARN of the Amazon SNS target where the message is sent."
+            }
+          ]
+        },
+        "payload": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/Payload"
+            },
+            {
+              "description": "You can configure the action payload when you send a message as an Amazon SNS push notification."
+            }
+          ]
+        }
+      },
+      "description": "Information required to publish the Amazon SNS message."
+    },
+    "iotTopicPublish": {
+      "type": "object",
+      "required": [
+        "mqttTopic"
+      ],
+      "properties": {
+        "mqttTopic": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/MQTTTopic"
+            },
+            {
+              "description": "The MQTT topic of the message. You can use a string expression that includes variables (<code>$variable.&lt;variable-name&gt;</code>) and input values (<code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>) as the topic string."
+            }
+          ]
+        },
+        "payload": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/Payload"
+            },
+            {
+              "description": "You can configure the action payload when you publish a message to an AWS IoT Core topic."
+            }
+          ]
+        }
+      },
+      "description": "Information required to publish the MQTT message through the AWS IoT message broker."
+    },
+    "lambda": {
+      "type": "object",
+      "required": [
+        "functionArn"
+      ],
+      "properties": {
+        "functionArn": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/AmazonResourceName"
+            },
+            {
+              "description": "The ARN of the Lambda function that is executed."
+            }
+          ]
+        },
+        "payload": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/Payload"
+            },
+            {
+              "description": "You can configure the action payload when you send a message to a Lambda function."
+            }
+          ]
+        }
+      },
+      "description": "Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action."
+    },
+    "iotEvents": {
+      "type": "object",
+      "required": [
+        "inputName"
+      ],
+      "properties": {
+        "inputName": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/InputName"
+            },
+            {
+              "description": "The name of the AWS IoT Events input where the data is sent."
+            }
+          ]
+        },
+        "payload": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/Payload"
+            },
+            {
+              "description": "You can configure the action payload when you send a message to an AWS IoT Events input."
+            }
+          ]
+        }
+      },
+      "description": "Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action."
+    },
+    "sqs": {
+      "type": "object",
+      "required": [
+        "queueUrl"
+      ],
+      "properties": {
+        "queueUrl": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/QueueUrl"
+            },
+            {
+              "description": "The URL of the SQS queue where the data is written."
+            }
+          ]
+        },
+        "useBase64": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/UseBase64"
+            },
+            {
+              "description": "Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE."
+            }
+          ]
+        },
+        "payload": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/Payload"
+            },
+            {
+              "description": "You can configure the action payload when you send a message to an Amazon SQS queue."
+            }
+          ]
+        }
+      },
+      "description": "Sends information about the detector model instance and the event that triggered the action to an Amazon SQS queue."
+    },
+    "firehose": {
+      "type": "object",
+      "required": [
+        "deliveryStreamName"
+      ],
+      "properties": {
+        "deliveryStreamName": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DeliveryStreamName"
+            },
+            {
+              "description": "The name of the Kinesis Data Firehose delivery stream where the data is written."
+            }
+          ]
+        },
+        "separator": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/FirehoseSeparator"
+            },
+            {
+              "description": "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma)."
+            }
+          ]
+        },
+        "payload": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/Payload"
+            },
+            {
+              "description": "You can configure the action payload when you send a message to an Amazon Kinesis Data Firehose delivery stream."
+            }
+          ]
+        }
+      },
+      "description": "Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream."
+    },
+    "dynamoDB": {
+      "type": "object",
+      "required": [
+        "hashKeyField",
+        "hashKeyValue",
+        "tableName"
+      ],
+      "properties": {
+        "hashKeyType": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DynamoKeyType"
+            },
+            {
+              "description": "<p>The data type for the hash key (also called the partition key). You can specify the following values:</p> <ul> <li> <p> <code>'STRING'</code> - The hash key is a string.</p> </li> <li> <p> <code>'NUMBER'</code> - The hash key is a number.</p> </li> </ul> <p>If you don't specify <code>hashKeyType</code>, the default value is <code>'STRING'</code>.</p>"
+            }
+          ]
+        },
+        "hashKeyField": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DynamoKeyField"
+            },
+            {
+              "description": "The name of the hash key (also called the partition key). The <code>hashKeyField</code> value must match the partition key of the target DynamoDB table."
+            }
+          ]
+        },
+        "hashKeyValue": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DynamoKeyValue"
+            },
+            {
+              "description": "The value of the hash key (also called the partition key)."
+            }
+          ]
+        },
+        "rangeKeyType": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DynamoKeyType"
+            },
+            {
+              "description": "<p>The data type for the range key (also called the sort key), You can specify the following values:</p> <ul> <li> <p> <code>'STRING'</code> - The range key is a string.</p> </li> <li> <p> <code>'NUMBER'</code> - The range key is number.</p> </li> </ul> <p>If you don't specify <code>rangeKeyField</code>, the default value is <code>'STRING'</code>.</p>"
+            }
+          ]
+        },
+        "rangeKeyField": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DynamoKeyField"
+            },
+            {
+              "description": "The name of the range key (also called the sort key). The <code>rangeKeyField</code> value must match the sort key of the target DynamoDB table. "
+            }
+          ]
+        },
+        "rangeKeyValue": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DynamoKeyValue"
+            },
+            {
+              "description": "The value of the range key (also called the sort key)."
+            }
+          ]
+        },
+        "operation": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DynamoOperation"
+            },
+            {
+              "description": "<p>The type of operation to perform. You can specify the following values: </p> <ul> <li> <p> <code>'INSERT'</code> - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.</p> </li> <li> <p> <code>'UPDATE'</code> - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.</p> </li> <li> <p> <code>'DELETE'</code> - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.</p> </li> </ul> <p>If you don't specify this parameter, AWS IoT Events triggers the <code>'INSERT'</code> operation.</p>"
+            }
+          ]
+        },
+        "payloadField": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DynamoKeyField"
+            },
+            {
+              "description": "<p>The name of the DynamoDB column that receives the action payload.</p> <p>If you don't specify this parameter, the name of the DynamoDB column is <code>payload</code>.</p>"
+            }
+          ]
+        },
+        "tableName": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DynamoTableName"
+            },
+            {
+              "description": "The name of the DynamoDB table. The <code>tableName</code> value must match the table name of the target DynamoDB table. "
+            }
+          ]
+        },
+        "payload": {
+          "$ref": "#/components/schemas/Payload"
+        }
+      },
+      "description": "<p>Defines an action to write to the Amazon DynamoDB table that you created. The standard action payload contains all the information about the detector model instance and the event that triggered the action. You can customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify.</p> <p>You must use expressions for all parameters in <code>DynamoDBAction</code>. The expressions accept literals, operators, functions, references, and substitution templates.</p> <p class=\"title\"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>hashKeyType</code> parameter can be <code>'STRING'</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>hashKeyField</code> parameter can be <code>$input.GreenhouseInput.name</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>hashKeyValue</code> parameter uses a substitution template. </p> <p> <code>'${$input.GreenhouseInput.temperature * 6 / 5 + 32} in Fahrenheit'</code> </p> </li> <li> <p>For a string concatenation, you must use <code>+</code>. A string concatenation can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>tableName</code> parameter uses a string concatenation. </p> <p> <code>'GreenhouseTemperatureTable ' + $input.GreenhouseInput.date</code> </p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p> <p>If the defined payload type is a string, <code>DynamoDBAction</code> writes non-JSON data to the DynamoDB table as binary data. The DynamoDB console displays the data as Base64-encoded text. The value for the <code>payloadField</code> parameter is <code>&lt;payload-field&gt;_raw</code>.</p>"
+    },
+    "dynamoDBv2": {
+      "type": "object",
+      "required": [
+        "tableName"
+      ],
+      "properties": {
+        "tableName": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DynamoTableName"
+            },
+            {
+              "description": "The name of the DynamoDB table."
+            }
+          ]
+        },
+        "payload": {
+          "$ref": "#/components/schemas/Payload"
+        }
+      },
+      "description": "<p>Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all the information about the detector model instance and the event that triggered the action. You can customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.</p> <p>You must use expressions for all parameters in <code>DynamoDBv2Action</code>. The expressions accept literals, operators, functions, references, and substitution templates.</p> <p class=\"title\"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>tableName</code> parameter can be <code>'GreenhouseTemperatureTable'</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>tableName</code> parameter can be <code>$variable.ddbtableName</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>contentExpression</code> parameter in <code>Payload</code> uses a substitution template. </p> <p> <code>'{\\\"sensorID\\\": \\\"${$input.GreenhouseInput.sensor_id}\\\", \\\"temperature\\\": \\\"${$input.GreenhouseInput.temperature * 9 / 5 + 32}\\\"}'</code> </p> </li> <li> <p>For a string concatenation, you must use <code>+</code>. A string concatenation can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>tableName</code> parameter uses a string concatenation. </p> <p> <code>'GreenhouseTemperatureTable ' + $input.GreenhouseInput.date</code> </p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p> <p>The value for the <code>type</code> parameter in <code>Payload</code> must be <code>JSON</code>.</p>"
+    },
+    "iotSiteWise": {
+      "type": "object",
+      "properties": {
+        "entryId": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/AssetPropertyEntryId"
+            },
+            {
+              "description": "A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier."
+            }
+          ]
+        },
+        "assetId": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/AssetId"
+            },
+            {
+              "description": "The ID of the asset that has the specified property."
+            }
+          ]
+        },
+        "propertyId": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/AssetPropertyId"
+            },
+            {
+              "description": "The ID of the asset property."
+            }
+          ]
+        },
+        "propertyAlias": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/AssetPropertyAlias"
+            },
+            {
+              "description": "The alias of the asset property."
+            }
+          ]
+        },
+        "propertyValue": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/AssetPropertyValue"
+            },
+            {
+              "description": "The value to send to the asset property. This value contains timestamp, quality, and value (TQV) information. "
+            }
+          ]
+        }
+      },
+      "description": "<p>Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise.</p> <p>You must use expressions for all parameters in <code>IotSiteWiseAction</code>. The expressions accept literals, operators, functions, references, and substitutions templates.</p> <p class=\"title\"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>propertyAlias</code> parameter can be <code>'/company/windfarm/3/turbine/7/temperature'</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>assetId</code> parameter can be <code>$input.TurbineInput.assetId1</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>propertyAlias</code> parameter uses a substitution template. </p> <p> <code>'company/windfarm/${$input.TemperatureInput.sensorData.windfarmID}/turbine/ ${$input.TemperatureInput.sensorData.turbineID}/temperature'</code> </p> </li> </ul> <p>You must specify either <code>propertyAlias</code> or both <code>assetId</code> and <code>propertyId</code> to identify the target asset property in AWS IoT SiteWise.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p>"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-get-detector-model-analysis-results-response-structure.json",
+  "name": "GetDetectorModelAnalysisResultsResponse",
+  "description": "GetDetectorModelAnalysisResultsResponse schema",
+  "type": "object",
+  "properties": {
+    "analysisResults": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AnalysisResults"
+        },
+        {
+          "description": "Contains information about one or more analysis results."
+        }
+      ]
+    },
+    "nextToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/NextToken"
+        },
+        {
+          "description": "The token that you can use to return the next set of results, or <code>null</code> if there are no more results."
+        }
+      ]
+    }
+  }
+}

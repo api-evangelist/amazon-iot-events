@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-actions-schema.json",
+  "title": "Actions",
+  "description": "Actions schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "setVariable": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SetVariableAction"
+          },
+          {
+            "description": "Sets a variable to a specified value."
+          }
+        ]
+      },
+      "sns": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SNSTopicPublishAction"
+          },
+          {
+            "description": "Sends an Amazon SNS message."
+          }
+        ]
+      },
+      "iotTopicPublish": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IotTopicPublishAction"
+          },
+          {
+            "description": "Publishes an MQTT message with the given topic to the AWS IoT message broker."
+          }
+        ]
+      },
+      "setTimer": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SetTimerAction"
+          },
+          {
+            "description": "Information needed to set the timer."
+          }
+        ]
+      },
+      "clearTimer": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ClearTimerAction"
+          },
+          {
+            "description": "Information needed to clear the timer."
+          }
+        ]
+      },
+      "resetTimer": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResetTimerAction"
+          },
+          {
+            "description": "Information needed to reset the timer."
+          }
+        ]
+      },
+      "lambda": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LambdaAction"
+          },
+          {
+            "description": "Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action."
+          }
+        ]
+      },
+      "iotEvents": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IotEventsAction"
+          },
+          {
+            "description": "Sends AWS IoT Events input, which passes information about the detector model instance and the event that triggered the action."
+          }
+        ]
+      },
+      "sqs": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SqsAction"
+          },
+          {
+            "description": "Sends information about the detector model instance and the event that triggered the action to an Amazon SQS queue."
+          }
+        ]
+      },
+      "firehose": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/FirehoseAction"
+          },
+          {
+            "description": "Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream."
+          }
+        ]
+      },
+      "dynamoDB": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DynamoDBAction"
+          },
+          {
+            "description": "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html\">Actions</a> in <i>AWS IoT Events Developer Guide</i>."
+          }
+        ]
+      },
+      "dynamoDBv2": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DynamoDBv2Action"
+          },
+          {
+            "description": "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html\">Actions</a> in <i>AWS IoT Events Developer Guide</i>."
+          }
+        ]
+      },
+      "iotSiteWise": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IotSiteWiseAction"
+          },
+          {
+            "description": "Sends information about the detector model instance and the event that triggered the action to an asset property in AWS IoT SiteWise ."
+          }
+        ]
+      }
+    },
+    "description": "An action to be performed when the <code>condition</code> is TRUE."
+  }
+}

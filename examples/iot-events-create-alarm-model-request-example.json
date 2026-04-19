@@ -1,0 +1,12 @@
+{
+  "alarmModelName": "example-resource",
+  "alarmModelDescription": "example-value",
+  "roleArn": "arn:aws:iot:us-east-1:123456789012:thing/example",
+  "tags": "example-value",
+  "key": "example-value",
+  "severity": "example-value",
+  "alarmRule": "example-value",
+  "alarmNotification": "example-value",
+  "alarmEventActions": "example-value",
+  "alarmCapabilities": "example-value"
+}

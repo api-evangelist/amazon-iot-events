@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-state-schema.json",
+  "title": "State",
+  "description": "Information that defines a state of a detector.",
+  "type": "object",
+  "properties": {
+    "stateName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StateName"
+        },
+        {
+          "description": "The name of the state."
+        }
+      ]
+    },
+    "onInput": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/OnInputLifecycle"
+        },
+        {
+          "description": "When an input is received and the <code>condition</code> is TRUE, perform the specified <code>actions</code>."
+        }
+      ]
+    },
+    "onEnter": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/OnEnterLifecycle"
+        },
+        {
+          "description": "When entering this state, perform these <code>actions</code> if the <code>condition</code> is TRUE."
+        }
+      ]
+    },
+    "onExit": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/OnExitLifecycle"
+        },
+        {
+          "description": "When exiting this state, perform these <code>actions</code> if the specified <code>condition</code> is <code>TRUE</code>."
+        }
+      ]
+    }
+  },
+  "required": [
+    "stateName"
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "deliveryStreamName": "example-resource",
+  "separator": "example-value",
+  "payload": "example-value"
+}

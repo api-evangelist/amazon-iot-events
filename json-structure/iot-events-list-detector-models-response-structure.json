@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-list-detector-models-response-structure.json",
+  "name": "ListDetectorModelsResponse",
+  "description": "ListDetectorModelsResponse schema",
+  "type": "object",
+  "properties": {
+    "detectorModelSummaries": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelSummaries"
+        },
+        {
+          "description": "Summary information about the detector models."
+        }
+      ]
+    },
+    "nextToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/NextToken"
+        },
+        {
+          "description": "The token that you can use to return the next set of results, or <code>null</code> if there are no more results."
+        }
+      ]
+    }
+  }
+}

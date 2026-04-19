@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-input-configuration-schema.json",
+  "title": "InputConfiguration",
+  "description": "Information about the configuration of an input.",
+  "type": "object",
+  "properties": {
+    "inputName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/InputName"
+        },
+        {
+          "description": "The name of the input."
+        }
+      ]
+    },
+    "inputDescription": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/InputDescription"
+        },
+        {
+          "description": "A brief description of the input."
+        }
+      ]
+    },
+    "inputArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/InputArn"
+        },
+        {
+          "description": "The ARN of the input."
+        }
+      ]
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The time the input was created."
+        }
+      ]
+    },
+    "lastUpdateTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The last time the input was updated."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/InputStatus"
+        },
+        {
+          "description": "The status of the input."
+        }
+      ]
+    }
+  },
+  "required": [
+    "inputName",
+    "inputArn",
+    "creationTime",
+    "lastUpdateTime",
+    "status"
+  ]
+}

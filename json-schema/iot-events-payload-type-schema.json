@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-payload-type-schema.json",
+  "title": "PayloadType",
+  "description": "PayloadType schema",
+  "type": "string",
+  "enum": [
+    "STRING",
+    "JSON"
+  ]
+}

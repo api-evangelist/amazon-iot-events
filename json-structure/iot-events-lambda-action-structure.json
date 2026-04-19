@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-lambda-action-structure.json",
+  "name": "LambdaAction",
+  "description": "Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.",
+  "type": "object",
+  "properties": {
+    "functionArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AmazonResourceName"
+        },
+        {
+          "description": "The ARN of the Lambda function that is executed."
+        }
+      ]
+    },
+    "payload": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Payload"
+        },
+        {
+          "description": "You can configure the action payload when you send a message to a Lambda function."
+        }
+      ]
+    }
+  },
+  "required": [
+    "functionArn"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-alarm-actions-structure.json",
+  "name": "AlarmActions",
+  "description": "AlarmActions schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "sns": {
+        "$ref": "#/components/schemas/SNSTopicPublishAction"
+      },
+      "iotTopicPublish": {
+        "$ref": "#/components/schemas/IotTopicPublishAction"
+      },
+      "lambda": {
+        "$ref": "#/components/schemas/LambdaAction"
+      },
+      "iotEvents": {
+        "$ref": "#/components/schemas/IotEventsAction"
+      },
+      "sqs": {
+        "$ref": "#/components/schemas/SqsAction"
+      },
+      "firehose": {
+        "$ref": "#/components/schemas/FirehoseAction"
+      },
+      "dynamoDB": {
+        "$ref": "#/components/schemas/DynamoDBAction"
+      },
+      "dynamoDBv2": {
+        "$ref": "#/components/schemas/DynamoDBv2Action"
+      },
+      "iotSiteWise": {
+        "$ref": "#/components/schemas/IotSiteWiseAction"
+      }
+    },
+    "description": "Specifies one of the following actions to receive notifications when the alarm state changes."
+  }
+}

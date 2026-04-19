@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-detector-model-configuration-schema.json",
+  "title": "DetectorModelConfiguration",
+  "description": "Information about how the detector model is configured.",
+  "type": "object",
+  "properties": {
+    "detectorModelName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelName"
+        },
+        {
+          "description": "The name of the detector model."
+        }
+      ]
+    },
+    "detectorModelVersion": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelVersion"
+        },
+        {
+          "description": "The version of the detector model."
+        }
+      ]
+    },
+    "detectorModelDescription": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelDescription"
+        },
+        {
+          "description": "A brief description of the detector model."
+        }
+      ]
+    },
+    "detectorModelArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelArn"
+        },
+        {
+          "description": "The ARN of the detector model."
+        }
+      ]
+    },
+    "roleArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AmazonResourceName"
+        },
+        {
+          "description": "The ARN of the role that grants permission to AWS IoT Events to perform its operations."
+        }
+      ]
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The time the detector model was created."
+        }
+      ]
+    },
+    "lastUpdateTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The time the detector model was last updated."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelVersionStatus"
+        },
+        {
+          "description": "The status of the detector model."
+        }
+      ]
+    },
+    "key": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AttributeJsonPath"
+        },
+        {
+          "description": "<p>The value used to identify a detector instance. When a device or system sends input, a new detector instance with a unique key value is created. AWS IoT Events can continue to route input to its corresponding detector instance based on this identifying information. </p> <p>This parameter uses a JSON-path expression to select the attribute-value pair in the message payload that is used for identification. To route the message to the correct detector instance, the device must send a message payload that contains the same attribute-value.</p>"
+        }
+      ]
+    },
+    "evaluationMethod": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EvaluationMethod"
+        },
+        {
+          "description": "Information about the order in which events are evaluated and how actions are executed. "
+        }
+      ]
+    }
+  }
+}

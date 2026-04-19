@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-list-alarm-models-response-structure.json",
+  "name": "ListAlarmModelsResponse",
+  "description": "ListAlarmModelsResponse schema",
+  "type": "object",
+  "properties": {
+    "alarmModelSummaries": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmModelSummaries"
+        },
+        {
+          "description": "A list that summarizes each alarm model."
+        }
+      ]
+    },
+    "nextToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/NextToken"
+        },
+        {
+          "description": "The token that you can use to return the next set of results, or <code>null</code> if there are no more results."
+        }
+      ]
+    }
+  }
+}

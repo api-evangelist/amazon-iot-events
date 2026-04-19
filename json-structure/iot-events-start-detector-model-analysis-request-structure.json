@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-start-detector-model-analysis-request-structure.json",
+  "name": "StartDetectorModelAnalysisRequest",
+  "description": "StartDetectorModelAnalysisRequest schema",
+  "type": "object",
+  "properties": {
+    "detectorModelDefinition": {
+      "type": "object",
+      "required": [
+        "states",
+        "initialStateName"
+      ],
+      "properties": {
+        "states": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/States"
+            },
+            {
+              "description": "Information about the states of the detector."
+            }
+          ]
+        },
+        "initialStateName": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/StateName"
+            },
+            {
+              "description": "The state that is entered at the creation of each detector (instance)."
+            }
+          ]
+        }
+      },
+      "description": "Information that defines how a detector operates."
+    }
+  },
+  "required": [
+    "detectorModelDefinition"
+  ]
+}

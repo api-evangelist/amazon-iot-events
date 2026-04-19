@@ -1,0 +1,67 @@
+vocabulary: "1.0.0"
+info:
+  provider: Amazon IoT Events
+  description: Vocabulary for Amazon IoT Events covering all API resources and operations.
+  created: "2026-04-19"
+  modified: "2026-04-19"
+operational:
+  apis:
+    - namespace: iot-events
+      version: "2024-01-01"
+      baseUrl: https://iotevents.amazonaws.com
+      status: active
+  resources:
+    - name: resources
+      api: iot-events
+      actions: [list, create, delete, get, update]
+  actions:
+    - name: list
+      methods: [GET]
+      pattern: read
+    - name: create
+      methods: [POST]
+      pattern: write
+    - name: get
+      methods: [GET]
+      pattern: read
+    - name: update
+      methods: [PUT, PATCH]
+      pattern: write
+    - name: delete
+      methods: [DELETE]
+      pattern: destructive
+  authentication:
+    schemes:
+      - type: AWS Signature Version 4
+        placement: header
+capability:
+  workflows:
+    - name: Iot Event Management
+      file: capabilities/iot-event-management.yaml
+      apis: [iot-events]
+      toolCount: 8
+      personas: [IoT Developer, Solutions Architect]
+  personas:
+    - id: primary-persona
+      name: IoT Developer
+      description: Manages Amazon IoT Events resources and operations
+  domains:
+    - name: IoT
+      description: Detect and respond to events from IoT sensors and applications.
+  namespaces:
+    - name: iot-events
+      type: consumed
+    - name: iot-event-management-api
+      type: rest
+      port: 8080
+    - name: iot-event-management-mcp
+      type: mcp
+      port: 9090
+  binds:
+    - AWS_ACCESS_KEY_ID
+    - AWS_SECRET_ACCESS_KEY
+crossReference:
+  - resource: resources
+    operations: [listdetectormodels, createdetectormodel, listinputs, createinput]
+    workflows: [Iot Event Management]
+    personas: [IoT Developer, Solutions Architect]

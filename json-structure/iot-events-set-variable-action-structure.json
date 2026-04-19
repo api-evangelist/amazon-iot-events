@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-set-variable-action-structure.json",
+  "name": "SetVariableAction",
+  "description": "Information about the variable and its new value.",
+  "type": "object",
+  "properties": {
+    "variableName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/VariableName"
+        },
+        {
+          "description": "The name of the variable."
+        }
+      ]
+    },
+    "value": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/VariableValue"
+        },
+        {
+          "description": "The new value of the variable."
+        }
+      ]
+    }
+  },
+  "required": [
+    "variableName",
+    "value"
+  ]
+}

@@ -1,0 +1,674 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amzn": "https://amazonaws.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "AcknowledgeFlow": "amzn:AcknowledgeFlow",
+    "Action": "amzn:Action",
+    "AlarmAction": "amzn:AlarmAction",
+    "AlarmCapabilities": "amzn:AlarmCapabilities",
+    "AlarmEventActions": "amzn:AlarmEventActions",
+    "AlarmModelSummary": "amzn:AlarmModelSummary",
+    "AlarmModelVersionSummary": "amzn:AlarmModelVersionSummary",
+    "AlarmNotification": "amzn:AlarmNotification",
+    "AlarmRule": "amzn:AlarmRule",
+    "AnalysisResult": "amzn:AnalysisResult",
+    "AnalysisResultLocation": "amzn:AnalysisResultLocation",
+    "AssetPropertyTimestamp": "amzn:AssetPropertyTimestamp",
+    "AssetPropertyValue": "amzn:AssetPropertyValue",
+    "AssetPropertyVariant": "amzn:AssetPropertyVariant",
+    "Attribute": "amzn:Attribute",
+    "ClearTimerAction": "amzn:ClearTimerAction",
+    "CreateAlarmModelRequest": "amzn:CreateAlarmModelRequest",
+    "CreateAlarmModelResponse": "amzn:CreateAlarmModelResponse",
+    "CreateDetectorModelRequest": "amzn:CreateDetectorModelRequest",
+    "CreateDetectorModelResponse": "amzn:CreateDetectorModelResponse",
+    "CreateInputRequest": "amzn:CreateInputRequest",
+    "CreateInputResponse": "amzn:CreateInputResponse",
+    "DeleteAlarmModelRequest": "amzn:DeleteAlarmModelRequest",
+    "DeleteAlarmModelResponse": "amzn:DeleteAlarmModelResponse",
+    "DeleteDetectorModelRequest": "amzn:DeleteDetectorModelRequest",
+    "DeleteDetectorModelResponse": "amzn:DeleteDetectorModelResponse",
+    "DeleteInputRequest": "amzn:DeleteInputRequest",
+    "DeleteInputResponse": "amzn:DeleteInputResponse",
+    "DescribeAlarmModelRequest": "amzn:DescribeAlarmModelRequest",
+    "DescribeAlarmModelResponse": "amzn:DescribeAlarmModelResponse",
+    "DescribeDetectorModelAnalysisRequest": "amzn:DescribeDetectorModelAnalysisRequest",
+    "DescribeDetectorModelAnalysisResponse": "amzn:DescribeDetectorModelAnalysisResponse",
+    "DescribeDetectorModelRequest": "amzn:DescribeDetectorModelRequest",
+    "DescribeDetectorModelResponse": "amzn:DescribeDetectorModelResponse",
+    "DescribeInputRequest": "amzn:DescribeInputRequest",
+    "DescribeInputResponse": "amzn:DescribeInputResponse",
+    "DescribeLoggingOptionsRequest": "amzn:DescribeLoggingOptionsRequest",
+    "DescribeLoggingOptionsResponse": "amzn:DescribeLoggingOptionsResponse",
+    "DetectorDebugOption": "amzn:DetectorDebugOption",
+    "DetectorModel": "amzn:DetectorModel",
+    "DetectorModelConfiguration": "amzn:DetectorModelConfiguration",
+    "DetectorModelDefinition": "amzn:DetectorModelDefinition",
+    "DetectorModelSummary": "amzn:DetectorModelSummary",
+    "DetectorModelVersionSummary": "amzn:DetectorModelVersionSummary",
+    "DynamoDBAction": "amzn:DynamoDBAction",
+    "DynamoDBv2Action": "amzn:DynamoDBv2Action",
+    "EmailConfiguration": "amzn:EmailConfiguration",
+    "EmailContent": "amzn:EmailContent",
+    "EmailRecipients": "amzn:EmailRecipients",
+    "Event": "amzn:Event",
+    "FirehoseAction": "amzn:FirehoseAction",
+    "GetDetectorModelAnalysisResultsRequest": "amzn:GetDetectorModelAnalysisResultsRequest",
+    "GetDetectorModelAnalysisResultsResponse": "amzn:GetDetectorModelAnalysisResultsResponse",
+    "InitializationConfiguration": "amzn:InitializationConfiguration",
+    "Input": "amzn:Input",
+    "InputConfiguration": "amzn:InputConfiguration",
+    "InputDefinition": "amzn:InputDefinition",
+    "InputIdentifier": "amzn:InputIdentifier",
+    "InputSummary": "amzn:InputSummary",
+    "IotEventsAction": "amzn:IotEventsAction",
+    "IotEventsInputIdentifier": "amzn:IotEventsInputIdentifier",
+    "IotSiteWiseAction": "amzn:IotSiteWiseAction",
+    "IotSiteWiseAssetModelPropertyIdentifier": "amzn:IotSiteWiseAssetModelPropertyIdentifier",
+    "IotSiteWiseInputIdentifier": "amzn:IotSiteWiseInputIdentifier",
+    "IotTopicPublishAction": "amzn:IotTopicPublishAction",
+    "LambdaAction": "amzn:LambdaAction",
+    "ListAlarmModelVersionsRequest": "amzn:ListAlarmModelVersionsRequest",
+    "ListAlarmModelVersionsResponse": "amzn:ListAlarmModelVersionsResponse",
+    "ListAlarmModelsRequest": "amzn:ListAlarmModelsRequest",
+    "ListAlarmModelsResponse": "amzn:ListAlarmModelsResponse",
+    "ListDetectorModelVersionsRequest": "amzn:ListDetectorModelVersionsRequest",
+    "ListDetectorModelVersionsResponse": "amzn:ListDetectorModelVersionsResponse",
+    "ListDetectorModelsRequest": "amzn:ListDetectorModelsRequest",
+    "ListDetectorModelsResponse": "amzn:ListDetectorModelsResponse",
+    "ListInputRoutingsRequest": "amzn:ListInputRoutingsRequest",
+    "ListInputRoutingsResponse": "amzn:ListInputRoutingsResponse",
+    "ListInputsRequest": "amzn:ListInputsRequest",
+    "ListInputsResponse": "amzn:ListInputsResponse",
+    "ListTagsForResourceRequest": "amzn:ListTagsForResourceRequest",
+    "ListTagsForResourceResponse": "amzn:ListTagsForResourceResponse",
+    "LoggingOptions": "amzn:LoggingOptions",
+    "NotificationAction": "amzn:NotificationAction",
+    "NotificationTargetActions": "amzn:NotificationTargetActions",
+    "OnEnterLifecycle": "amzn:OnEnterLifecycle",
+    "OnExitLifecycle": "amzn:OnExitLifecycle",
+    "OnInputLifecycle": "amzn:OnInputLifecycle",
+    "Payload": "amzn:Payload",
+    "PutLoggingOptionsRequest": "amzn:PutLoggingOptionsRequest",
+    "RecipientDetail": "amzn:RecipientDetail",
+    "ResetTimerAction": "amzn:ResetTimerAction",
+    "RoutedResource": "amzn:RoutedResource",
+    "SMSConfiguration": "amzn:SMSConfiguration",
+    "SNSTopicPublishAction": "amzn:SNSTopicPublishAction",
+    "SSOIdentity": "amzn:SSOIdentity",
+    "SetTimerAction": "amzn:SetTimerAction",
+    "SetVariableAction": "amzn:SetVariableAction",
+    "SimpleRule": "amzn:SimpleRule",
+    "SqsAction": "amzn:SqsAction",
+    "StartDetectorModelAnalysisRequest": "amzn:StartDetectorModelAnalysisRequest",
+    "StartDetectorModelAnalysisResponse": "amzn:StartDetectorModelAnalysisResponse",
+    "acknowledgeFlow": {
+      "@id": "amzn:acknowledgeFlow",
+      "@type": "xsd:string"
+    },
+    "action": {
+      "@id": "amzn:action",
+      "@type": "xsd:string"
+    },
+    "actions": {
+      "@id": "amzn:actions",
+      "@type": "xsd:string"
+    },
+    "additionalMessage": {
+      "@id": "amzn:additionalMessage",
+      "@type": "xsd:string"
+    },
+    "alarmActions": {
+      "@id": "amzn:alarmActions",
+      "@type": "xsd:string"
+    },
+    "alarmCapabilities": {
+      "@id": "amzn:alarmCapabilities",
+      "@type": "xsd:string"
+    },
+    "alarmEventActions": {
+      "@id": "amzn:alarmEventActions",
+      "@type": "xsd:string"
+    },
+    "alarmModelArn": {
+      "@id": "amzn:alarmModelArn",
+      "@type": "xsd:string"
+    },
+    "alarmModelDescription": {
+      "@id": "amzn:alarmModelDescription",
+      "@type": "xsd:string"
+    },
+    "alarmModelName": {
+      "@id": "amzn:alarmModelName",
+      "@type": "xsd:string"
+    },
+    "alarmModelSummaries": {
+      "@id": "amzn:alarmModelSummaries",
+      "@type": "xsd:string"
+    },
+    "alarmModelVersion": {
+      "@id": "amzn:alarmModelVersion",
+      "@type": "xsd:string"
+    },
+    "alarmModelVersionSummaries": {
+      "@id": "amzn:alarmModelVersionSummaries",
+      "@type": "xsd:string"
+    },
+    "alarmNotification": {
+      "@id": "amzn:alarmNotification",
+      "@type": "xsd:string"
+    },
+    "alarmRule": {
+      "@id": "amzn:alarmRule",
+      "@type": "xsd:string"
+    },
+    "analysisId": {
+      "@id": "amzn:analysisId",
+      "@type": "xsd:string"
+    },
+    "analysisResults": {
+      "@id": "amzn:analysisResults",
+      "@type": "xsd:string"
+    },
+    "arn": {
+      "@id": "amzn:arn",
+      "@type": "xsd:string"
+    },
+    "assetId": {
+      "@id": "amzn:assetId",
+      "@type": "xsd:string"
+    },
+    "assetModelId": {
+      "@id": "amzn:assetModelId",
+      "@type": "xsd:string"
+    },
+    "attributes": {
+      "@id": "amzn:attributes",
+      "@type": "xsd:string"
+    },
+    "booleanValue": {
+      "@id": "amzn:booleanValue",
+      "@type": "xsd:string"
+    },
+    "clearTimer": {
+      "@id": "amzn:clearTimer",
+      "@type": "xsd:string"
+    },
+    "comparisonOperator": {
+      "@id": "amzn:comparisonOperator",
+      "@type": "xsd:string"
+    },
+    "condition": {
+      "@id": "amzn:condition",
+      "@type": "xsd:string"
+    },
+    "content": {
+      "@id": "amzn:content",
+      "@type": "xsd:string"
+    },
+    "contentExpression": {
+      "@id": "amzn:contentExpression",
+      "@type": "xsd:string"
+    },
+    "creationTime": {
+      "@id": "amzn:creationTime",
+      "@type": "xsd:string"
+    },
+    "deliveryStreamName": {
+      "@id": "amzn:deliveryStreamName",
+      "@type": "xsd:string"
+    },
+    "detectorDebugOptions": {
+      "@id": "amzn:detectorDebugOptions",
+      "@type": "xsd:string"
+    },
+    "detectorModel": {
+      "@id": "amzn:detectorModel",
+      "@type": "xsd:string"
+    },
+    "detectorModelArn": {
+      "@id": "amzn:detectorModelArn",
+      "@type": "xsd:string"
+    },
+    "detectorModelConfiguration": {
+      "@id": "amzn:detectorModelConfiguration",
+      "@type": "xsd:string"
+    },
+    "detectorModelDefinition": {
+      "@id": "amzn:detectorModelDefinition",
+      "@type": "xsd:string"
+    },
+    "detectorModelDescription": {
+      "@id": "amzn:detectorModelDescription",
+      "@type": "xsd:string"
+    },
+    "detectorModelName": {
+      "@id": "amzn:detectorModelName",
+      "@type": "xsd:string"
+    },
+    "detectorModelSummaries": {
+      "@id": "amzn:detectorModelSummaries",
+      "@type": "xsd:string"
+    },
+    "detectorModelVersion": {
+      "@id": "amzn:detectorModelVersion",
+      "@type": "xsd:string"
+    },
+    "detectorModelVersionSummaries": {
+      "@id": "amzn:detectorModelVersionSummaries",
+      "@type": "xsd:string"
+    },
+    "disabledOnInitialization": {
+      "@id": "amzn:disabledOnInitialization",
+      "@type": "xsd:string"
+    },
+    "doubleValue": {
+      "@id": "amzn:doubleValue",
+      "@type": "xsd:string"
+    },
+    "durationExpression": {
+      "@id": "amzn:durationExpression",
+      "@type": "xsd:string"
+    },
+    "dynamoDB": {
+      "@id": "amzn:dynamoDB",
+      "@type": "xsd:string"
+    },
+    "dynamoDBv2": {
+      "@id": "amzn:dynamoDBv2",
+      "@type": "xsd:string"
+    },
+    "emailConfigurations": {
+      "@id": "amzn:emailConfigurations",
+      "@type": "xsd:string"
+    },
+    "enabled": {
+      "@id": "amzn:enabled",
+      "@type": "xsd:string"
+    },
+    "entryId": {
+      "@id": "amzn:entryId",
+      "@type": "xsd:string"
+    },
+    "evaluationMethod": {
+      "@id": "amzn:evaluationMethod",
+      "@type": "xsd:string"
+    },
+    "eventName": {
+      "@id": "amzn:eventName",
+      "@type": "xsd:string"
+    },
+    "events": {
+      "@id": "amzn:events",
+      "@type": "xsd:string"
+    },
+    "firehose": {
+      "@id": "amzn:firehose",
+      "@type": "xsd:string"
+    },
+    "from": {
+      "@id": "amzn:from",
+      "@type": "xsd:string"
+    },
+    "functionArn": {
+      "@id": "amzn:functionArn",
+      "@type": "xsd:string"
+    },
+    "hashKeyField": {
+      "@id": "amzn:hashKeyField",
+      "@type": "xsd:string"
+    },
+    "hashKeyType": {
+      "@id": "amzn:hashKeyType",
+      "@type": "xsd:string"
+    },
+    "hashKeyValue": {
+      "@id": "amzn:hashKeyValue",
+      "@type": "xsd:string"
+    },
+    "identityStoreId": {
+      "@id": "amzn:identityStoreId",
+      "@type": "xsd:string"
+    },
+    "initialStateName": {
+      "@id": "amzn:initialStateName",
+      "@type": "xsd:string"
+    },
+    "initializationConfiguration": {
+      "@id": "amzn:initializationConfiguration",
+      "@type": "xsd:string"
+    },
+    "input": {
+      "@id": "amzn:input",
+      "@type": "xsd:string"
+    },
+    "inputArn": {
+      "@id": "amzn:inputArn",
+      "@type": "xsd:string"
+    },
+    "inputConfiguration": {
+      "@id": "amzn:inputConfiguration",
+      "@type": "xsd:string"
+    },
+    "inputDefinition": {
+      "@id": "amzn:inputDefinition",
+      "@type": "xsd:string"
+    },
+    "inputDescription": {
+      "@id": "amzn:inputDescription",
+      "@type": "xsd:string"
+    },
+    "inputIdentifier": {
+      "@id": "amzn:inputIdentifier",
+      "@type": "xsd:string"
+    },
+    "inputName": {
+      "@id": "amzn:inputName",
+      "@type": "xsd:string"
+    },
+    "inputProperty": {
+      "@id": "amzn:inputProperty",
+      "@type": "xsd:string"
+    },
+    "inputSummaries": {
+      "@id": "amzn:inputSummaries",
+      "@type": "xsd:string"
+    },
+    "integerValue": {
+      "@id": "amzn:integerValue",
+      "@type": "xsd:string"
+    },
+    "iotEvents": {
+      "@id": "amzn:iotEvents",
+      "@type": "xsd:string"
+    },
+    "iotEventsInputIdentifier": {
+      "@id": "amzn:iotEventsInputIdentifier",
+      "@type": "xsd:string"
+    },
+    "iotSiteWise": {
+      "@id": "amzn:iotSiteWise",
+      "@type": "xsd:string"
+    },
+    "iotSiteWiseAssetModelPropertyIdentifier": {
+      "@id": "amzn:iotSiteWiseAssetModelPropertyIdentifier",
+      "@type": "xsd:string"
+    },
+    "iotSiteWiseInputIdentifier": {
+      "@id": "amzn:iotSiteWiseInputIdentifier",
+      "@type": "xsd:string"
+    },
+    "iotTopicPublish": {
+      "@id": "amzn:iotTopicPublish",
+      "@type": "xsd:string"
+    },
+    "jsonPath": {
+      "@id": "amzn:jsonPath",
+      "@type": "xsd:string"
+    },
+    "key": {
+      "@id": "amzn:key",
+      "@type": "xsd:string"
+    },
+    "keyValue": {
+      "@id": "amzn:keyValue",
+      "@type": "xsd:string"
+    },
+    "lambda": {
+      "@id": "amzn:lambda",
+      "@type": "xsd:string"
+    },
+    "lambdaAction": {
+      "@id": "amzn:lambdaAction",
+      "@type": "xsd:string"
+    },
+    "lastUpdateTime": {
+      "@id": "amzn:lastUpdateTime",
+      "@type": "xsd:string"
+    },
+    "level": {
+      "@id": "amzn:level",
+      "@type": "xsd:string"
+    },
+    "locations": {
+      "@id": "amzn:locations",
+      "@type": "xsd:string"
+    },
+    "loggingOptions": {
+      "@id": "amzn:loggingOptions",
+      "@type": "xsd:string"
+    },
+    "maxResults": {
+      "@id": "amzn:maxResults",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "amzn:message",
+      "@type": "xsd:string"
+    },
+    "mqttTopic": {
+      "@id": "amzn:mqttTopic",
+      "@type": "xsd:string"
+    },
+    "name": "schema:name",
+    "nextState": {
+      "@id": "amzn:nextState",
+      "@type": "xsd:string"
+    },
+    "nextToken": {
+      "@id": "amzn:nextToken",
+      "@type": "xsd:string"
+    },
+    "notificationActions": {
+      "@id": "amzn:notificationActions",
+      "@type": "xsd:string"
+    },
+    "offsetInNanos": {
+      "@id": "amzn:offsetInNanos",
+      "@type": "xsd:string"
+    },
+    "onEnter": {
+      "@id": "amzn:onEnter",
+      "@type": "xsd:string"
+    },
+    "onExit": {
+      "@id": "amzn:onExit",
+      "@type": "xsd:string"
+    },
+    "onInput": {
+      "@id": "amzn:onInput",
+      "@type": "xsd:string"
+    },
+    "operation": {
+      "@id": "amzn:operation",
+      "@type": "xsd:string"
+    },
+    "path": {
+      "@id": "amzn:path",
+      "@type": "xsd:string"
+    },
+    "payload": {
+      "@id": "amzn:payload",
+      "@type": "xsd:string"
+    },
+    "payloadField": {
+      "@id": "amzn:payloadField",
+      "@type": "xsd:string"
+    },
+    "propertyAlias": {
+      "@id": "amzn:propertyAlias",
+      "@type": "xsd:string"
+    },
+    "propertyId": {
+      "@id": "amzn:propertyId",
+      "@type": "xsd:string"
+    },
+    "propertyValue": {
+      "@id": "amzn:propertyValue",
+      "@type": "xsd:string"
+    },
+    "quality": {
+      "@id": "amzn:quality",
+      "@type": "xsd:string"
+    },
+    "queueUrl": {
+      "@id": "amzn:queueUrl",
+      "@type": "xsd:string"
+    },
+    "rangeKeyField": {
+      "@id": "amzn:rangeKeyField",
+      "@type": "xsd:string"
+    },
+    "rangeKeyType": {
+      "@id": "amzn:rangeKeyType",
+      "@type": "xsd:string"
+    },
+    "rangeKeyValue": {
+      "@id": "amzn:rangeKeyValue",
+      "@type": "xsd:string"
+    },
+    "recipients": {
+      "@id": "amzn:recipients",
+      "@type": "xsd:string"
+    },
+    "resetTimer": {
+      "@id": "amzn:resetTimer",
+      "@type": "xsd:string"
+    },
+    "roleArn": {
+      "@id": "amzn:roleArn",
+      "@type": "xsd:string"
+    },
+    "routedResources": {
+      "@id": "amzn:routedResources",
+      "@type": "xsd:string"
+    },
+    "seconds": {
+      "@id": "amzn:seconds",
+      "@type": "xsd:string"
+    },
+    "senderId": {
+      "@id": "amzn:senderId",
+      "@type": "xsd:string"
+    },
+    "separator": {
+      "@id": "amzn:separator",
+      "@type": "xsd:string"
+    },
+    "setTimer": {
+      "@id": "amzn:setTimer",
+      "@type": "xsd:string"
+    },
+    "setVariable": {
+      "@id": "amzn:setVariable",
+      "@type": "xsd:string"
+    },
+    "severity": {
+      "@id": "amzn:severity",
+      "@type": "xsd:string"
+    },
+    "simpleRule": {
+      "@id": "amzn:simpleRule",
+      "@type": "xsd:string"
+    },
+    "smsConfigurations": {
+      "@id": "amzn:smsConfigurations",
+      "@type": "xsd:string"
+    },
+    "sns": {
+      "@id": "amzn:sns",
+      "@type": "xsd:string"
+    },
+    "sqs": {
+      "@id": "amzn:sqs",
+      "@type": "xsd:string"
+    },
+    "ssoIdentity": {
+      "@id": "amzn:ssoIdentity",
+      "@type": "xsd:string"
+    },
+    "stateName": {
+      "@id": "amzn:stateName",
+      "@type": "xsd:string"
+    },
+    "states": {
+      "@id": "amzn:states",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "amzn:status",
+      "@type": "xsd:string"
+    },
+    "statusMessage": {
+      "@id": "amzn:statusMessage",
+      "@type": "xsd:string"
+    },
+    "stringValue": {
+      "@id": "amzn:stringValue",
+      "@type": "xsd:string"
+    },
+    "subject": {
+      "@id": "amzn:subject",
+      "@type": "xsd:string"
+    },
+    "tableName": {
+      "@id": "amzn:tableName",
+      "@type": "xsd:string"
+    },
+    "tags": {
+      "@id": "amzn:tags",
+      "@type": "xsd:string"
+    },
+    "targetArn": {
+      "@id": "amzn:targetArn",
+      "@type": "xsd:string"
+    },
+    "threshold": {
+      "@id": "amzn:threshold",
+      "@type": "xsd:string"
+    },
+    "timeInSeconds": {
+      "@id": "amzn:timeInSeconds",
+      "@type": "xsd:string"
+    },
+    "timerName": {
+      "@id": "amzn:timerName",
+      "@type": "xsd:string"
+    },
+    "timestamp": {
+      "@id": "amzn:timestamp",
+      "@type": "xsd:string"
+    },
+    "to": {
+      "@id": "amzn:to",
+      "@type": "xsd:string"
+    },
+    "transitionEvents": {
+      "@id": "amzn:transitionEvents",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "amzn:type",
+      "@type": "xsd:string"
+    },
+    "useBase64": {
+      "@id": "amzn:useBase64",
+      "@type": "xsd:string"
+    },
+    "userId": {
+      "@id": "amzn:userId",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "amzn:value",
+      "@type": "xsd:string"
+    },
+    "variableName": {
+      "@id": "amzn:variableName",
+      "@type": "xsd:string"
+    }
+  }
+}

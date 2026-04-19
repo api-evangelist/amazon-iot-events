@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-put-logging-options-request-schema.json",
+  "title": "PutLoggingOptionsRequest",
+  "description": "PutLoggingOptionsRequest schema",
+  "type": "object",
+  "properties": {
+    "loggingOptions": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/LoggingOptions"
+        },
+        {
+          "description": "The new values of the AWS IoT Events logging options."
+        }
+      ]
+    }
+  },
+  "required": [
+    "loggingOptions"
+  ]
+}

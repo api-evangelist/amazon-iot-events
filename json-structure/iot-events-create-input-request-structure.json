@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-create-input-request-structure.json",
+  "name": "CreateInputRequest",
+  "description": "CreateInputRequest schema",
+  "type": "object",
+  "properties": {
+    "inputName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/InputName"
+        },
+        {
+          "description": "The name you want to give to the input."
+        }
+      ]
+    },
+    "inputDescription": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/InputDescription"
+        },
+        {
+          "description": "A brief description of the input."
+        }
+      ]
+    },
+    "inputDefinition": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/InputDefinition"
+        },
+        {
+          "description": "The definition of the input."
+        }
+      ]
+    },
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Tags"
+        },
+        {
+          "description": "Metadata that can be used to manage the input."
+        }
+      ]
+    }
+  },
+  "required": [
+    "inputName",
+    "inputDefinition"
+  ]
+}

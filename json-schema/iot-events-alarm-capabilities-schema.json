@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-alarm-capabilities-schema.json",
+  "title": "AlarmCapabilities",
+  "description": "Contains the configuration information of alarm state changes.",
+  "type": "object",
+  "properties": {
+    "initializationConfiguration": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/InitializationConfiguration"
+        },
+        {
+          "description": "Specifies the default alarm state. The configuration applies to all alarms that were created based on this alarm model."
+        }
+      ]
+    },
+    "acknowledgeFlow": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AcknowledgeFlow"
+        },
+        {
+          "description": "Specifies whether to get notified for alarm state changes."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "roleArn": "arn:aws:iot:us-east-1:123456789012:thing/example",
+  "level": "example-value",
+  "enabled": "example-value",
+  "detectorDebugOptions": "example-value"
+}

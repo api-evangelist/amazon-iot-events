@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-detector-debug-option-structure.json",
+  "name": "DetectorDebugOption",
+  "description": "The detector model and the specific detectors (instances) for which the logging level is given.",
+  "type": "object",
+  "properties": {
+    "detectorModelName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelName"
+        },
+        {
+          "description": "The name of the detector model."
+        }
+      ]
+    },
+    "keyValue": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/KeyValue"
+        },
+        {
+          "description": "The value of the input attribute key used to create the detector (the instance of the detector model)."
+        }
+      ]
+    }
+  },
+  "required": [
+    "detectorModelName"
+  ]
+}

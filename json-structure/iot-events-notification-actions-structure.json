@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-notification-actions-structure.json",
+  "name": "NotificationActions",
+  "description": "NotificationActions schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "action"
+    ],
+    "properties": {
+      "action": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationTargetActions"
+          },
+          {
+            "description": "Specifies an AWS Lambda function to manage alarm notifications. You can create one or use the <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html\">AWS Lambda function provided by AWS IoT Events</a>."
+          }
+        ]
+      },
+      "smsConfigurations": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SMSConfigurations"
+          },
+          {
+            "description": "Contains the configuration information of SMS notifications."
+          }
+        ]
+      },
+      "emailConfigurations": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EmailConfigurations"
+          },
+          {
+            "description": "Contains the configuration information of email notifications."
+          }
+        ]
+      }
+    },
+    "description": "Contains the notification settings of an alarm model. The settings apply to all alarms that were created based on this alarm model."
+  }
+}

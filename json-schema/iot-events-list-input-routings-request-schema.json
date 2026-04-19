@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-list-input-routings-request-schema.json",
+  "title": "ListInputRoutingsRequest",
+  "description": "ListInputRoutingsRequest schema",
+  "type": "object",
+  "properties": {
+    "inputIdentifier": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/InputIdentifier"
+        },
+        {
+          "description": " The identifer of the routed input. "
+        }
+      ]
+    },
+    "maxResults": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MaxResults"
+        },
+        {
+          "description": " The maximum number of results to be returned per request. "
+        }
+      ]
+    },
+    "nextToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/NextToken"
+        },
+        {
+          "description": " The token that you can use to return the next set of results. "
+        }
+      ]
+    }
+  },
+  "required": [
+    "inputIdentifier"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-firehose-action-schema.json",
+  "title": "FirehoseAction",
+  "description": "Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.",
+  "type": "object",
+  "properties": {
+    "deliveryStreamName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DeliveryStreamName"
+        },
+        {
+          "description": "The name of the Kinesis Data Firehose delivery stream where the data is written."
+        }
+      ]
+    },
+    "separator": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FirehoseSeparator"
+        },
+        {
+          "description": "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma)."
+        }
+      ]
+    },
+    "payload": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Payload"
+        },
+        {
+          "description": "You can configure the action payload when you send a message to an Amazon Kinesis Data Firehose delivery stream."
+        }
+      ]
+    }
+  },
+  "required": [
+    "deliveryStreamName"
+  ]
+}

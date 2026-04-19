@@ -1,0 +1,6 @@
+{
+  "stateName": "example-resource",
+  "onInput": "example-value",
+  "onEnter": "example-value",
+  "onExit": "example-value"
+}

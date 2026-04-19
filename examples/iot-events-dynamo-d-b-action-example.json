@@ -1,0 +1,15 @@
+{
+  "hashKeyType": "example-value",
+  "hashKeyField": "example-value",
+  "hashKeyValue": "example-value",
+  "rangeKeyType": "example-value",
+  "rangeKeyField": "example-value",
+  "rangeKeyValue": "example-value",
+  "operation": "example-value",
+  "payloadField": "example-value",
+  "tableName": "example-resource",
+  "payload": {
+    "contentExpression": "example-value",
+    "type": "example-value"
+  }
+}

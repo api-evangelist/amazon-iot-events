@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-update-alarm-model-request-schema.json",
+  "title": "UpdateAlarmModelRequest",
+  "description": "UpdateAlarmModelRequest schema",
+  "type": "object",
+  "properties": {
+    "alarmModelDescription": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmModelDescription"
+        },
+        {
+          "description": "The description of the alarm model."
+        }
+      ]
+    },
+    "roleArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AmazonResourceName"
+        },
+        {
+          "description": "The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>."
+        }
+      ]
+    },
+    "severity": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Severity"
+        },
+        {
+          "description": "A non-negative integer that reflects the severity level of the alarm."
+        }
+      ]
+    },
+    "alarmRule": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmRule"
+        },
+        {
+          "description": "Defines when your alarm is invoked."
+        }
+      ]
+    },
+    "alarmNotification": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmNotification"
+        },
+        {
+          "description": "Contains information about one or more notification actions."
+        }
+      ]
+    },
+    "alarmEventActions": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmEventActions"
+        },
+        {
+          "description": "Contains information about one or more alarm actions."
+        }
+      ]
+    },
+    "alarmCapabilities": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmCapabilities"
+        },
+        {
+          "description": "Contains the configuration information of alarm state changes."
+        }
+      ]
+    }
+  },
+  "required": [
+    "roleArn",
+    "alarmRule"
+  ]
+}

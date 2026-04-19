@@ -1,0 +1,6 @@
+{
+  "eventName": "example-resource",
+  "condition": "example-value",
+  "actions": "example-value",
+  "nextState": "example-value"
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-on-exit-lifecycle-schema.json",
+  "title": "OnExitLifecycle",
+  "description": "When exiting this state, perform these <code>actions</code> if the specified <code>condition</code> is <code>TRUE</code>.",
+  "type": "object",
+  "properties": {
+    "events": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Events"
+        },
+        {
+          "description": "Specifies the <code>actions</code> that are performed when the state is exited and the <code>condition</code> is <code>TRUE</code>."
+        }
+      ]
+    }
+  }
+}

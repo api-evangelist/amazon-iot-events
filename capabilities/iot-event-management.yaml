@@ -1,0 +1,122 @@
+naftiko: "1.0.0-alpha1"
+info:
+  label: Amazon IoT Events - Iot Event Management
+  description: Unified capability for IoT Developer, Solutions Architect to manage detect and respond to events from iot sensors and applications operations.
+  tags:
+    - IoT
+    - AWS
+    - Event Detection
+    - Automation
+  created: "2026-04-19"
+  modified: "2026-04-19"
+binds:
+  - namespace: env
+    keys:
+      AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
+capability:
+  consumes:
+    - import: iot-events
+      location: ./shared/iot-events.yaml
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: iot-event-management-api
+      description: Unified REST API for iot event management.
+      resources:
+        - path: /v1/resources
+          name: resources
+          description: Amazon IoT Events resources
+          operations:
+            - method: GET
+              name: list-detector-models
+              description: List Detector Models
+              call: "iot-events.list-detector-models"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+    - type: mcp
+      port: 9090
+      namespace: iot-event-management-mcp
+      transport: http
+      description: MCP server for AI-assisted iot event management.
+      tools:
+        - name: list-detector-models
+          description: Amazon IoT Events List Detector Models
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "iot-events.list-detector-models"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-detector-model
+          description: Amazon IoT Events Create Detector Model
+          hints:
+            readOnly: false
+            
+          call: "iot-events.create-detector-model"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-inputs
+          description: Amazon IoT Events List Inputs
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "iot-events.list-inputs"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-input
+          description: Amazon IoT Events Create Input
+          hints:
+            readOnly: false
+            
+          call: "iot-events.create-input"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: describe-detector-model
+          description: Amazon IoT Events Describe Detector Model
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "iot-events.describe-detector-model"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-alarms
+          description: Amazon IoT Events List Alarms
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "iot-events.list-alarms"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-alarm-model
+          description: Amazon IoT Events Create Alarm Model
+          hints:
+            readOnly: false
+            
+          call: "iot-events.create-alarm-model"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: describe-alarm-model
+          description: Amazon IoT Events Describe Alarm Model
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "iot-events.describe-alarm-model"
+          outputParameters:
+            - type: object
+              mapping: "$."

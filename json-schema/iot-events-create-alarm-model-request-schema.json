@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-create-alarm-model-request-schema.json",
+  "title": "CreateAlarmModelRequest",
+  "description": "CreateAlarmModelRequest schema",
+  "type": "object",
+  "properties": {
+    "alarmModelName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmModelName"
+        },
+        {
+          "description": "A unique name that helps you identify the alarm model. You can't change this name after you create the alarm model."
+        }
+      ]
+    },
+    "alarmModelDescription": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmModelDescription"
+        },
+        {
+          "description": "A description that tells you what the alarm model detects."
+        }
+      ]
+    },
+    "roleArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AmazonResourceName"
+        },
+        {
+          "description": "The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>."
+        }
+      ]
+    },
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Tags"
+        },
+        {
+          "description": "<p>A list of key-value pairs that contain metadata for the alarm model. The tags help you manage the alarm model. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/tagging-iotevents.html\">Tagging your AWS IoT Events resources</a> in the <i>AWS IoT Events Developer Guide</i>.</p> <p>You can create up to 50 tags for one alarm model.</p>"
+        }
+      ]
+    },
+    "key": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AttributeJsonPath"
+        },
+        {
+          "description": "An input attribute used as a key to create an alarm. AWS IoT Events routes <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Input.html\">inputs</a> associated with this key to the alarm."
+        }
+      ]
+    },
+    "severity": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Severity"
+        },
+        {
+          "description": "A non-negative integer that reflects the severity level of the alarm."
+        }
+      ]
+    },
+    "alarmRule": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmRule"
+        },
+        {
+          "description": "Defines when your alarm is invoked."
+        }
+      ]
+    },
+    "alarmNotification": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmNotification"
+        },
+        {
+          "description": "Contains information about one or more notification actions."
+        }
+      ]
+    },
+    "alarmEventActions": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmEventActions"
+        },
+        {
+          "description": "Contains information about one or more alarm actions."
+        }
+      ]
+    },
+    "alarmCapabilities": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmCapabilities"
+        },
+        {
+          "description": "Contains the configuration information of alarm state changes."
+        }
+      ]
+    }
+  },
+  "required": [
+    "alarmModelName",
+    "roleArn",
+    "alarmRule"
+  ]
+}

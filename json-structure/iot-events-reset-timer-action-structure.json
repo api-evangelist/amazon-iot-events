@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-reset-timer-action-structure.json",
+  "name": "ResetTimerAction",
+  "description": "Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer.",
+  "type": "object",
+  "properties": {
+    "timerName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TimerName"
+        },
+        {
+          "description": "The name of the timer to reset."
+        }
+      ]
+    }
+  },
+  "required": [
+    "timerName"
+  ]
+}

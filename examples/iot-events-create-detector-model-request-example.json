@@ -1,0 +1,9 @@
+{
+  "detectorModelName": "example-resource",
+  "detectorModelDefinition": "example-value",
+  "detectorModelDescription": "example-value",
+  "key": "example-value",
+  "roleArn": "arn:aws:iot:us-east-1:123456789012:thing/example",
+  "tags": "example-value",
+  "evaluationMethod": "example-value"
+}

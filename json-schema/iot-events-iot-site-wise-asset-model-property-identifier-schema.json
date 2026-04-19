@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-iot-site-wise-asset-model-property-identifier-schema.json",
+  "title": "IotSiteWiseAssetModelPropertyIdentifier",
+  "description": " The asset model property identifer of the input routed from AWS IoT SiteWise. ",
+  "type": "object",
+  "properties": {
+    "assetModelId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AssetModelId"
+        },
+        {
+          "description": " The ID of the AWS IoT SiteWise asset model. "
+        }
+      ]
+    },
+    "propertyId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AssetPropertyId"
+        },
+        {
+          "description": " The ID of the AWS IoT SiteWise asset property. "
+        }
+      ]
+    }
+  },
+  "required": [
+    "assetModelId",
+    "propertyId"
+  ]
+}

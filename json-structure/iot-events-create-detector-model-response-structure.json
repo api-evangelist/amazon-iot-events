@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-create-detector-model-response-structure.json",
+  "name": "CreateDetectorModelResponse",
+  "description": "CreateDetectorModelResponse schema",
+  "type": "object",
+  "properties": {
+    "detectorModelConfiguration": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelConfiguration"
+        },
+        {
+          "description": "Information about how the detector model is configured."
+        }
+      ]
+    }
+  }
+}

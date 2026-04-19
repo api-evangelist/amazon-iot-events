@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-start-detector-model-analysis-response-structure.json",
+  "name": "StartDetectorModelAnalysisResponse",
+  "description": "StartDetectorModelAnalysisResponse schema",
+  "type": "object",
+  "properties": {
+    "analysisId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AnalysisId"
+        },
+        {
+          "description": "The ID that you can use to retrieve the analysis result."
+        }
+      ]
+    }
+  }
+}

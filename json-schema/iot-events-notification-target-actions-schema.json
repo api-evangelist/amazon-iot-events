@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-notification-target-actions-schema.json",
+  "title": "NotificationTargetActions",
+  "description": "Specifies an AWS Lambda function to manage alarm notifications. You can create one or use the <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html\">AWS Lambda function provided by AWS IoT Events</a>.",
+  "type": "object",
+  "properties": {
+    "lambdaAction": {
+      "type": "object",
+      "required": [
+        "functionArn"
+      ],
+      "properties": {
+        "functionArn": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/AmazonResourceName"
+            },
+            {
+              "description": "The ARN of the Lambda function that is executed."
+            }
+          ]
+        },
+        "payload": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/Payload"
+            },
+            {
+              "description": "You can configure the action payload when you send a message to a Lambda function."
+            }
+          ]
+        }
+      },
+      "description": "Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action."
+    }
+  }
+}

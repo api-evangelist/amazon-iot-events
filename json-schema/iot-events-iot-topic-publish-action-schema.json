@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-iot-topic-publish-action-schema.json",
+  "title": "IotTopicPublishAction",
+  "description": "Information required to publish the MQTT message through the AWS IoT message broker.",
+  "type": "object",
+  "properties": {
+    "mqttTopic": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MQTTTopic"
+        },
+        {
+          "description": "The MQTT topic of the message. You can use a string expression that includes variables (<code>$variable.&lt;variable-name&gt;</code>) and input values (<code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>) as the topic string."
+        }
+      ]
+    },
+    "payload": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Payload"
+        },
+        {
+          "description": "You can configure the action payload when you publish a message to an AWS IoT Core topic."
+        }
+      ]
+    }
+  },
+  "required": [
+    "mqttTopic"
+  ]
+}

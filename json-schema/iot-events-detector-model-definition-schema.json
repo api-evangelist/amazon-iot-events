@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-detector-model-definition-schema.json",
+  "title": "DetectorModelDefinition",
+  "description": "Information that defines how a detector operates.",
+  "type": "object",
+  "properties": {
+    "states": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/States"
+        },
+        {
+          "description": "Information about the states of the detector."
+        }
+      ]
+    },
+    "initialStateName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StateName"
+        },
+        {
+          "description": "The state that is entered at the creation of each detector (instance)."
+        }
+      ]
+    }
+  },
+  "required": [
+    "states",
+    "initialStateName"
+  ]
+}

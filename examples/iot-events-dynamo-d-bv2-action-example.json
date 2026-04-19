@@ -1,0 +1,7 @@
+{
+  "tableName": "example-resource",
+  "payload": {
+    "contentExpression": "example-value",
+    "type": "example-value"
+  }
+}

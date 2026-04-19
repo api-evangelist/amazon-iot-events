@@ -1,0 +1,51 @@
+{
+  "sns": {
+    "targetArn": "arn:aws:iot:us-east-1:123456789012:thing/example",
+    "payload": "example-value"
+  },
+  "iotTopicPublish": {
+    "mqttTopic": "example-value",
+    "payload": "example-value"
+  },
+  "lambda": {
+    "functionArn": "arn:aws:iot:us-east-1:123456789012:thing/example",
+    "payload": "example-value"
+  },
+  "iotEvents": {
+    "inputName": "example-resource",
+    "payload": "example-value"
+  },
+  "sqs": {
+    "queueUrl": "https://example.com/path",
+    "useBase64": "example-value",
+    "payload": "example-value"
+  },
+  "firehose": {
+    "deliveryStreamName": "example-resource",
+    "separator": "example-value",
+    "payload": "example-value"
+  },
+  "dynamoDB": {
+    "hashKeyType": "example-value",
+    "hashKeyField": "example-value",
+    "hashKeyValue": "example-value",
+    "rangeKeyType": "example-value",
+    "rangeKeyField": "example-value",
+    "rangeKeyValue": "example-value",
+    "operation": "example-value",
+    "payloadField": "example-value",
+    "tableName": "example-resource",
+    "payload": "example-value"
+  },
+  "dynamoDBv2": {
+    "tableName": "example-resource",
+    "payload": "example-value"
+  },
+  "iotSiteWise": {
+    "entryId": "id-abc123",
+    "assetId": "id-abc123",
+    "propertyId": "id-abc123",
+    "propertyAlias": "example-value",
+    "propertyValue": "example-value"
+  }
+}

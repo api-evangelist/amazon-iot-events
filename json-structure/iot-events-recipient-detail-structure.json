@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-recipient-detail-structure.json",
+  "name": "RecipientDetail",
+  "description": "The information that identifies the recipient.",
+  "type": "object",
+  "properties": {
+    "ssoIdentity": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SSOIdentity"
+        },
+        {
+          "description": "The AWS Single Sign-On (AWS SSO) authentication information."
+        }
+      ]
+    }
+  }
+}

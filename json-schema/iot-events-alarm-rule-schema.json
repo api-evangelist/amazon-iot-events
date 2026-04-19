@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-alarm-rule-schema.json",
+  "title": "AlarmRule",
+  "description": "Defines when your alarm is invoked.",
+  "type": "object",
+  "properties": {
+    "simpleRule": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SimpleRule"
+        },
+        {
+          "description": "A rule that compares an input property value to a threshold value with a comparison operator."
+        }
+      ]
+    }
+  }
+}

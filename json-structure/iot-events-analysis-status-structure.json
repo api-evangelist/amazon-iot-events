@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-analysis-status-structure.json",
+  "name": "AnalysisStatus",
+  "description": "AnalysisStatus schema",
+  "type": "string",
+  "enum": [
+    "RUNNING",
+    "COMPLETE",
+    "FAILED"
+  ]
+}

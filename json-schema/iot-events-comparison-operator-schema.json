@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-comparison-operator-schema.json",
+  "title": "ComparisonOperator",
+  "description": "ComparisonOperator schema",
+  "type": "string",
+  "enum": [
+    "GREATER",
+    "GREATER_OR_EQUAL",
+    "LESS",
+    "LESS_OR_EQUAL",
+    "EQUAL",
+    "NOT_EQUAL"
+  ]
+}

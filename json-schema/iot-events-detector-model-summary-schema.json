@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-detector-model-summary-schema.json",
+  "title": "DetectorModelSummary",
+  "description": "Information about the detector model.",
+  "type": "object",
+  "properties": {
+    "detectorModelName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelName"
+        },
+        {
+          "description": "The name of the detector model."
+        }
+      ]
+    },
+    "detectorModelDescription": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelDescription"
+        },
+        {
+          "description": "A brief description of the detector model."
+        }
+      ]
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The time the detector model was created."
+        }
+      ]
+    }
+  }
+}

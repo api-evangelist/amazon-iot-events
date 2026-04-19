@@ -1,0 +1,15 @@
+{
+  "setVariable": "example-value",
+  "sns": "example-value",
+  "iotTopicPublish": "example-value",
+  "setTimer": "2025-03-15T14:30:00Z",
+  "clearTimer": "2025-03-15T14:30:00Z",
+  "resetTimer": "2025-03-15T14:30:00Z",
+  "lambda": "example-value",
+  "iotEvents": "example-value",
+  "sqs": "example-value",
+  "firehose": "example-value",
+  "dynamoDB": "example-value",
+  "dynamoDBv2": "example-value",
+  "iotSiteWise": "example-value"
+}

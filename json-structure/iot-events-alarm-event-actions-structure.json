@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-alarm-event-actions-structure.json",
+  "name": "AlarmEventActions",
+  "description": "Contains information about one or more alarm actions.",
+  "type": "object",
+  "properties": {
+    "alarmActions": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmActions"
+        },
+        {
+          "description": "Specifies one or more supported actions to receive notifications when the alarm state changes."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-payload-structure.json",
+  "name": "Payload",
+  "description": "<p>Information needed to configure the payload.</p> <p>By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use <code>contentExpression</code>.</p>",
+  "type": "object",
+  "properties": {
+    "contentExpression": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ContentExpression"
+        },
+        {
+          "description": "The content of the payload. You can use a string expression that includes quoted strings (<code>'&lt;string&gt;'</code>), variables (<code>$variable.&lt;variable-name&gt;</code>), input values (<code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>), string concatenations, and quoted strings that contain <code>${}</code> as the content. The recommended maximum size of a content expression is 1 KB."
+        }
+      ]
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PayloadType"
+        },
+        {
+          "description": "The value of the payload type can be either <code>STRING</code> or <code>JSON</code>."
+        }
+      ]
+    }
+  },
+  "required": [
+    "contentExpression",
+    "type"
+  ]
+}

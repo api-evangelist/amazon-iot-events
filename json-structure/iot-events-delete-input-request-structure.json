@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-delete-input-request-structure.json",
+  "name": "DeleteInputRequest",
+  "description": "DeleteInputRequest schema",
+  "type": "object",
+  "properties": {}
+}

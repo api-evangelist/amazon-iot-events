@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-on-input-lifecycle-schema.json",
+  "title": "OnInputLifecycle",
+  "description": "Specifies the actions performed when the <code>condition</code> evaluates to TRUE.",
+  "type": "object",
+  "properties": {
+    "events": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Events"
+        },
+        {
+          "description": "Specifies the actions performed when the <code>condition</code> evaluates to TRUE."
+        }
+      ]
+    },
+    "transitionEvents": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TransitionEvents"
+        },
+        {
+          "description": "Specifies the actions performed, and the next state entered, when a <code>condition</code> evaluates to TRUE."
+        }
+      ]
+    }
+  }
+}

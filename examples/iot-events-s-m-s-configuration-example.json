@@ -1,0 +1,5 @@
+{
+  "senderId": "id-abc123",
+  "additionalMessage": "example-value",
+  "recipients": "example-value"
+}

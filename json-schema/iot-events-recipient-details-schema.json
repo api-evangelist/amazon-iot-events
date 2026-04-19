@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-recipient-details-schema.json",
+  "title": "RecipientDetails",
+  "description": "RecipientDetails schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "ssoIdentity": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SSOIdentity"
+          },
+          {
+            "description": "The AWS Single Sign-On (AWS SSO) authentication information."
+          }
+        ]
+      }
+    },
+    "description": "The information that identifies the recipient."
+  }
+}

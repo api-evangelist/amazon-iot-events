@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-tag-keys-structure.json",
+  "name": "TagKeys",
+  "description": "TagKeys schema",
+  "type": "array",
+  "items": {
+    "type": "string",
+    "minLength": 1,
+    "maxLength": 128
+  }
+}

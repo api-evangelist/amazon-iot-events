@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-create-detector-model-request-structure.json",
+  "name": "CreateDetectorModelRequest",
+  "description": "CreateDetectorModelRequest schema",
+  "type": "object",
+  "properties": {
+    "detectorModelName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelName"
+        },
+        {
+          "description": "The name of the detector model."
+        }
+      ]
+    },
+    "detectorModelDefinition": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelDefinition"
+        },
+        {
+          "description": "Information that defines how the detectors operate."
+        }
+      ]
+    },
+    "detectorModelDescription": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelDescription"
+        },
+        {
+          "description": "A brief description of the detector model."
+        }
+      ]
+    },
+    "key": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AttributeJsonPath"
+        },
+        {
+          "description": "The input attribute key used to identify a device or system to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression in the message payload of each input to specify the attribute-value pair that is used to identify the device associated with the input."
+        }
+      ]
+    },
+    "roleArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AmazonResourceName"
+        },
+        {
+          "description": "The ARN of the role that grants permission to AWS IoT Events to perform its operations."
+        }
+      ]
+    },
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Tags"
+        },
+        {
+          "description": "Metadata that can be used to manage the detector model."
+        }
+      ]
+    },
+    "evaluationMethod": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EvaluationMethod"
+        },
+        {
+          "description": "Information about the order in which events are evaluated and how actions are executed. "
+        }
+      ]
+    }
+  },
+  "required": [
+    "detectorModelName",
+    "detectorModelDefinition",
+    "roleArn"
+  ]
+}

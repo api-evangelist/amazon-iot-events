@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-list-tags-for-resource-response-structure.json",
+  "name": "ListTagsForResourceResponse",
+  "description": "ListTagsForResourceResponse schema",
+  "type": "object",
+  "properties": {
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Tags"
+        },
+        {
+          "description": "The list of tags assigned to the resource."
+        }
+      ]
+    }
+  }
+}

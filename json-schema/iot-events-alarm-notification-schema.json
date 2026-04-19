@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-alarm-notification-schema.json",
+  "title": "AlarmNotification",
+  "description": "Contains information about one or more notification actions.",
+  "type": "object",
+  "properties": {
+    "notificationActions": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/NotificationActions"
+        },
+        {
+          "description": "Contains the notification settings of an alarm model. The settings apply to all alarms that were created based on this alarm model."
+        }
+      ]
+    }
+  }
+}

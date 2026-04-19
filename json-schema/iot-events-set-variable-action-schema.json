@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-set-variable-action-schema.json",
+  "title": "SetVariableAction",
+  "description": "Information about the variable and its new value.",
+  "type": "object",
+  "properties": {
+    "variableName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/VariableName"
+        },
+        {
+          "description": "The name of the variable."
+        }
+      ]
+    },
+    "value": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/VariableValue"
+        },
+        {
+          "description": "The new value of the variable."
+        }
+      ]
+    }
+  },
+  "required": [
+    "variableName",
+    "value"
+  ]
+}

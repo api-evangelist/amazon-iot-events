@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-s-m-s-configurations-schema.json",
+  "title": "SMSConfigurations",
+  "description": "SMSConfigurations schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "recipients"
+    ],
+    "properties": {
+      "senderId": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SMSSenderId"
+          },
+          {
+            "description": "The sender ID."
+          }
+        ]
+      },
+      "additionalMessage": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationAdditionalMessage"
+          },
+          {
+            "description": "The message that you want to send. The message can be up to 200 characters."
+          }
+        ]
+      },
+      "recipients": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RecipientDetails"
+          },
+          {
+            "description": "<p>Specifies one or more recipients who receive the message.</p> <important> <p>You must <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html\">add the users that receive SMS messages to your AWS SSO store</a>.</p> </important>"
+          }
+        ]
+      }
+    },
+    "description": "Contains the configuration information of SMS notifications."
+  }
+}

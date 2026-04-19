@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-iot-events-action-structure.json",
+  "name": "IotEventsAction",
+  "description": "Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action.",
+  "type": "object",
+  "properties": {
+    "inputName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/InputName"
+        },
+        {
+          "description": "The name of the AWS IoT Events input where the data is sent."
+        }
+      ]
+    },
+    "payload": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Payload"
+        },
+        {
+          "description": "You can configure the action payload when you send a message to an AWS IoT Events input."
+        }
+      ]
+    }
+  },
+  "required": [
+    "inputName"
+  ]
+}

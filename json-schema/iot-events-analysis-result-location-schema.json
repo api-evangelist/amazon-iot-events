@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-analysis-result-location-schema.json",
+  "title": "AnalysisResultLocation",
+  "description": "Contains information that you can use to locate the field in your detector model that the analysis result references.",
+  "type": "object",
+  "properties": {
+    "path": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AnalysisResultLocationPath"
+        },
+        {
+          "description": "A <a href=\"https://github.com/json-path/JsonPath\">JsonPath</a> expression that identifies the error field in your detector model."
+        }
+      ]
+    }
+  }
+}

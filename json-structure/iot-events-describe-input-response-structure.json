@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-describe-input-response-structure.json",
+  "name": "DescribeInputResponse",
+  "description": "DescribeInputResponse schema",
+  "type": "object",
+  "properties": {
+    "input": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Input"
+        },
+        {
+          "description": "Information about the input."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-clear-timer-action-structure.json",
+  "name": "ClearTimerAction",
+  "description": "Information needed to clear the timer.",
+  "type": "object",
+  "properties": {
+    "timerName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TimerName"
+        },
+        {
+          "description": "The name of the timer to clear."
+        }
+      ]
+    }
+  },
+  "required": [
+    "timerName"
+  ]
+}

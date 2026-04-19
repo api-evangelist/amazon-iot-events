@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-list-alarm-model-versions-response-schema.json",
+  "title": "ListAlarmModelVersionsResponse",
+  "description": "ListAlarmModelVersionsResponse schema",
+  "type": "object",
+  "properties": {
+    "alarmModelVersionSummaries": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmModelVersionSummaries"
+        },
+        {
+          "description": "A list that summarizes each alarm model version."
+        }
+      ]
+    },
+    "nextToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/NextToken"
+        },
+        {
+          "description": "The token that you can use to return the next set of results, or <code>null</code> if there are no more results."
+        }
+      ]
+    }
+  }
+}

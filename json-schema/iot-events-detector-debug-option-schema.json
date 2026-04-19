@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-detector-debug-option-schema.json",
+  "title": "DetectorDebugOption",
+  "description": "The detector model and the specific detectors (instances) for which the logging level is given.",
+  "type": "object",
+  "properties": {
+    "detectorModelName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelName"
+        },
+        {
+          "description": "The name of the detector model."
+        }
+      ]
+    },
+    "keyValue": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/KeyValue"
+        },
+        {
+          "description": "The value of the input attribute key used to create the detector (the instance of the detector model)."
+        }
+      ]
+    }
+  },
+  "required": [
+    "detectorModelName"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-s-n-s-topic-publish-action-structure.json",
+  "name": "SNSTopicPublishAction",
+  "description": "Information required to publish the Amazon SNS message.",
+  "type": "object",
+  "properties": {
+    "targetArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AmazonResourceName"
+        },
+        {
+          "description": "The ARN of the Amazon SNS target where the message is sent."
+        }
+      ]
+    },
+    "payload": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Payload"
+        },
+        {
+          "description": "You can configure the action payload when you send a message as an Amazon SNS push notification."
+        }
+      ]
+    }
+  },
+  "required": [
+    "targetArn"
+  ]
+}

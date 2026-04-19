@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-alarm-model-version-status-structure.json",
+  "name": "AlarmModelVersionStatus",
+  "description": "AlarmModelVersionStatus schema",
+  "type": "string",
+  "enum": [
+    "ACTIVE",
+    "ACTIVATING",
+    "INACTIVE",
+    "FAILED"
+  ]
+}

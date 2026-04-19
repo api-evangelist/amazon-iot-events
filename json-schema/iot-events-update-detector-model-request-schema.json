@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-update-detector-model-request-schema.json",
+  "title": "UpdateDetectorModelRequest",
+  "description": "UpdateDetectorModelRequest schema",
+  "type": "object",
+  "properties": {
+    "detectorModelDefinition": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelDefinition"
+        },
+        {
+          "description": "Information that defines how a detector operates."
+        }
+      ]
+    },
+    "detectorModelDescription": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DetectorModelDescription"
+        },
+        {
+          "description": "A brief description of the detector model."
+        }
+      ]
+    },
+    "roleArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AmazonResourceName"
+        },
+        {
+          "description": "The ARN of the role that grants permission to AWS IoT Events to perform its operations."
+        }
+      ]
+    },
+    "evaluationMethod": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EvaluationMethod"
+        },
+        {
+          "description": "Information about the order in which events are evaluated and how actions are executed. "
+        }
+      ]
+    }
+  },
+  "required": [
+    "detectorModelDefinition",
+    "roleArn"
+  ]
+}

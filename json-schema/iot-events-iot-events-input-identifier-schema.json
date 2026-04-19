@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-iot-events-input-identifier-schema.json",
+  "title": "IotEventsInputIdentifier",
+  "description": " The identifier of the input routed to AWS IoT Events. ",
+  "type": "object",
+  "properties": {
+    "inputName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/InputName"
+        },
+        {
+          "description": " The name of the input routed to AWS IoT Events. "
+        }
+      ]
+    }
+  },
+  "required": [
+    "inputName"
+  ]
+}

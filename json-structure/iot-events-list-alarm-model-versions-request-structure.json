@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-list-alarm-model-versions-request-structure.json",
+  "name": "ListAlarmModelVersionsRequest",
+  "description": "ListAlarmModelVersionsRequest schema",
+  "type": "object",
+  "properties": {}
+}

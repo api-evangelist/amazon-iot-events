@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-describe-logging-options-request-structure.json",
+  "name": "DescribeLoggingOptionsRequest",
+  "description": "DescribeLoggingOptionsRequest schema",
+  "type": "object",
+  "properties": {}
+}

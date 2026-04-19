@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-sqs-action-structure.json",
+  "name": "SqsAction",
+  "description": "Sends information about the detector model instance and the event that triggered the action to an Amazon SQS queue.",
+  "type": "object",
+  "properties": {
+    "queueUrl": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/QueueUrl"
+        },
+        {
+          "description": "The URL of the SQS queue where the data is written."
+        }
+      ]
+    },
+    "useBase64": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UseBase64"
+        },
+        {
+          "description": "Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE."
+        }
+      ]
+    },
+    "payload": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Payload"
+        },
+        {
+          "description": "You can configure the action payload when you send a message to an Amazon SQS queue."
+        }
+      ]
+    }
+  },
+  "required": [
+    "queueUrl"
+  ]
+}

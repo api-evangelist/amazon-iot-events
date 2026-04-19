@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-delete-detector-model-response-structure.json",
+  "name": "DeleteDetectorModelResponse",
+  "description": "DeleteDetectorModelResponse schema",
+  "type": "object",
+  "properties": {}
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-update-input-response-schema.json",
+  "title": "UpdateInputResponse",
+  "description": "UpdateInputResponse schema",
+  "type": "object",
+  "properties": {
+    "inputConfiguration": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/InputConfiguration"
+        },
+        {
+          "description": "Information about the configuration of the input."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "queueUrl": "https://example.com/path",
+  "useBase64": "example-value",
+  "payload": "example-value"
+}

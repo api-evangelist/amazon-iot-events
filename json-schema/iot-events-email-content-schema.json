@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-email-content-schema.json",
+  "title": "EmailContent",
+  "description": "Contains the subject and message of an email.",
+  "type": "object",
+  "properties": {
+    "subject": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EmailSubject"
+        },
+        {
+          "description": "The subject of the email."
+        }
+      ]
+    },
+    "additionalMessage": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/NotificationAdditionalMessage"
+        },
+        {
+          "description": "The message that you want to send. The message can be up to 200 characters."
+        }
+      ]
+    }
+  }
+}

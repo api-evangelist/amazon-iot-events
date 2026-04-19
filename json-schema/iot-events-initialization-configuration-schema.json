@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-initialization-configuration-schema.json",
+  "title": "InitializationConfiguration",
+  "description": "Specifies the default alarm state. The configuration applies to all alarms that were created based on this alarm model.",
+  "type": "object",
+  "properties": {
+    "disabledOnInitialization": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DisabledOnInitialization"
+        },
+        {
+          "description": "The value must be <code>TRUE</code> or <code>FALSE</code>. If <code>FALSE</code>, all alarm instances created based on the alarm model are activated. The default value is <code>TRUE</code>."
+        }
+      ]
+    }
+  },
+  "required": [
+    "disabledOnInitialization"
+  ]
+}

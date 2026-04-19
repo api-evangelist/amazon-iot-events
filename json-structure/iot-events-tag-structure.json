@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-tag-structure.json",
+  "name": "Tag",
+  "description": "Metadata that can be used to manage the resource.",
+  "type": "object",
+  "properties": {
+    "key": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagKey"
+        },
+        {
+          "description": "The tag's key."
+        }
+      ]
+    },
+    "value": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagValue"
+        },
+        {
+          "description": "The tag's value."
+        }
+      ]
+    }
+  },
+  "required": [
+    "key",
+    "value"
+  ]
+}

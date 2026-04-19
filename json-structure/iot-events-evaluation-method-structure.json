@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-evaluation-method-structure.json",
+  "name": "EvaluationMethod",
+  "description": "EvaluationMethod schema",
+  "type": "string",
+  "enum": [
+    "BATCH",
+    "SERIAL"
+  ]
+}

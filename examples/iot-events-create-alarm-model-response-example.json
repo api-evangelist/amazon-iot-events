@@ -1,0 +1,7 @@
+{
+  "creationTime": "2025-03-15T14:30:00Z",
+  "alarmModelArn": "arn:aws:iot:us-east-1:123456789012:thing/example",
+  "alarmModelVersion": "example-value",
+  "lastUpdateTime": "2025-03-15T14:30:00Z",
+  "status": "ACTIVE"
+}

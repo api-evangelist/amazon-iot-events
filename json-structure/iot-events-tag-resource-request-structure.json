@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-tag-resource-request-structure.json",
+  "name": "TagResourceRequest",
+  "description": "TagResourceRequest schema",
+  "type": "object",
+  "properties": {
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Tags"
+        },
+        {
+          "description": "The new or modified tags for the resource."
+        }
+      ]
+    }
+  },
+  "required": [
+    "tags"
+  ]
+}

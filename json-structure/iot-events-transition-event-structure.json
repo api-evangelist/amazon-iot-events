@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-transition-event-structure.json",
+  "name": "TransitionEvent",
+  "description": "Specifies the actions performed and the next state entered when a <code>condition</code> evaluates to TRUE.",
+  "type": "object",
+  "properties": {
+    "eventName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EventName"
+        },
+        {
+          "description": "The name of the transition event."
+        }
+      ]
+    },
+    "condition": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Condition"
+        },
+        {
+          "description": "Required. A Boolean expression that when TRUE causes the actions to be performed and the <code>nextState</code> to be entered."
+        }
+      ]
+    },
+    "actions": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Actions"
+        },
+        {
+          "description": "The actions to be performed."
+        }
+      ]
+    },
+    "nextState": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StateName"
+        },
+        {
+          "description": "The next state to enter."
+        }
+      ]
+    }
+  },
+  "required": [
+    "eventName",
+    "condition",
+    "nextState"
+  ]
+}

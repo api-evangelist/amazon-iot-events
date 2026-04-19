@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-input-status-structure.json",
+  "name": "InputStatus",
+  "description": "InputStatus schema",
+  "type": "string",
+  "enum": [
+    "CREATING",
+    "UPDATING",
+    "ACTIVE",
+    "DELETING"
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-structure/iot-events-describe-alarm-model-response-structure.json",
+  "name": "DescribeAlarmModelResponse",
+  "description": "DescribeAlarmModelResponse schema",
+  "type": "object",
+  "properties": {
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The time the alarm model was created, in the Unix epoch format."
+        }
+      ]
+    },
+    "alarmModelArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmModelArn"
+        },
+        {
+          "description": "The ARN of the alarm model. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>."
+        }
+      ]
+    },
+    "alarmModelVersion": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmModelVersion"
+        },
+        {
+          "description": "The version of the alarm model."
+        }
+      ]
+    },
+    "lastUpdateTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The time the alarm model was last updated, in the Unix epoch format."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmModelVersionStatus"
+        },
+        {
+          "description": "<p>The status of the alarm model. The status can be one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - The alarm model is active and it's ready to evaluate data.</p> </li> <li> <p> <code>ACTIVATING</code> - AWS IoT Events is activating your alarm model. Activating an alarm model can take up to a few minutes.</p> </li> <li> <p> <code>INACTIVE</code> - The alarm model is inactive, so it isn't ready to evaluate data. Check your alarm model information and update the alarm model.</p> </li> <li> <p> <code>FAILED</code> - You couldn't create or update the alarm model. Check your alarm model information and try again.</p> </li> </ul>"
+        }
+      ]
+    },
+    "statusMessage": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StatusMessage"
+        },
+        {
+          "description": " Contains information about the status of the alarm model. "
+        }
+      ]
+    },
+    "alarmModelName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmModelName"
+        },
+        {
+          "description": "The name of the alarm model."
+        }
+      ]
+    },
+    "alarmModelDescription": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmModelDescription"
+        },
+        {
+          "description": "The description of the alarm model."
+        }
+      ]
+    },
+    "roleArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AmazonResourceName"
+        },
+        {
+          "description": "The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>."
+        }
+      ]
+    },
+    "key": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AttributeJsonPath"
+        },
+        {
+          "description": "An input attribute used as a key to create an alarm. AWS IoT Events routes <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Input.html\">inputs</a> associated with this key to the alarm."
+        }
+      ]
+    },
+    "severity": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Severity"
+        },
+        {
+          "description": "A non-negative integer that reflects the severity level of the alarm."
+        }
+      ]
+    },
+    "alarmRule": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmRule"
+        },
+        {
+          "description": "Defines when your alarm is invoked."
+        }
+      ]
+    },
+    "alarmNotification": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmNotification"
+        },
+        {
+          "description": "Contains information about one or more notification actions."
+        }
+      ]
+    },
+    "alarmEventActions": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmEventActions"
+        },
+        {
+          "description": "Contains information about one or more alarm actions."
+        }
+      ]
+    },
+    "alarmCapabilities": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AlarmCapabilities"
+        },
+        {
+          "description": "Contains the configuration information of alarm state changes."
+        }
+      ]
+    }
+  }
+}

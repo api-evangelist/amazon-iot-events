@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/json-schema/iot-events-detector-model-version-status-schema.json",
+  "title": "DetectorModelVersionStatus",
+  "description": "DetectorModelVersionStatus schema",
+  "type": "string",
+  "enum": [
+    "ACTIVE",
+    "ACTIVATING",
+    "INACTIVE",
+    "DEPRECATED",
+    "DRAFT",
+    "PAUSED",
+    "FAILED"
+  ]
+}

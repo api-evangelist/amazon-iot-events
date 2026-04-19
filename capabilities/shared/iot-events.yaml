@@ -1,0 +1,140 @@
+naftiko: "1.0.0-alpha1"
+info:
+  label: Amazon IoT Events API
+  description: Detect and respond to events from IoT sensors and applications.
+  tags:
+    - IoT
+    - AWS
+    - Event Detection
+    - Automation
+  created: "2026-04-19"
+  modified: "2026-04-19"
+binds:
+  - namespace: env
+    keys:
+      AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
+capability:
+  consumes:
+    - type: http
+      namespace: iot-events
+      baseUri: https://iotevents.amazonaws.com
+      description: Amazon IoT Events REST API
+      authentication:
+        type: apikey
+        key: Authorization
+        value: "{{AWS_ACCESS_KEY_ID}}"
+        placement: header
+      resources:
+        - name: resources
+          path: /
+          description: Amazon IoT Events resources
+          operations:
+            - name: list-detector-models
+              method: GET
+              description: List Detector Models
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: iot-events-rest
+      resources:
+        - path: /v1/resources
+          name: resources
+          description: Amazon IoT Events resources
+          operations:
+            - method: GET
+              name: list-detector-models
+              description: List Detector Models
+              call: "iot-events.list-detector-models"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+    - type: mcp
+      port: 9100
+      namespace: iot-events-mcp
+      transport: http
+      tools:
+        - name: list-detector-models
+          description: Amazon IoT Events List Detector Models
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "iot-events.list-detector-models"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-detector-model
+          description: Amazon IoT Events Create Detector Model
+          hints:
+            readOnly: false
+            
+          call: "iot-events.create-detector-model"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-inputs
+          description: Amazon IoT Events List Inputs
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "iot-events.list-inputs"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-input
+          description: Amazon IoT Events Create Input
+          hints:
+            readOnly: false
+            
+          call: "iot-events.create-input"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: describe-detector-model
+          description: Amazon IoT Events Describe Detector Model
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "iot-events.describe-detector-model"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-alarms
+          description: Amazon IoT Events List Alarms
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "iot-events.list-alarms"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-alarm-model
+          description: Amazon IoT Events Create Alarm Model
+          hints:
+            readOnly: false
+            
+          call: "iot-events.create-alarm-model"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: describe-alarm-model
+          description: Amazon IoT Events Describe Alarm Model
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "iot-events.describe-alarm-model"
+          outputParameters:
+            - type: object
+              mapping: "$."
