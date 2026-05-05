@@ -1,0 +1,13 @@
+{
+  "repo": "amazon-iot-events",
+  "feeds": [
+    {
+      "source": "https://aws.amazon.com/blogs/iot/tag/aws-iot-events/",
+      "feed_url": "https://aws.amazon.com/blogs/iot/tag/aws-iot-events/feed/",
+      "saved": 8,
+      "title": "AWS IoT Events \u2013 The Internet of Things on AWS \u2013 Official Blog"
+    }
+  ],
+  "post_count": 8,
+  "fetched": "2026-05-03T23:21:29Z"
+}
