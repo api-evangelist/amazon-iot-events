@@ -40,6 +40,14 @@ apis:
   - type: X-NaftikoCapability
     url: capabilities/amazon-iot-events.yaml
 common:
+- type: TrustCenter
+  url: security/amazon-iot-events-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/amazon-iot-events-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/amazon-iot-events-domain-security.yml
+- type: Authentication
+  url: authentication/amazon-iot-events-authentication.yml
 - type: Portal
   url: https://aws.amazon.com/iot-events/
 - type: Website
