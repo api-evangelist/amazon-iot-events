@@ -40,6 +40,8 @@ apis:
   - type: X-NaftikoCapability
     url: capabilities/amazon-iot-events.yaml
 common:
+- type: AgenticAccess
+  url: agentic-access/amazon-iot-events-agentic-access.yml
 - type: TrustCenter
   url: security/amazon-iot-events-trust-center.yml
 - type: VulnerabilityDisclosure
