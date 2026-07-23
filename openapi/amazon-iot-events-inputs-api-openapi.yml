@@ -1,0 +1,723 @@
+openapi: 3.0.0
+info:
+  version: '2018-07-27'
+  x-release: v4
+  title: AWS IoT Events Alarm Models Inputs API
+  description: AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur. You can use AWS IoT Events API operations to create, read, update, and delete inputs and detector models, and to list their versions.
+  x-logo:
+    url: https://twitter.com/awscloud/profile_image?size=original
+    backgroundColor: '#FFFFFF'
+  termsOfService: https://aws.amazon.com/service-terms/
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: https://github.com/mermade/aws2openapi
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: http://www.apache.org/licenses/
+  x-providerName: amazonaws.com
+  x-serviceName: iotevents
+  x-aws-signingName: iotevents
+  x-origin:
+  - contentType: application/json
+    url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/iotevents-2018-07-27.normal.json
+    converter:
+      url: https://github.com/mermade/aws2openapi
+      version: 1.0.0
+    x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+  x-apisguru-categories:
+  - cloud
+  x-preferred: true
+servers:
+- url: http://iotevents.{region}.amazonaws.com
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - us-gov-west-1
+      - us-gov-east-1
+      - ca-central-1
+      - eu-north-1
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-south-1
+      - af-south-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-northeast-3
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-east-1
+      - ap-south-1
+      - sa-east-1
+      - me-south-1
+      default: us-east-1
+  description: The AWS IoT Events multi-region endpoint
+- url: https://iotevents.{region}.amazonaws.com
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - us-gov-west-1
+      - us-gov-east-1
+      - ca-central-1
+      - eu-north-1
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-south-1
+      - af-south-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-northeast-3
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-east-1
+      - ap-south-1
+      - sa-east-1
+      - me-south-1
+      default: us-east-1
+  description: The AWS IoT Events multi-region endpoint
+- url: http://iotevents.{region}.amazonaws.com.cn
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - cn-north-1
+      - cn-northwest-1
+      default: cn-north-1
+  description: The AWS IoT Events endpoint for China (Beijing) and China (Ningxia)
+- url: https://iotevents.{region}.amazonaws.com.cn
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - cn-north-1
+      - cn-northwest-1
+      default: cn-north-1
+  description: The AWS IoT Events endpoint for China (Beijing) and China (Ningxia)
+security:
+- hmac: []
+tags:
+- name: Inputs
+paths:
+  /inputs:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: CreateInput
+      description: Creates an input.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateInputResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - inputName
+              - inputDefinition
+              properties:
+                inputName:
+                  description: The name you want to give to the input.
+                  type: string
+                  pattern: ^[a-zA-Z][a-zA-Z0-9_]*$
+                  minLength: 1
+                  maxLength: 128
+                inputDescription:
+                  description: A brief description of the input.
+                  type: string
+                  maxLength: 128
+                inputDefinition:
+                  description: The definition of the input.
+                  type: object
+                  properties:
+                    attributes:
+                      allOf:
+                      - $ref: '#/components/schemas/Attributes'
+                      - description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the <code>condition</code> expressions used by detectors that monitor this input. '
+                tags:
+                  description: Metadata that can be used to manage the input.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+      summary: Amazon IoT Events Create Input
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Inputs
+    get:
+      operationId: ListInputs
+      description: Lists the inputs you have created.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInputsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+      - name: nextToken
+        in: query
+        required: false
+        description: The token that you can use to return the next set of results.
+        schema:
+          type: string
+      - name: maxResults
+        in: query
+        required: false
+        description: The maximum number of results to be returned per request.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 250
+      summary: Amazon IoT Events List Inputs
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Inputs
+  /inputs/{inputName}:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteInput
+      description: Deletes an input.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteInputResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+      parameters:
+      - name: inputName
+        in: path
+        required: true
+        description: The name of the input to delete.
+        schema:
+          type: string
+          pattern: ^[a-zA-Z][a-zA-Z0-9_]*$
+          minLength: 1
+          maxLength: 128
+      summary: Amazon IoT Events Delete Input
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Inputs
+    get:
+      operationId: DescribeInput
+      description: Describes an input.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeInputResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+      - name: inputName
+        in: path
+        required: true
+        description: The name of the input.
+        schema:
+          type: string
+          pattern: ^[a-zA-Z][a-zA-Z0-9_]*$
+          minLength: 1
+          maxLength: 128
+      summary: Amazon IoT Events Describe Input
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Inputs
+    put:
+      operationId: UpdateInput
+      description: Updates an input.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateInputResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+      parameters:
+      - name: inputName
+        in: path
+        required: true
+        description: The name of the input you want to update.
+        schema:
+          type: string
+          pattern: ^[a-zA-Z][a-zA-Z0-9_]*$
+          minLength: 1
+          maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - inputDefinition
+              properties:
+                inputDescription:
+                  description: A brief description of the input.
+                  type: string
+                  maxLength: 128
+                inputDefinition:
+                  description: The definition of the input.
+                  type: object
+                  properties:
+                    attributes:
+                      allOf:
+                      - $ref: '#/components/schemas/Attributes'
+                      - description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the <code>condition</code> expressions used by detectors that monitor this input. '
+      summary: Amazon IoT Events Update Input
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Inputs
+components:
+  schemas:
+    ResourceInUseException: {}
+    Tag:
+      type: object
+      required:
+      - key
+      - value
+      properties:
+        key:
+          allOf:
+          - $ref: '#/components/schemas/TagKey'
+          - description: The tag's key.
+        value:
+          allOf:
+          - $ref: '#/components/schemas/TagValue'
+          - description: The tag's value.
+      description: Metadata that can be used to manage the resource.
+    InputArn:
+      type: string
+    Input:
+      type: object
+      properties:
+        inputConfiguration:
+          allOf:
+          - $ref: '#/components/schemas/InputConfiguration'
+          - description: Information about the configuration of an input.
+        inputDefinition:
+          allOf:
+          - $ref: '#/components/schemas/InputDefinition'
+          - description: The definition of the input.
+      description: Information about the input.
+    InternalFailureException: {}
+    InputDescription:
+      type: string
+      maxLength: 128
+    DescribeInputResponse:
+      type: object
+      properties:
+        input:
+          allOf:
+          - $ref: '#/components/schemas/Input'
+          - description: Information about the input.
+    Timestamp:
+      type: string
+      format: date-time
+    CreateInputResponse:
+      type: object
+      properties:
+        inputConfiguration:
+          allOf:
+          - $ref: '#/components/schemas/InputConfiguration'
+          - description: Information about the configuration of the input.
+    InputName:
+      type: string
+      pattern: ^[a-zA-Z][a-zA-Z0-9_]*$
+      minLength: 1
+      maxLength: 128
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    Attribute:
+      type: object
+      required:
+      - jsonPath
+      properties:
+        jsonPath:
+          allOf:
+          - $ref: '#/components/schemas/AttributeJsonPath'
+          - description: '<p>An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to AWS IoT Events (<code>BatchPutMessage</code>). Each such message contains a JSON payload. The attribute (and its paired value) specified here are available for use in the <code>condition</code> expressions used by detectors. </p> <p>Syntax: <code>&lt;field-name&gt;.&lt;field-name&gt;...</code> </p>'
+      description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload. Those attributes (and their paired values) specified here are available for use in the <code>condition</code> expressions used by detectors. '
+    AttributeJsonPath:
+      type: string
+      pattern: ^((`[\w\- ]+`)|([\w\-]+))(\.((`[\w- ]+`)|([\w\-]+)))*$
+      minLength: 1
+      maxLength: 128
+    InputDefinition:
+      type: object
+      required:
+      - attributes
+      properties:
+        attributes:
+          allOf:
+          - $ref: '#/components/schemas/Attributes'
+          - description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the <code>condition</code> expressions used by detectors that monitor this input. '
+      description: The definition of the input.
+    InvalidRequestException: {}
+    InputSummary:
+      type: object
+      properties:
+        inputName:
+          allOf:
+          - $ref: '#/components/schemas/InputName'
+          - description: The name of the input.
+        inputDescription:
+          allOf:
+          - $ref: '#/components/schemas/InputDescription'
+          - description: A brief description of the input.
+        inputArn:
+          allOf:
+          - $ref: '#/components/schemas/InputArn'
+          - description: The ARN of the input.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The time the input was created.
+        lastUpdateTime:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The last time the input was updated.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/InputStatus'
+          - description: The status of the input.
+      description: Information about the input.
+    NextToken:
+      type: string
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    Attributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Attribute'
+      minItems: 1
+      maxItems: 200
+    ServiceUnavailableException: {}
+    InputStatus:
+      type: string
+      enum:
+      - CREATING
+      - UPDATING
+      - ACTIVE
+      - DELETING
+    ResourceAlreadyExistsException: {}
+    UpdateInputResponse:
+      type: object
+      properties:
+        inputConfiguration:
+          allOf:
+          - $ref: '#/components/schemas/InputConfiguration'
+          - description: Information about the configuration of the input.
+    ListInputsResponse:
+      type: object
+      properties:
+        inputSummaries:
+          allOf:
+          - $ref: '#/components/schemas/InputSummaries'
+          - description: Summary information about the inputs.
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: The token that you can use to return the next set of results, or <code>null</code> if there are no more results.
+    DeleteInputResponse:
+      type: object
+      properties: {}
+    InputConfiguration:
+      type: object
+      required:
+      - inputName
+      - inputArn
+      - creationTime
+      - lastUpdateTime
+      - status
+      properties:
+        inputName:
+          allOf:
+          - $ref: '#/components/schemas/InputName'
+          - description: The name of the input.
+        inputDescription:
+          allOf:
+          - $ref: '#/components/schemas/InputDescription'
+          - description: A brief description of the input.
+        inputArn:
+          allOf:
+          - $ref: '#/components/schemas/InputArn'
+          - description: The ARN of the input.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The time the input was created.
+        lastUpdateTime:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The last time the input was updated.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/InputStatus'
+          - description: The status of the input.
+      description: Information about the configuration of an input.
+    ThrottlingException: {}
+    ResourceNotFoundException: {}
+    InputSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/InputSummary'
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+externalDocs:
+  description: Amazon Web Services documentation
+  url: https://docs.aws.amazon.com/iotevents/
+x-hasEquivalentPaths: true
