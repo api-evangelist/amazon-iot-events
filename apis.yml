@@ -4,7 +4,20 @@ description: AWS IoT Events is a managed service that makes it easy to detect an
   You can use it to build complex event detection logic, create state machines for IoT workflows, and trigger alerts or actions
   when specific conditions are met.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/amazon-iot-events.png
 tags:
 - AWS
 - Event Detection
@@ -16,23 +29,169 @@ created: '2026-03-16'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-- aid: amazon-iot-events:aws-iot-events-api
-  name: AWS IoT Events API
-  description: The AWS IoT Events API provides access to detector models, inputs, alarms, and event detection configurations
-    for building IoT event-driven workflows.
+- aid: amazon-iot-events:amazon-iot-events-alarm-models-api
+  name: Amazon IoT Events Alarm Models API
+  description: The Alarm Models API from Amazon IoT Events — 3 operation(s) for alarm models.
   humanURL: https://aws.amazon.com/iot-events/
   baseURL: https://iotevents.amazonaws.com
   tags:
-  - Event Detection
-  - IoT
-  - State Machine
+  - Alarm Models
   properties:
+  - type: OpenAPI
+    url: openapi/amazon-iot-events-alarm-models-api-openapi.yml
   - type: Documentation
     url: https://docs.aws.amazon.com/iotevents/latest/apireference/
-  - type: OpenAPI
-    url: openapi/amazon-iot-events-openapi-original.yml
   - type: GettingStarted
-    url: https://docs.aws.amazon.com/iotevents/latest/developerguide/getting-started-iotevents.html
+    url: >-
+      https://docs.aws.amazon.com/iotevents/latest/developerguide/getting-started-iotevents.html
+  - type: Pricing
+    url: https://aws.amazon.com/iot-events/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/iot-events/faqs/
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-iot-events.yaml
+- aid: amazon-iot-events:amazon-iot-events-analysis-api
+  name: Amazon IoT Events Analysis API
+  description: The Analysis API from Amazon IoT Events — 3 operation(s) for analysis.
+  humanURL: https://aws.amazon.com/iot-events/
+  baseURL: https://iotevents.amazonaws.com
+  tags:
+  - Analysis
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-iot-events-analysis-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/iotevents/latest/apireference/
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/iotevents/latest/developerguide/getting-started-iotevents.html
+  - type: Pricing
+    url: https://aws.amazon.com/iot-events/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/iot-events/faqs/
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-iot-events.yaml
+- aid: amazon-iot-events:amazon-iot-events-detector-models-api
+  name: Amazon IoT Events Detector Models API
+  description: The Detector Models API from Amazon IoT Events — 3 operation(s) for detector models.
+  humanURL: https://aws.amazon.com/iot-events/
+  baseURL: https://iotevents.amazonaws.com
+  tags:
+  - Detector Models
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-iot-events-detector-models-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/iotevents/latest/apireference/
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/iotevents/latest/developerguide/getting-started-iotevents.html
+  - type: Pricing
+    url: https://aws.amazon.com/iot-events/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/iot-events/faqs/
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-iot-events.yaml
+- aid: amazon-iot-events:amazon-iot-events-input-routings-api
+  name: Amazon IoT Events Input Routings API
+  description: The Input Routings API from Amazon IoT Events — 1 operation(s) for input routings.
+  humanURL: https://aws.amazon.com/iot-events/
+  baseURL: https://iotevents.amazonaws.com
+  tags:
+  - Input Routings
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-iot-events-input-routings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/iotevents/latest/apireference/
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/iotevents/latest/developerguide/getting-started-iotevents.html
+  - type: Pricing
+    url: https://aws.amazon.com/iot-events/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/iot-events/faqs/
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-iot-events.yaml
+- aid: amazon-iot-events:amazon-iot-events-inputs-api
+  name: Amazon IoT Events Inputs API
+  description: The Inputs API from Amazon IoT Events — 2 operation(s) for inputs.
+  humanURL: https://aws.amazon.com/iot-events/
+  baseURL: https://iotevents.amazonaws.com
+  tags:
+  - Inputs
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-iot-events-inputs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/iotevents/latest/apireference/
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/iotevents/latest/developerguide/getting-started-iotevents.html
+  - type: Pricing
+    url: https://aws.amazon.com/iot-events/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/iot-events/faqs/
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-iot-events.yaml
+- aid: amazon-iot-events:amazon-iot-events-logging-api
+  name: Amazon IoT Events Logging API
+  description: The Logging API from Amazon IoT Events — 1 operation(s) for logging.
+  humanURL: https://aws.amazon.com/iot-events/
+  baseURL: https://iotevents.amazonaws.com
+  tags:
+  - Logging
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-iot-events-logging-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/iotevents/latest/apireference/
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/iotevents/latest/developerguide/getting-started-iotevents.html
+  - type: Pricing
+    url: https://aws.amazon.com/iot-events/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/iot-events/faqs/
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-iot-events.yaml
+- aid: amazon-iot-events:amazon-iot-events-tags-resourcearn-api
+  name: Amazon IoT Events Tags#resourceArn API
+  description: The Tags#resourceArn API from Amazon IoT Events — 1 operation(s) for tags#resourcearn.
+  humanURL: https://aws.amazon.com/iot-events/
+  baseURL: https://iotevents.amazonaws.com
+  tags:
+  - Tags#resourceArn
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-iot-events-tags-resourcearn-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/iotevents/latest/apireference/
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/iotevents/latest/developerguide/getting-started-iotevents.html
+  - type: Pricing
+    url: https://aws.amazon.com/iot-events/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/iot-events/faqs/
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-iot-events.yaml
+- aid: amazon-iot-events:amazon-iot-events-tags-resourcearn-tagkeys-api
+  name: Amazon IoT Events Tags#resourceArn&tagKeys API
+  description: >-
+    The Tags#resourceArn&tagKeys API from Amazon IoT Events — 1 operation(s) for tags#resourcearn&tagkeys.
+  humanURL: https://aws.amazon.com/iot-events/
+  baseURL: https://iotevents.amazonaws.com
+  tags:
+  - Tags#resourceArn&tagKeys
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-iot-events-tags-resourcearn-tagkeys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/iotevents/latest/apireference/
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/iotevents/latest/developerguide/getting-started-iotevents.html
   - type: Pricing
     url: https://aws.amazon.com/iot-events/pricing/
   - type: FAQ
@@ -40,6 +199,8 @@ apis:
   - type: X-NaftikoCapability
     url: capabilities/amazon-iot-events.yaml
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/amazon-iot-events/overview
 - type: AgenticAccess
   url: agentic-access/amazon-iot-events-agentic-access.yml
 - type: TrustCenter
