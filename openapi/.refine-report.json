@@ -1,0 +1,28 @@
+{
+  "provider": "amazon-iot-events",
+  "sources": [
+    "amazon-iot-events-alarm-models-api-openapi.yml",
+    "amazon-iot-events-analysis-api-openapi.yml",
+    "amazon-iot-events-detector-models-api-openapi.yml",
+    "amazon-iot-events-input-routings-api-openapi.yml",
+    "amazon-iot-events-inputs-api-openapi.yml",
+    "amazon-iot-events-logging-api-openapi.yml",
+    "amazon-iot-events-tags-resourcearn-api-openapi.yml",
+    "amazon-iot-events-tags-resourcearn-tagkeys-api-openapi.yml"
+  ],
+  "outputs": [
+    "amazon-iot-events-alarm-models-api-openapi.yml",
+    "amazon-iot-events-analysis-api-openapi.yml",
+    "amazon-iot-events-detector-models-api-openapi.yml",
+    "amazon-iot-events-input-routings-api-openapi.yml",
+    "amazon-iot-events-inputs-api-openapi.yml",
+    "amazon-iot-events-logging-api-openapi.yml",
+    "amazon-iot-events-tags-resourcearn-api-openapi.yml",
+    "amazon-iot-events-tags-resourcearn-tagkeys-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
