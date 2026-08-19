@@ -1,0 +1,344 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AWS IoT Events Alarm Models Detector Models API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Detector Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon IoT Events List Detector Models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://iotevents.{region}.amazonaws.com/detector-models",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "The token that you can use to return the next set of results."
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to be returned per request."
+              }
+            ]
+          },
+          "docs": "Lists the detector models you have created. Only the metadata associated with each detector model is returned."
+        },
+        {
+          "info": {
+            "name": "Amazon IoT Events Create Detector Model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://iotevents.{region}.amazonaws.com/detector-models",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a detector model."
+        },
+        {
+          "info": {
+            "name": "Amazon IoT Events Describe Detector Model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://iotevents.{region}.amazonaws.com/detector-models/:detectorModelName",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "detectorModelName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the detector model."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "The version of the detector model."
+              }
+            ]
+          },
+          "docs": "Describes a detector model. If the <code>version</code> parameter is not specified, information about the latest version is returned."
+        },
+        {
+          "info": {
+            "name": "Amazon IoT Events Update Detector Model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://iotevents.{region}.amazonaws.com/detector-models/:detectorModelName",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "detectorModelName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the detector model that is updated."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a detector model. Detectors (instances) spawned by the previous version are deleted and then re-created as new inputs arrive."
+        },
+        {
+          "info": {
+            "name": "Amazon IoT Events Delete Detector Model",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://iotevents.{region}.amazonaws.com/detector-models/:detectorModelName",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "detectorModelName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the detector model to be deleted."
+              }
+            ]
+          },
+          "docs": "Deletes a detector model. Any active instances of the detector model are also deleted."
+        },
+        {
+          "info": {
+            "name": "Amazon IoT Events List Detector Model Versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://iotevents.{region}.amazonaws.com/detector-models/:detectorModelName/versions",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "detectorModelName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the detector model whose versions are returned."
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "The token that you can use to return the next set of results."
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to be returned per request."
+              }
+            ]
+          },
+          "docs": "Lists all the versions of a detector model. Only the metadata associated with each detector model version is returned."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
