@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  version: "1.0.0"
+  version: 1.0.0
   x-release: v4
   title: AWS IoT Events Alarm Models Analysis API
   description: AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur. You can use AWS IoT Events API operations to create, read, update, and delete inputs and detector models, and to list their versions.
@@ -329,78 +329,215 @@ paths:
       - Analysis
 components:
   schemas:
-    AnalysisResultLocationPath:
+    VariableValue:
       type: string
-    IotTopicPublishAction:
+      minLength: 1
+      maxLength: 1024
+    AssetPropertyQuality:
+      type: string
+    DynamoKeyField:
+      type: string
+    IotEventsAction:
       type: object
       required:
-      - mqttTopic
+      - inputName
       properties:
-        mqttTopic:
+        inputName:
           allOf:
-          - $ref: '#/components/schemas/MQTTTopic'
-          - description: The MQTT topic of the message. You can use a string expression that includes variables (<code>$variable.&lt;variable-name&gt;</code>) and input values (<code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>) as the topic string.
+          - $ref: '#/components/schemas/InputName'
+          - description: The name of the AWS IoT Events input where the data is sent.
         payload:
           allOf:
           - $ref: '#/components/schemas/Payload'
-          - description: You can configure the action payload when you publish a message to an AWS IoT Core topic.
-      description: Information required to publish the MQTT message through the AWS IoT message broker.
-    InternalFailureException: {}
-    AssetPropertyStringValue:
-      type: string
-    EventName:
-      type: string
-      maxLength: 128
-    State:
+          - description: You can configure the action payload when you send a message to an AWS IoT Events input.
+      description: Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action.
+    Event:
       type: object
       required:
-      - stateName
+      - eventName
       properties:
-        stateName:
+        eventName:
+          allOf:
+          - $ref: '#/components/schemas/EventName'
+          - description: The name of the event.
+        condition:
+          allOf:
+          - $ref: '#/components/schemas/Condition'
+          - description: Optional. The Boolean expression that, when TRUE, causes the <code>actions</code> to be performed. If not present, the actions are performed (=TRUE). If the expression result is not a Boolean value, the actions are not performed (=FALSE).
+        actions:
+          allOf:
+          - $ref: '#/components/schemas/Actions'
+          - description: The actions to be performed.
+      description: Specifies the <code>actions</code> to be performed when the <code>condition</code> evaluates to TRUE.
+    SNSTopicPublishAction:
+      type: object
+      required:
+      - targetArn
+      properties:
+        targetArn:
+          allOf:
+          - $ref: '#/components/schemas/AmazonResourceName'
+          - description: The ARN of the Amazon SNS target where the message is sent.
+        payload:
+          allOf:
+          - $ref: '#/components/schemas/Payload'
+          - description: You can configure the action payload when you send a message as an Amazon SNS push notification.
+      description: Information required to publish the Amazon SNS message.
+    AssetPropertyEntryId:
+      type: string
+    ContentExpression:
+      type: string
+      minLength: 1
+    UseBase64:
+      type: boolean
+    OnInputLifecycle:
+      type: object
+      properties:
+        events:
+          allOf:
+          - $ref: '#/components/schemas/Events'
+          - description: Specifies the actions performed when the <code>condition</code> evaluates to TRUE.
+        transitionEvents:
+          allOf:
+          - $ref: '#/components/schemas/TransitionEvents'
+          - description: Specifies the actions performed, and the next state entered, when a <code>condition</code> evaluates to TRUE.
+      description: Specifies the actions performed when the <code>condition</code> evaluates to TRUE.
+    InternalFailureException: {}
+    VariableName:
+      type: string
+      pattern: ^[a-zA-Z][a-zA-Z0-9_]*$
+      minLength: 1
+      maxLength: 128
+    AssetPropertyBooleanValue:
+      type: string
+    AssetPropertyId:
+      type: string
+    ResourceNotFoundException: {}
+    FirehoseAction:
+      type: object
+      required:
+      - deliveryStreamName
+      properties:
+        deliveryStreamName:
+          allOf:
+          - $ref: '#/components/schemas/DeliveryStreamName'
+          - description: The name of the Kinesis Data Firehose delivery stream where the data is written.
+        separator:
+          allOf:
+          - $ref: '#/components/schemas/FirehoseSeparator'
+          - description: 'A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: ''\n'' (newline), ''\t'' (tab), ''\r\n'' (Windows newline), '','' (comma).'
+        payload:
+          allOf:
+          - $ref: '#/components/schemas/Payload'
+          - description: You can configure the action payload when you send a message to an Amazon Kinesis Data Firehose delivery stream.
+      description: Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.
+    ThrottlingException: {}
+    GetDetectorModelAnalysisResultsResponse:
+      type: object
+      properties:
+        analysisResults:
+          allOf:
+          - $ref: '#/components/schemas/AnalysisResults'
+          - description: Contains information about one or more analysis results.
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: The token that you can use to return the next set of results, or <code>null</code> if there are no more results.
+    DynamoDBv2Action:
+      type: object
+      required:
+      - tableName
+      properties:
+        tableName:
+          allOf:
+          - $ref: '#/components/schemas/DynamoTableName'
+          - description: The name of the DynamoDB table.
+        payload:
+          $ref: '#/components/schemas/Payload'
+      description: '<p>Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all the information about the detector model instance and the event that triggered the action. You can customize the <a href="https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html">payload</a>. A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.</p> <p>You must use expressions for all parameters in <code>DynamoDBv2Action</code>. The expressions accept literals, operators, functions, references, and substitution templates.</p> <p class="title"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>tableName</code> parameter can be <code>''GreenhouseTemperatureTable''</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>tableName</code> parameter can be <code>$variable.ddbtableName</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>contentExpression</code> parameter in <code>Payload</code> uses a substitution template. </p> <p> <code>''{\"sensorID\": \"${$input.GreenhouseInput.sensor_id}\", \"temperature\": \"${$input.GreenhouseInput.temperature * 9 / 5 + 32}\"}''</code> </p> </li> <li> <p>For a string concatenation, you must use <code>+</code>. A string concatenation can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>tableName</code> parameter uses a string concatenation. </p> <p> <code>''GreenhouseTemperatureTable '' + $input.GreenhouseInput.date</code> </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p> <p>The value for the <code>type</code> parameter in <code>Payload</code> must be <code>JSON</code>.</p>'
+    AnalysisResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalysisResult'
+    Events:
+      type: array
+      items:
+        $ref: '#/components/schemas/Event'
+    IotSiteWiseAction:
+      type: object
+      properties:
+        entryId:
+          allOf:
+          - $ref: '#/components/schemas/AssetPropertyEntryId'
+          - description: A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier.
+        assetId:
+          allOf:
+          - $ref: '#/components/schemas/AssetId'
+          - description: The ID of the asset that has the specified property.
+        propertyId:
+          allOf:
+          - $ref: '#/components/schemas/AssetPropertyId'
+          - description: The ID of the asset property.
+        propertyAlias:
+          allOf:
+          - $ref: '#/components/schemas/AssetPropertyAlias'
+          - description: The alias of the asset property.
+        propertyValue:
+          allOf:
+          - $ref: '#/components/schemas/AssetPropertyValue'
+          - description: 'The value to send to the asset property. This value contains timestamp, quality, and value (TQV) information. '
+      description: <p>Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise.</p> <p>You must use expressions for all parameters in <code>IotSiteWiseAction</code>. The expressions accept literals, operators, functions, references, and substitutions templates.</p> <p class="title"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>propertyAlias</code> parameter can be <code>'/company/windfarm/3/turbine/7/temperature'</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>assetId</code> parameter can be <code>$input.TurbineInput.assetId1</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>propertyAlias</code> parameter uses a substitution template. </p> <p> <code>'company/windfarm/${$input.TemperatureInput.sensorData.windfarmID}/turbine/ ${$input.TemperatureInput.sensorData.turbineID}/temperature'</code> </p> </li> </ul> <p>You must specify either <code>propertyAlias</code> or both <code>assetId</code> and <code>propertyId</code> to identify the target asset property in AWS IoT SiteWise.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p>
+    AssetPropertyTimeInSeconds:
+      type: string
+    QueueUrl:
+      type: string
+    Payload:
+      type: object
+      required:
+      - contentExpression
+      - type
+      properties:
+        contentExpression:
+          allOf:
+          - $ref: '#/components/schemas/ContentExpression'
+          - description: The content of the payload. You can use a string expression that includes quoted strings (<code>'&lt;string&gt;'</code>), variables (<code>$variable.&lt;variable-name&gt;</code>), input values (<code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>), string concatenations, and quoted strings that contain <code>${}</code> as the content. The recommended maximum size of a content expression is 1 KB.
+        type:
+          allOf:
+          - $ref: '#/components/schemas/PayloadType'
+          - description: The value of the payload type can be either <code>STRING</code> or <code>JSON</code>.
+      description: <p>Information needed to configure the payload.</p> <p>By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use <code>contentExpression</code>.</p>
+    DynamoOperation:
+      type: string
+    TransitionEvent:
+      type: object
+      required:
+      - eventName
+      - condition
+      - nextState
+      properties:
+        eventName:
+          allOf:
+          - $ref: '#/components/schemas/EventName'
+          - description: The name of the transition event.
+        condition:
+          allOf:
+          - $ref: '#/components/schemas/Condition'
+          - description: Required. A Boolean expression that when TRUE causes the actions to be performed and the <code>nextState</code> to be entered.
+        actions:
+          allOf:
+          - $ref: '#/components/schemas/Actions'
+          - description: The actions to be performed.
+        nextState:
           allOf:
           - $ref: '#/components/schemas/StateName'
-          - description: The name of the state.
-        onInput:
-          allOf:
-          - $ref: '#/components/schemas/OnInputLifecycle'
-          - description: When an input is received and the <code>condition</code> is TRUE, perform the specified <code>actions</code>.
-        onEnter:
-          allOf:
-          - $ref: '#/components/schemas/OnEnterLifecycle'
-          - description: When entering this state, perform these <code>actions</code> if the <code>condition</code> is TRUE.
-        onExit:
-          allOf:
-          - $ref: '#/components/schemas/OnExitLifecycle'
-          - description: When exiting this state, perform these <code>actions</code> if the specified <code>condition</code> is <code>TRUE</code>.
-      description: Information that defines a state of a detector.
+          - description: The next state to enter.
+      description: Specifies the actions performed and the next state entered when a <code>condition</code> evaluates to TRUE.
+    DeliveryStreamName:
+      type: string
     StateName:
       type: string
       minLength: 1
       maxLength: 128
-    SqsAction:
-      type: object
-      required:
-      - queueUrl
-      properties:
-        queueUrl:
-          allOf:
-          - $ref: '#/components/schemas/QueueUrl'
-          - description: The URL of the SQS queue where the data is written.
-        useBase64:
-          allOf:
-          - $ref: '#/components/schemas/UseBase64'
-          - description: Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.
-        payload:
-          allOf:
-          - $ref: '#/components/schemas/Payload'
-          - description: You can configure the action payload when you send a message to an Amazon SQS queue.
-      description: Sends information about the detector model instance and the event that triggered the action to an Amazon SQS queue.
-    LimitExceededException: {}
-    PayloadType:
-      type: string
-      enum:
-      - STRING
-      - JSON
     AssetPropertyVariant:
       type: object
       properties:
@@ -421,85 +558,6 @@ components:
           - $ref: '#/components/schemas/AssetPropertyBooleanValue'
           - description: The asset property value is a Boolean value that must be <code>'TRUE'</code> or <code>'FALSE'</code>. You must use an expression, and the evaluated result should be a Boolean value.
       description: <p>A structure that contains an asset property value. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html">Variant</a> in the <i>AWS IoT SiteWise API Reference</i>.</p> <p>You must use expressions for all parameters in <code>AssetPropertyVariant</code>. The expressions accept literals, operators, functions, references, and substitution templates.</p> <p class="title"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>integerValue</code> parameter can be <code>'100'</code>.</p> </li> <li> <p>For references, you must specify either variables or parameters. For example, the value for the <code>booleanValue</code> parameter can be <code>$variable.offline</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates. </p> <p>In the following example, the value for the <code>doubleValue</code> parameter uses a substitution template. </p> <p> <code>'${$input.TemperatureInput.sensorData.temperature * 6 / 5 + 32}'</code> </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p> <p>You must specify one of the following value types, depending on the <code>dataType</code> of the specified asset property. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetProperty.html">AssetProperty</a> in the <i>AWS IoT SiteWise API Reference</i>.</p>
-    ServiceUnavailableException: {}
-    LambdaAction:
-      type: object
-      required:
-      - functionArn
-      properties:
-        functionArn:
-          allOf:
-          - $ref: '#/components/schemas/AmazonResourceName'
-          - description: The ARN of the Lambda function that is executed.
-        payload:
-          allOf:
-          - $ref: '#/components/schemas/Payload'
-          - description: You can configure the action payload when you send a message to a Lambda function.
-      description: Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.
-    AssetPropertyIntegerValue:
-      type: string
-    DynamoOperation:
-      type: string
-    AssetPropertyQuality:
-      type: string
-    Event:
-      type: object
-      required:
-      - eventName
-      properties:
-        eventName:
-          allOf:
-          - $ref: '#/components/schemas/EventName'
-          - description: The name of the event.
-        condition:
-          allOf:
-          - $ref: '#/components/schemas/Condition'
-          - description: Optional. The Boolean expression that, when TRUE, causes the <code>actions</code> to be performed. If not present, the actions are performed (=TRUE). If the expression result is not a Boolean value, the actions are not performed (=FALSE).
-        actions:
-          allOf:
-          - $ref: '#/components/schemas/Actions'
-          - description: The actions to be performed.
-      description: Specifies the <code>actions</code> to be performed when the <code>condition</code> evaluates to TRUE.
-    VariableName:
-      type: string
-      pattern: ^[a-zA-Z][a-zA-Z0-9_]*$
-      minLength: 1
-      maxLength: 128
-    FirehoseSeparator:
-      type: string
-      pattern: ([\n\t])|(\r\n)|(,)
-    AssetId:
-      type: string
-    SNSTopicPublishAction:
-      type: object
-      required:
-      - targetArn
-      properties:
-        targetArn:
-          allOf:
-          - $ref: '#/components/schemas/AmazonResourceName'
-          - description: The ARN of the Amazon SNS target where the message is sent.
-        payload:
-          allOf:
-          - $ref: '#/components/schemas/Payload'
-          - description: You can configure the action payload when you send a message as an Amazon SNS push notification.
-      description: Information required to publish the Amazon SNS message.
-    AssetPropertyEntryId:
-      type: string
-    IotEventsAction:
-      type: object
-      required:
-      - inputName
-      properties:
-        inputName:
-          allOf:
-          - $ref: '#/components/schemas/InputName'
-          - description: The name of the AWS IoT Events input where the data is sent.
-        payload:
-          allOf:
-          - $ref: '#/components/schemas/Payload'
-          - description: You can configure the action payload when you send a message to an AWS IoT Events input.
-      description: Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action.
     Action:
       type: object
       properties:
@@ -556,84 +614,40 @@ components:
           - $ref: '#/components/schemas/IotSiteWiseAction'
           - description: Sends information about the detector model instance and the event that triggered the action to an asset property in AWS IoT SiteWise .
       description: An action to be performed when the <code>condition</code> is TRUE.
-    DynamoTableName:
-      type: string
-    MQTTTopic:
-      type: string
-      minLength: 1
-      maxLength: 128
-    DynamoKeyField:
-      type: string
-    SetVariableAction:
+    AssetPropertyValue:
       type: object
-      required:
-      - variableName
-      - value
       properties:
-        variableName:
-          allOf:
-          - $ref: '#/components/schemas/VariableName'
-          - description: The name of the variable.
         value:
           allOf:
-          - $ref: '#/components/schemas/VariableValue'
-          - description: The new value of the variable.
-      description: Information about the variable and its new value.
-    TransitionEvent:
-      type: object
-      required:
-      - eventName
-      - condition
-      - nextState
-      properties:
-        eventName:
+          - $ref: '#/components/schemas/AssetPropertyVariant'
+          - description: The value to send to an asset property.
+        timestamp:
           allOf:
-          - $ref: '#/components/schemas/EventName'
-          - description: The name of the transition event.
-        condition:
+          - $ref: '#/components/schemas/AssetPropertyTimestamp'
+          - description: The timestamp associated with the asset property value. The default is the current event time.
+        quality:
           allOf:
-          - $ref: '#/components/schemas/Condition'
-          - description: Required. A Boolean expression that when TRUE causes the actions to be performed and the <code>nextState</code> to be entered.
-        actions:
-          allOf:
-          - $ref: '#/components/schemas/Actions'
-          - description: The actions to be performed.
-        nextState:
-          allOf:
-          - $ref: '#/components/schemas/StateName'
-          - description: The next state to enter.
-      description: Specifies the actions performed and the next state entered when a <code>condition</code> evaluates to TRUE.
-    AnalysisResults:
+          - $ref: '#/components/schemas/AssetPropertyQuality'
+          - description: The quality of the asset property value. The value must be <code>'GOOD'</code>, <code>'BAD'</code>, or <code>'UNCERTAIN'</code>.
+      description: <p>A structure that contains value information. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html">AssetPropertyValue</a> in the <i>AWS IoT SiteWise API Reference</i>.</p> <p>You must use expressions for all parameters in <code>AssetPropertyValue</code>. The expressions accept literals, operators, functions, references, and substitution templates.</p> <p class="title"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>quality</code> parameter can be <code>'GOOD'</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>quality</code> parameter can be <code>$input.TemperatureInput.sensorData.quality</code>.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p>
+    AnalysisResultLocations:
       type: array
       items:
-        $ref: '#/components/schemas/AnalysisResult'
-    UseBase64:
-      type: boolean
-    IotSiteWiseAction:
+        $ref: '#/components/schemas/AnalysisResultLocation'
+    StartDetectorModelAnalysisResponse:
       type: object
       properties:
-        entryId:
+        analysisId:
           allOf:
-          - $ref: '#/components/schemas/AssetPropertyEntryId'
-          - description: A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier.
-        assetId:
-          allOf:
-          - $ref: '#/components/schemas/AssetId'
-          - description: The ID of the asset that has the specified property.
-        propertyId:
-          allOf:
-          - $ref: '#/components/schemas/AssetPropertyId'
-          - description: The ID of the asset property.
-        propertyAlias:
-          allOf:
-          - $ref: '#/components/schemas/AssetPropertyAlias'
-          - description: The alias of the asset property.
-        propertyValue:
-          allOf:
-          - $ref: '#/components/schemas/AssetPropertyValue'
-          - description: 'The value to send to the asset property. This value contains timestamp, quality, and value (TQV) information. '
-      description: <p>Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise.</p> <p>You must use expressions for all parameters in <code>IotSiteWiseAction</code>. The expressions accept literals, operators, functions, references, and substitutions templates.</p> <p class="title"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>propertyAlias</code> parameter can be <code>'/company/windfarm/3/turbine/7/temperature'</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>assetId</code> parameter can be <code>$input.TurbineInput.assetId1</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>propertyAlias</code> parameter uses a substitution template. </p> <p> <code>'company/windfarm/${$input.TemperatureInput.sensorData.windfarmID}/turbine/ ${$input.TemperatureInput.sensorData.turbineID}/temperature'</code> </p> </li> </ul> <p>You must specify either <code>propertyAlias</code> or both <code>assetId</code> and <code>propertyId</code> to identify the target asset property in AWS IoT SiteWise.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p>
-    AssetPropertyTimeInSeconds:
+          - $ref: '#/components/schemas/AnalysisId'
+          - description: The ID that you can use to retrieve the analysis result.
+    Seconds:
+      type: integer
+      minimum: 1
+      maximum: 31622400
+    AssetPropertyAlias:
+      type: string
+    AnalysisType:
       type: string
     ResetTimerAction:
       type: object
@@ -645,65 +659,6 @@ components:
           - $ref: '#/components/schemas/TimerName'
           - description: The name of the timer to reset.
       description: Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer.
-    VariableValue:
-      type: string
-      minLength: 1
-      maxLength: 1024
-    Condition:
-      type: string
-      maxLength: 512
-    ThrottlingException: {}
-    NextToken:
-      type: string
-    TimerName:
-      type: string
-      minLength: 1
-      maxLength: 128
-    AssetPropertyTimestamp:
-      type: object
-      required:
-      - timeInSeconds
-      properties:
-        timeInSeconds:
-          allOf:
-          - $ref: '#/components/schemas/AssetPropertyTimeInSeconds'
-          - description: The timestamp, in seconds, in the Unix epoch format. The valid range is between 1-31556889864403199.
-        offsetInNanos:
-          allOf:
-          - $ref: '#/components/schemas/AssetPropertyOffsetInNanos'
-          - description: The nanosecond offset converted from <code>timeInSeconds</code>. The valid range is between 0-999999999.
-      description: <p>A structure that contains timestamp information. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html">TimeInNanos</a> in the <i>AWS IoT SiteWise API Reference</i>.</p> <p>You must use expressions for all parameters in <code>AssetPropertyTimestamp</code>. The expressions accept literals, operators, functions, references, and substitution templates.</p> <p class="title"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>timeInSeconds</code> parameter can be <code>'1586400675'</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>offsetInNanos</code> parameter can be <code>$variable.time</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>timeInSeconds</code> parameter uses a substitution template.</p> <p> <code>'${$input.TemperatureInput.sensorData.timestamp / 1000}'</code> </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p>
-    DynamoDBv2Action:
-      type: object
-      required:
-      - tableName
-      properties:
-        tableName:
-          allOf:
-          - $ref: '#/components/schemas/DynamoTableName'
-          - description: The name of the DynamoDB table.
-        payload:
-          $ref: '#/components/schemas/Payload'
-      description: '<p>Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all the information about the detector model instance and the event that triggered the action. You can customize the <a href="https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html">payload</a>. A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.</p> <p>You must use expressions for all parameters in <code>DynamoDBv2Action</code>. The expressions accept literals, operators, functions, references, and substitution templates.</p> <p class="title"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>tableName</code> parameter can be <code>''GreenhouseTemperatureTable''</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>tableName</code> parameter can be <code>$variable.ddbtableName</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>contentExpression</code> parameter in <code>Payload</code> uses a substitution template. </p> <p> <code>''{\"sensorID\": \"${$input.GreenhouseInput.sensor_id}\", \"temperature\": \"${$input.GreenhouseInput.temperature * 9 / 5 + 32}\"}''</code> </p> </li> <li> <p>For a string concatenation, you must use <code>+</code>. A string concatenation can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>tableName</code> parameter uses a string concatenation. </p> <p> <code>''GreenhouseTemperatureTable '' + $input.GreenhouseInput.date</code> </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p> <p>The value for the <code>type</code> parameter in <code>Payload</code> must be <code>JSON</code>.</p>'
-    Seconds:
-      type: integer
-      minimum: 1
-      maximum: 31622400
-    AnalysisResultLocations:
-      type: array
-      items:
-        $ref: '#/components/schemas/AnalysisResultLocation'
-    DynamoKeyValue:
-      type: string
-    InputName:
-      type: string
-      pattern: ^[a-zA-Z][a-zA-Z0-9_]*$
-      minLength: 1
-      maxLength: 128
-    AmazonResourceName:
-      type: string
-      minLength: 1
-      maxLength: 2048
     SetTimerAction:
       type: object
       required:
@@ -723,57 +678,6 @@ components:
           - $ref: '#/components/schemas/VariableValue'
           - description: 'The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (<code>$variable.&lt;variable-name&gt;</code>), and input values (<code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>) as the duration. The range of the duration is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration is rounded down to the nearest whole number. '
       description: Information needed to set the timer.
-    InvalidRequestException: {}
-    Payload:
-      type: object
-      required:
-      - contentExpression
-      - type
-      properties:
-        contentExpression:
-          allOf:
-          - $ref: '#/components/schemas/ContentExpression'
-          - description: The content of the payload. You can use a string expression that includes quoted strings (<code>'&lt;string&gt;'</code>), variables (<code>$variable.&lt;variable-name&gt;</code>), input values (<code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>), string concatenations, and quoted strings that contain <code>${}</code> as the content. The recommended maximum size of a content expression is 1 KB.
-        type:
-          allOf:
-          - $ref: '#/components/schemas/PayloadType'
-          - description: The value of the payload type can be either <code>STRING</code> or <code>JSON</code>.
-      description: <p>Information needed to configure the payload.</p> <p>By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use <code>contentExpression</code>.</p>
-    Events:
-      type: array
-      items:
-        $ref: '#/components/schemas/Event'
-    ClearTimerAction:
-      type: object
-      required:
-      - timerName
-      properties:
-        timerName:
-          allOf:
-          - $ref: '#/components/schemas/TimerName'
-          - description: The name of the timer to clear.
-      description: Information needed to clear the timer.
-    AnalysisMessage:
-      type: string
-    DescribeDetectorModelAnalysisResponse:
-      type: object
-      properties:
-        status:
-          allOf:
-          - $ref: '#/components/schemas/AnalysisStatus'
-          - description: <p>The status of the analysis activity. The status can be one of the following values:</p> <ul> <li> <p> <code>RUNNING</code> - AWS IoT Events is analyzing your detector model. This process can take several minutes to complete.</p> </li> <li> <p> <code>COMPLETE</code> - AWS IoT Events finished analyzing your detector model.</p> </li> <li> <p> <code>FAILED</code> - AWS IoT Events couldn't analyze your detector model. Try again later.</p> </li> </ul>
-    AnalysisStatus:
-      type: string
-      enum:
-      - RUNNING
-      - COMPLETE
-      - FAILED
-    QueueUrl:
-      type: string
-    TransitionEvents:
-      type: array
-      items:
-        $ref: '#/components/schemas/TransitionEvent'
     OnExitLifecycle:
       type: object
       properties:
@@ -782,39 +686,120 @@ components:
           - $ref: '#/components/schemas/Events'
           - description: Specifies the <code>actions</code> that are performed when the state is exited and the <code>condition</code> is <code>TRUE</code>.
       description: When exiting this state, perform these <code>actions</code> if the specified <code>condition</code> is <code>TRUE</code>.
-    ResourceNotFoundException: {}
-    AssetPropertyDoubleValue:
-      type: string
-    StartDetectorModelAnalysisResponse:
+    SqsAction:
       type: object
+      required:
+      - queueUrl
       properties:
-        analysisId:
+        queueUrl:
           allOf:
-          - $ref: '#/components/schemas/AnalysisId'
-          - description: The ID that you can use to retrieve the analysis result.
-    AnalysisId:
-      type: string
-    AnalysisType:
-      type: string
-    AssetPropertyOffsetInNanos:
-      type: string
-    AssetPropertyValue:
+          - $ref: '#/components/schemas/QueueUrl'
+          - description: The URL of the SQS queue where the data is written.
+        useBase64:
+          allOf:
+          - $ref: '#/components/schemas/UseBase64'
+          - description: Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.
+        payload:
+          allOf:
+          - $ref: '#/components/schemas/Payload'
+          - description: You can configure the action payload when you send a message to an Amazon SQS queue.
+      description: Sends information about the detector model instance and the event that triggered the action to an Amazon SQS queue.
+    InvalidRequestException: {}
+    LambdaAction:
       type: object
+      required:
+      - functionArn
       properties:
+        functionArn:
+          allOf:
+          - $ref: '#/components/schemas/AmazonResourceName'
+          - description: The ARN of the Lambda function that is executed.
+        payload:
+          allOf:
+          - $ref: '#/components/schemas/Payload'
+          - description: You can configure the action payload when you send a message to a Lambda function.
+      description: Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.
+    SetVariableAction:
+      type: object
+      required:
+      - variableName
+      - value
+      properties:
+        variableName:
+          allOf:
+          - $ref: '#/components/schemas/VariableName'
+          - description: The name of the variable.
         value:
           allOf:
-          - $ref: '#/components/schemas/AssetPropertyVariant'
-          - description: The value to send to an asset property.
-        timestamp:
+          - $ref: '#/components/schemas/VariableValue'
+          - description: The new value of the variable.
+      description: Information about the variable and its new value.
+    State:
+      type: object
+      required:
+      - stateName
+      properties:
+        stateName:
           allOf:
-          - $ref: '#/components/schemas/AssetPropertyTimestamp'
-          - description: The timestamp associated with the asset property value. The default is the current event time.
-        quality:
+          - $ref: '#/components/schemas/StateName'
+          - description: The name of the state.
+        onInput:
           allOf:
-          - $ref: '#/components/schemas/AssetPropertyQuality'
-          - description: The quality of the asset property value. The value must be <code>'GOOD'</code>, <code>'BAD'</code>, or <code>'UNCERTAIN'</code>.
-      description: <p>A structure that contains value information. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html">AssetPropertyValue</a> in the <i>AWS IoT SiteWise API Reference</i>.</p> <p>You must use expressions for all parameters in <code>AssetPropertyValue</code>. The expressions accept literals, operators, functions, references, and substitution templates.</p> <p class="title"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>quality</code> parameter can be <code>'GOOD'</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>quality</code> parameter can be <code>$input.TemperatureInput.sensorData.quality</code>.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p>
-    AssetPropertyId:
+          - $ref: '#/components/schemas/OnInputLifecycle'
+          - description: When an input is received and the <code>condition</code> is TRUE, perform the specified <code>actions</code>.
+        onEnter:
+          allOf:
+          - $ref: '#/components/schemas/OnEnterLifecycle'
+          - description: When entering this state, perform these <code>actions</code> if the <code>condition</code> is TRUE.
+        onExit:
+          allOf:
+          - $ref: '#/components/schemas/OnExitLifecycle'
+          - description: When exiting this state, perform these <code>actions</code> if the specified <code>condition</code> is <code>TRUE</code>.
+      description: Information that defines a state of a detector.
+    LimitExceededException: {}
+    PayloadType:
+      type: string
+      enum:
+      - STRING
+      - JSON
+    EventName:
+      type: string
+      maxLength: 128
+    NextToken:
+      type: string
+    InputName:
+      type: string
+      pattern: ^[a-zA-Z][a-zA-Z0-9_]*$
+      minLength: 1
+      maxLength: 128
+    MQTTTopic:
+      type: string
+      minLength: 1
+      maxLength: 128
+    AnalysisResultLevel:
+      type: string
+      enum:
+      - INFO
+      - WARNING
+      - ERROR
+    IotTopicPublishAction:
+      type: object
+      required:
+      - mqttTopic
+      properties:
+        mqttTopic:
+          allOf:
+          - $ref: '#/components/schemas/MQTTTopic'
+          - description: The MQTT topic of the message. You can use a string expression that includes variables (<code>$variable.&lt;variable-name&gt;</code>) and input values (<code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>) as the topic string.
+        payload:
+          allOf:
+          - $ref: '#/components/schemas/Payload'
+          - description: You can configure the action payload when you publish a message to an AWS IoT Core topic.
+      description: Information required to publish the MQTT message through the AWS IoT message broker.
+    FirehoseSeparator:
+      type: string
+      pattern: ([\n\t])|(\r\n)|(,)
+    DynamoTableName:
       type: string
     AnalysisResult:
       type: object
@@ -836,14 +821,22 @@ components:
           - $ref: '#/components/schemas/AnalysisResultLocations'
           - description: Contains one or more locations that you can use to locate the fields in your detector model that the analysis result references.
       description: Contains the result of the analysis.
-    OnEnterLifecycle:
+    AssetPropertyTimestamp:
       type: object
+      required:
+      - timeInSeconds
       properties:
-        events:
+        timeInSeconds:
           allOf:
-          - $ref: '#/components/schemas/Events'
-          - description: Specifies the actions that are performed when the state is entered and the <code>condition</code> is <code>TRUE</code>.
-      description: When entering this state, perform these <code>actions</code> if the <code>condition</code> is TRUE.
+          - $ref: '#/components/schemas/AssetPropertyTimeInSeconds'
+          - description: The timestamp, in seconds, in the Unix epoch format. The valid range is between 1-31556889864403199.
+        offsetInNanos:
+          allOf:
+          - $ref: '#/components/schemas/AssetPropertyOffsetInNanos'
+          - description: The nanosecond offset converted from <code>timeInSeconds</code>. The valid range is between 0-999999999.
+      description: <p>A structure that contains timestamp information. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html">TimeInNanos</a> in the <i>AWS IoT SiteWise API Reference</i>.</p> <p>You must use expressions for all parameters in <code>AssetPropertyTimestamp</code>. The expressions accept literals, operators, functions, references, and substitution templates.</p> <p class="title"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>timeInSeconds</code> parameter can be <code>'1586400675'</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>offsetInNanos</code> parameter can be <code>$variable.time</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>timeInSeconds</code> parameter uses a substitution template.</p> <p> <code>'${$input.TemperatureInput.sensorData.timestamp / 1000}'</code> </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p>
+    AssetId:
+      type: string
     AnalysisResultLocation:
       type: object
       properties:
@@ -852,10 +845,34 @@ components:
           - $ref: '#/components/schemas/AnalysisResultLocationPath'
           - description: A <a href="https://github.com/json-path/JsonPath">JsonPath</a> expression that identifies the error field in your detector model.
       description: Contains information that you can use to locate the field in your detector model that the analysis result references.
+    AssetPropertyDoubleValue:
+      type: string
+    DescribeDetectorModelAnalysisResponse:
+      type: object
+      properties:
+        status:
+          allOf:
+          - $ref: '#/components/schemas/AnalysisStatus'
+          - description: <p>The status of the analysis activity. The status can be one of the following values:</p> <ul> <li> <p> <code>RUNNING</code> - AWS IoT Events is analyzing your detector model. This process can take several minutes to complete.</p> </li> <li> <p> <code>COMPLETE</code> - AWS IoT Events finished analyzing your detector model.</p> </li> <li> <p> <code>FAILED</code> - AWS IoT Events couldn't analyze your detector model. Try again later.</p> </li> </ul>
+    AnalysisStatus:
+      type: string
+      enum:
+      - RUNNING
+      - COMPLETE
+      - FAILED
     Actions:
       type: array
       items:
         $ref: '#/components/schemas/Action'
+    AmazonResourceName:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    ServiceUnavailableException: {}
+    AssetPropertyIntegerValue:
+      type: string
+    AssetPropertyOffsetInNanos:
+      type: string
     DynamoDBAction:
       type: object
       required:
@@ -902,72 +919,55 @@ components:
         payload:
           $ref: '#/components/schemas/Payload'
       description: <p>Defines an action to write to the Amazon DynamoDB table that you created. The standard action payload contains all the information about the detector model instance and the event that triggered the action. You can customize the <a href="https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html">payload</a>. One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify.</p> <p>You must use expressions for all parameters in <code>DynamoDBAction</code>. The expressions accept literals, operators, functions, references, and substitution templates.</p> <p class="title"> <b>Examples</b> </p> <ul> <li> <p>For literal values, the expressions must contain single quotes. For example, the value for the <code>hashKeyType</code> parameter can be <code>'STRING'</code>.</p> </li> <li> <p>For references, you must specify either variables or input values. For example, the value for the <code>hashKeyField</code> parameter can be <code>$input.GreenhouseInput.name</code>.</p> </li> <li> <p>For a substitution template, you must use <code>${}</code>, and the template must be in single quotes. A substitution template can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>hashKeyValue</code> parameter uses a substitution template. </p> <p> <code>'${$input.GreenhouseInput.temperature * 6 / 5 + 32} in Fahrenheit'</code> </p> </li> <li> <p>For a string concatenation, you must use <code>+</code>. A string concatenation can also contain a combination of literals, operators, functions, references, and substitution templates.</p> <p>In the following example, the value for the <code>tableName</code> parameter uses a string concatenation. </p> <p> <code>'GreenhouseTemperatureTable ' + $input.GreenhouseInput.date</code> </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p> <p>If the defined payload type is a string, <code>DynamoDBAction</code> writes non-JSON data to the DynamoDB table as binary data. The DynamoDB console displays the data as Base64-encoded text. The value for the <code>payloadField</code> parameter is <code>&lt;payload-field&gt;_raw</code>.</p>
-    AssetPropertyAlias:
-      type: string
-    ContentExpression:
-      type: string
-      minLength: 1
-    DynamoKeyType:
-      type: string
-    AssetPropertyBooleanValue:
-      type: string
     States:
       type: array
       items:
         $ref: '#/components/schemas/State'
       minItems: 1
-    AnalysisResultLevel:
+    TimerName:
       type: string
-      enum:
-      - INFO
-      - WARNING
-      - ERROR
-    FirehoseAction:
+      minLength: 1
+      maxLength: 128
+    DynamoKeyType:
+      type: string
+    AssetPropertyStringValue:
+      type: string
+    Condition:
+      type: string
+      maxLength: 512
+    ClearTimerAction:
       type: object
       required:
-      - deliveryStreamName
+      - timerName
       properties:
-        deliveryStreamName:
+        timerName:
           allOf:
-          - $ref: '#/components/schemas/DeliveryStreamName'
-          - description: The name of the Kinesis Data Firehose delivery stream where the data is written.
-        separator:
-          allOf:
-          - $ref: '#/components/schemas/FirehoseSeparator'
-          - description: 'A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: ''\n'' (newline), ''\t'' (tab), ''\r\n'' (Windows newline), '','' (comma).'
-        payload:
-          allOf:
-          - $ref: '#/components/schemas/Payload'
-          - description: You can configure the action payload when you send a message to an Amazon Kinesis Data Firehose delivery stream.
-      description: Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.
-    OnInputLifecycle:
+          - $ref: '#/components/schemas/TimerName'
+          - description: The name of the timer to clear.
+      description: Information needed to clear the timer.
+    OnEnterLifecycle:
       type: object
       properties:
         events:
           allOf:
           - $ref: '#/components/schemas/Events'
-          - description: Specifies the actions performed when the <code>condition</code> evaluates to TRUE.
-        transitionEvents:
-          allOf:
-          - $ref: '#/components/schemas/TransitionEvents'
-          - description: Specifies the actions performed, and the next state entered, when a <code>condition</code> evaluates to TRUE.
-      description: Specifies the actions performed when the <code>condition</code> evaluates to TRUE.
-    GetDetectorModelAnalysisResultsResponse:
-      type: object
-      properties:
-        analysisResults:
-          allOf:
-          - $ref: '#/components/schemas/AnalysisResults'
-          - description: Contains information about one or more analysis results.
-        nextToken:
-          allOf:
-          - $ref: '#/components/schemas/NextToken'
-          - description: The token that you can use to return the next set of results, or <code>null</code> if there are no more results.
-    DeliveryStreamName:
+          - description: Specifies the actions that are performed when the state is entered and the <code>condition</code> is <code>TRUE</code>.
+      description: When entering this state, perform these <code>actions</code> if the <code>condition</code> is TRUE.
+    AnalysisId:
       type: string
+    AnalysisMessage:
+      type: string
+    DynamoKeyValue:
+      type: string
+    AnalysisResultLocationPath:
+      type: string
+    TransitionEvents:
+      type: array
+      items:
+        $ref: '#/components/schemas/TransitionEvent'
   parameters:
-    X-Amz-Algorithm:
-      name: X-Amz-Algorithm
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
       in: header
       schema:
         type: string
@@ -978,8 +978,8 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
+    X-Amz-Date:
+      name: X-Amz-Date
       in: header
       schema:
         type: string
@@ -990,20 +990,20 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-Date:
-      name: X-Amz-Date
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
       in: header
       schema:
         type: string
       required: false
     X-Amz-Credential:
       name: X-Amz-Credential
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
       in: header
       schema:
         type: string
