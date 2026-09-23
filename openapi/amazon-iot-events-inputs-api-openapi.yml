@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  version: 1.0.0
+  version: '2018-07-27'
   x-release: v4
-  title: AWS IoT Events Alarm Models Inputs API
+  title: AWS IoT Events Inputs API
   description: AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur. You can use AWS IoT Events API operations to create, read, update, and delete inputs and detector models, and to list their versions.
   x-logo:
     url: https://twitter.com/awscloud/profile_image?size=original
@@ -24,6 +24,7 @@ info:
     url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/iotevents-2018-07-27.normal.json
     converter:
       url: https://github.com/mermade/aws2openapi
+      version: 1.0.0
     x-apisguru-driver: external
   x-apiClientRegistration:
     url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
@@ -470,25 +471,113 @@ paths:
       - Inputs
 components:
   schemas:
-    InputName:
+    InputStatus:
       type: string
-      pattern: ^[a-zA-Z][a-zA-Z0-9_]*$
+      enum:
+      - CREATING
+      - UPDATING
+      - ACTIVE
+      - DELETING
+    DescribeInputResponse:
+      type: object
+      properties:
+        input:
+          allOf:
+          - $ref: '#/components/schemas/Input'
+          - description: Information about the input.
+    ResourceAlreadyExistsException: {}
+    UpdateInputResponse:
+      type: object
+      properties:
+        inputConfiguration:
+          allOf:
+          - $ref: '#/components/schemas/InputConfiguration'
+          - description: Information about the configuration of the input.
+    InputDefinition:
+      type: object
+      required:
+      - attributes
+      properties:
+        attributes:
+          allOf:
+          - $ref: '#/components/schemas/Attributes'
+          - description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the <code>condition</code> expressions used by detectors that monitor this input. '
+      description: The definition of the input.
+    InvalidRequestException: {}
+    TagKey:
+      type: string
       minLength: 1
       maxLength: 128
-    NextToken:
-      type: string
-    Timestamp:
-      type: string
-      format: date-time
     Attributes:
       type: array
       items:
         $ref: '#/components/schemas/Attribute'
       minItems: 1
       maxItems: 200
-    AttributeJsonPath:
+    InputDescription:
       type: string
-      pattern: ^((`[\w\- ]+`)|([\w\-]+))(\.((`[\w- ]+`)|([\w\-]+)))*$
+      maxLength: 128
+    InputSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/InputSummary'
+    InternalFailureException: {}
+    Attribute:
+      type: object
+      required:
+      - jsonPath
+      properties:
+        jsonPath:
+          allOf:
+          - $ref: '#/components/schemas/AttributeJsonPath'
+          - description: '<p>An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to AWS IoT Events (<code>BatchPutMessage</code>). Each such message contains a JSON payload. The attribute (and its paired value) specified here are available for use in the <code>condition</code> expressions used by detectors. </p> <p>Syntax: <code>&lt;field-name&gt;.&lt;field-name&gt;...</code> </p>'
+      description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload. Those attributes (and their paired values) specified here are available for use in the <code>condition</code> expressions used by detectors. '
+    Tag:
+      type: object
+      required:
+      - key
+      - value
+      properties:
+        key:
+          allOf:
+          - $ref: '#/components/schemas/TagKey'
+          - description: The tag's key.
+        value:
+          allOf:
+          - $ref: '#/components/schemas/TagValue'
+          - description: The tag's value.
+      description: Metadata that can be used to manage the resource.
+    ServiceUnavailableException: {}
+    InputArn:
+      type: string
+    DeleteInputResponse:
+      type: object
+      properties: {}
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    Timestamp:
+      type: string
+      format: date-time
+    ThrottlingException: {}
+    Input:
+      type: object
+      properties:
+        inputConfiguration:
+          allOf:
+          - $ref: '#/components/schemas/InputConfiguration'
+          - description: Information about the configuration of an input.
+        inputDefinition:
+          allOf:
+          - $ref: '#/components/schemas/InputDefinition'
+          - description: The definition of the input.
+      description: Information about the input.
+    ResourceNotFoundException: {}
+    ResourceInUseException: {}
+    InputName:
+      type: string
+      pattern: ^[a-zA-Z][a-zA-Z0-9_]*$
       minLength: 1
       maxLength: 128
     ListInputsResponse:
@@ -502,40 +591,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/NextToken'
           - description: The token that you can use to return the next set of results, or <code>null</code> if there are no more results.
-    DeleteInputResponse:
-      type: object
-      properties: {}
-    InputDescription:
-      type: string
-      maxLength: 128
-    InputSummary:
-      type: object
-      properties:
-        inputName:
-          allOf:
-          - $ref: '#/components/schemas/InputName'
-          - description: The name of the input.
-        inputDescription:
-          allOf:
-          - $ref: '#/components/schemas/InputDescription'
-          - description: A brief description of the input.
-        inputArn:
-          allOf:
-          - $ref: '#/components/schemas/InputArn'
-          - description: The ARN of the input.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/Timestamp'
-          - description: The time the input was created.
-        lastUpdateTime:
-          allOf:
-          - $ref: '#/components/schemas/Timestamp'
-          - description: The last time the input was updated.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/InputStatus'
-          - description: The status of the input.
-      description: Information about the input.
     InputConfiguration:
       type: object
       required:
@@ -570,41 +625,6 @@ components:
           - $ref: '#/components/schemas/InputStatus'
           - description: The status of the input.
       description: Information about the configuration of an input.
-    Tag:
-      type: object
-      required:
-      - key
-      - value
-      properties:
-        key:
-          allOf:
-          - $ref: '#/components/schemas/TagKey'
-          - description: The tag's key.
-        value:
-          allOf:
-          - $ref: '#/components/schemas/TagValue'
-          - description: The tag's value.
-      description: Metadata that can be used to manage the resource.
-    InternalFailureException: {}
-    InputStatus:
-      type: string
-      enum:
-      - CREATING
-      - UPDATING
-      - ACTIVE
-      - DELETING
-    Input:
-      type: object
-      properties:
-        inputConfiguration:
-          allOf:
-          - $ref: '#/components/schemas/InputConfiguration'
-          - description: Information about the configuration of an input.
-        inputDefinition:
-          allOf:
-          - $ref: '#/components/schemas/InputDefinition'
-          - description: The definition of the input.
-      description: Information about the input.
     CreateInputResponse:
       type: object
       properties:
@@ -612,69 +632,50 @@ components:
           allOf:
           - $ref: '#/components/schemas/InputConfiguration'
           - description: Information about the configuration of the input.
-    ResourceNotFoundException: {}
-    ThrottlingException: {}
-    DescribeInputResponse:
-      type: object
-      properties:
-        input:
-          allOf:
-          - $ref: '#/components/schemas/Input'
-          - description: Information about the input.
-    ResourceInUseException: {}
-    InvalidRequestException: {}
-    TagKey:
+    NextToken:
       type: string
+    AttributeJsonPath:
+      type: string
+      pattern: ^((`[\w\- ]+`)|([\w\-]+))(\.((`[\w- ]+`)|([\w\-]+)))*$
       minLength: 1
       maxLength: 128
-    TagValue:
-      type: string
-      minLength: 0
-      maxLength: 256
-    UpdateInputResponse:
+    InputSummary:
       type: object
       properties:
-        inputConfiguration:
+        inputName:
           allOf:
-          - $ref: '#/components/schemas/InputConfiguration'
-          - description: Information about the configuration of the input.
-    Attribute:
-      type: object
-      required:
-      - jsonPath
-      properties:
-        jsonPath:
+          - $ref: '#/components/schemas/InputName'
+          - description: The name of the input.
+        inputDescription:
           allOf:
-          - $ref: '#/components/schemas/AttributeJsonPath'
-          - description: '<p>An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to AWS IoT Events (<code>BatchPutMessage</code>). Each such message contains a JSON payload. The attribute (and its paired value) specified here are available for use in the <code>condition</code> expressions used by detectors. </p> <p>Syntax: <code>&lt;field-name&gt;.&lt;field-name&gt;...</code> </p>'
-      description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload. Those attributes (and their paired values) specified here are available for use in the <code>condition</code> expressions used by detectors. '
-    ResourceAlreadyExistsException: {}
-    InputArn:
-      type: string
-    InputDefinition:
-      type: object
-      required:
-      - attributes
-      properties:
-        attributes:
+          - $ref: '#/components/schemas/InputDescription'
+          - description: A brief description of the input.
+        inputArn:
           allOf:
-          - $ref: '#/components/schemas/Attributes'
-          - description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the <code>condition</code> expressions used by detectors that monitor this input. '
-      description: The definition of the input.
-    ServiceUnavailableException: {}
-    InputSummaries:
-      type: array
-      items:
-        $ref: '#/components/schemas/InputSummary'
+          - $ref: '#/components/schemas/InputArn'
+          - description: The ARN of the input.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The time the input was created.
+        lastUpdateTime:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The last time the input was updated.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/InputStatus'
+          - description: The status of the input.
+      description: Information about the input.
   parameters:
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
+    X-Amz-Signature:
+      name: X-Amz-Signature
       in: header
       schema:
         type: string
       required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
       in: header
       schema:
         type: string
@@ -685,8 +686,14 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
       in: header
       schema:
         type: string
@@ -697,14 +704,8 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-Signature:
-      name: X-Amz-Signature
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
+    X-Amz-Credential:
+      name: X-Amz-Credential
       in: header
       schema:
         type: string

@@ -1,14 +1,7 @@
 {
   "provider": "amazon-iot-events",
   "sources": [
-    "amazon-iot-events-alarm-models-api-openapi.yml",
-    "amazon-iot-events-analysis-api-openapi.yml",
-    "amazon-iot-events-detector-models-api-openapi.yml",
-    "amazon-iot-events-input-routings-api-openapi.yml",
-    "amazon-iot-events-inputs-api-openapi.yml",
-    "amazon-iot-events-logging-api-openapi.yml",
-    "amazon-iot-events-tags-resourcearn-api-openapi.yml",
-    "amazon-iot-events-tags-resourcearn-tagkeys-api-openapi.yml"
+    "_original/amazon-iot-events-openapi-original.yml"
   ],
   "outputs": [
     "amazon-iot-events-alarm-models-api-openapi.yml",
@@ -20,11 +13,59 @@
     "amazon-iot-events-tags-resourcearn-api-openapi.yml",
     "amazon-iot-events-tags-resourcearn-tagkeys-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
-    "apis.yml register: already-registered"
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "amazon-iot-events-openapi-original.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "amazon-iot-events-openapi-original.yml: tagged paths POST /alarm-models -> Alarm Models",
+    "amazon-iot-events-openapi-original.yml: tagged paths GET /alarm-models -> Alarm Models",
+    "amazon-iot-events-openapi-original.yml: tagged paths POST /detector-models -> Detector Models",
+    "amazon-iot-events-openapi-original.yml: tagged paths GET /detector-models -> Detector Models",
+    "amazon-iot-events-openapi-original.yml: tagged paths POST /inputs -> Inputs",
+    "amazon-iot-events-openapi-original.yml: tagged paths GET /inputs -> Inputs",
+    "amazon-iot-events-openapi-original.yml: tagged paths DELETE /alarm-models/{alarmModelName} -> Alarm Models",
+    "amazon-iot-events-openapi-original.yml: tagged paths GET /alarm-models/{alarmModelName} -> Alarm Models",
+    "amazon-iot-events-openapi-original.yml: tagged paths POST /alarm-models/{alarmModelName} -> Alarm Models",
+    "amazon-iot-events-openapi-original.yml: tagged paths DELETE /detector-models/{detectorModelName} -> Detector Models",
+    "amazon-iot-events-openapi-original.yml: tagged paths GET /detector-models/{detectorModelName} -> Detector Models",
+    "amazon-iot-events-openapi-original.yml: tagged paths POST /detector-models/{detectorModelName} -> Detector Models",
+    "amazon-iot-events-openapi-original.yml: tagged paths DELETE /inputs/{inputName} -> Inputs",
+    "amazon-iot-events-openapi-original.yml: tagged paths GET /inputs/{inputName} -> Inputs",
+    "amazon-iot-events-openapi-original.yml: tagged paths PUT /inputs/{inputName} -> Inputs",
+    "amazon-iot-events-openapi-original.yml: tagged paths GET /analysis/detector-models/{analysisId} -> Analysis",
+    "amazon-iot-events-openapi-original.yml: tagged paths GET /logging -> Logging",
+    "amazon-iot-events-openapi-original.yml: tagged paths PUT /logging -> Logging",
+    "amazon-iot-events-openapi-original.yml: tagged paths GET /analysis/detector-models/{analysisId}/results -> Analysis",
+    "amazon-iot-events-openapi-original.yml: tagged paths GET /alarm-models/{alarmModelName}/versions -> Alarm Models",
+    "amazon-iot-events-openapi-original.yml: tagged paths GET /detector-models/{detectorModelName}/versions -> Detector Models",
+    "amazon-iot-events-openapi-original.yml: tagged paths POST /input-routings -> Input Routings",
+    "amazon-iot-events-openapi-original.yml: tagged paths GET /tags#resourceArn -> Tags#resourceArn",
+    "amazon-iot-events-openapi-original.yml: tagged paths POST /tags#resourceArn -> Tags#resourceArn",
+    "amazon-iot-events-openapi-original.yml: tagged paths POST /analysis/detector-models/ -> Analysis",
+    "amazon-iot-events-openapi-original.yml: tagged paths DELETE /tags#resourceArn&tagKeys -> Tags#resourceArn&tagKeys",
+    "amazon-iot-events-openapi-original.yml: declared missing tag: Alarm Models",
+    "amazon-iot-events-openapi-original.yml: declared missing tag: Analysis",
+    "amazon-iot-events-openapi-original.yml: declared missing tag: Detector Models",
+    "amazon-iot-events-openapi-original.yml: declared missing tag: Input Routings",
+    "amazon-iot-events-openapi-original.yml: declared missing tag: Inputs",
+    "amazon-iot-events-openapi-original.yml: declared missing tag: Logging",
+    "amazon-iot-events-openapi-original.yml: declared missing tag: Tags#resourceArn",
+    "amazon-iot-events-openapi-original.yml: declared missing tag: Tags#resourceArn&tagKeys",
+    "superseded outputs removed: amazon-iot-events-tags-resource-arn-tag-keys-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 8 total)"
   ],
-  "skipped": []
+  "skipped": [
+    "amazon-iot-events-alarm-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-iot-events-analysis-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-iot-events-detector-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-iot-events-input-routings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-iot-events-inputs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-iot-events-logging-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-iot-events-tags-resource-arn-tag-keys-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-iot-events-tags-resourcearn-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

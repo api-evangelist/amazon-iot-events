@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  version: 1.0.0
+  version: '2018-07-27'
   x-release: v4
-  title: AWS IoT Events Alarm Models Tags#resource Arn&tag Keys API
+  title: AWS IoT Events Tags#resource Arn&tag Keys API
   description: AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur. You can use AWS IoT Events API operations to create, read, update, and delete inputs and detector models, and to list their versions.
   x-logo:
     url: https://twitter.com/awscloud/profile_image?size=original
@@ -24,6 +24,7 @@ info:
     url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/iotevents-2018-07-27.normal.json
     converter:
       url: https://github.com/mermade/aws2openapi
+      version: 1.0.0
     x-apisguru-driver: external
   x-apiClientRegistration:
     url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
@@ -112,7 +113,7 @@ servers:
 security:
 - hmac: []
 tags:
-- name: Tags#resourceArn&tagKeys
+- name: Tags#resource Arn&tag Keys
 paths:
   /tags#resourceArn&tagKeys:
     parameters:
@@ -185,29 +186,11 @@ paths:
         delay: 0
         dispatcher: FALLBACK
       tags:
-      - Tags#resourceArn&tagKeys
+      - Tags#resource Arn&tag Keys
 components:
   parameters:
-    X-Amz-Date:
-      name: X-Amz-Date
-      in: header
-      schema:
-        type: string
-      required: false
     X-Amz-Signature:
       name: X-Amz-Signature
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
       in: header
       schema:
         type: string
@@ -218,31 +201,49 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-Algorithm:
-      name: X-Amz-Algorithm
-      in: header
-      schema:
-        type: string
-      required: false
     X-Amz-Credential:
       name: X-Amz-Credential
       in: header
       schema:
         type: string
       required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
   schemas:
-    ResourceNotFoundException: {}
+    InternalFailureException: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
     ThrottlingException: {}
     InvalidRequestException: {}
-    ResourceInUseException: {}
+    ResourceNotFoundException: {}
     TagKey:
       type: string
       minLength: 1
       maxLength: 128
-    UntagResourceResponse:
-      type: object
-      properties: {}
-    InternalFailureException: {}
+    ResourceInUseException: {}
   securitySchemes:
     hmac:
       type: apiKey

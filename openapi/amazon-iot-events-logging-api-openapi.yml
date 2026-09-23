@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  version: 1.0.0
+  version: '2018-07-27'
   x-release: v4
-  title: AWS IoT Events Alarm Models Logging API
+  title: AWS IoT Events Logging API
   description: AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur. You can use AWS IoT Events API operations to create, read, update, and delete inputs and detector models, and to list their versions.
   x-logo:
     url: https://twitter.com/awscloud/profile_image?size=original
@@ -24,6 +24,7 @@ info:
     url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/iotevents-2018-07-27.normal.json
     converter:
       url: https://github.com/mermade/aws2openapi
+      version: 1.0.0
     x-apisguru-driver: external
   x-apiClientRegistration:
     url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
@@ -178,7 +179,10 @@ paths:
       - Logging
     put:
       operationId: PutLoggingOptions
-      description: <p>Sets or updates the AWS IoT Events logging options.</p> <p>If you update the value of any <code>loggingOptions</code> field, it takes up to one minute for the change to take effect. If you change the policy attached to the role you specified in the <code>roleArn</code> field (for example, to correct an invalid policy), it takes up to five minutes for that change to take effect.</p>
+      description: 'Sets or updates the AWS IoT Events logging options.
+
+
+        If you update the value of any loggingOptions field, it takes up to one minute for the change to take effect. If you change the policy attached to the role you specified in the roleArn field (for example, to correct an invalid policy), it takes up to five minutes for that change to take effect.'
       responses:
         '200':
           description: Success
@@ -256,17 +260,43 @@ paths:
       - Logging
 components:
   schemas:
+    AmazonResourceName:
+      type: string
+      minLength: 1
+      maxLength: 2048
     LoggingLevel:
       type: string
       enum:
       - ERROR
       - INFO
       - DEBUG
+    InvalidRequestException: {}
+    LoggingEnabled:
+      type: boolean
+    InternalFailureException: {}
+    ServiceUnavailableException: {}
+    DetectorDebugOption:
+      type: object
+      required:
+      - detectorModelName
+      properties:
+        detectorModelName:
+          allOf:
+          - $ref: '#/components/schemas/DetectorModelName'
+          - description: The name of the detector model.
+        keyValue:
+          allOf:
+          - $ref: '#/components/schemas/KeyValue'
+          - description: The value of the input attribute key used to create the detector (the instance of the detector model).
+      description: The detector model and the specific detectors (instances) for which the logging level is given.
     DetectorDebugOptions:
       type: array
       items:
         $ref: '#/components/schemas/DetectorDebugOption'
       minItems: 1
+    ThrottlingException: {}
+    ResourceNotFoundException: {}
+    ResourceInUseException: {}
     DescribeLoggingOptionsResponse:
       type: object
       properties:
@@ -274,7 +304,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/LoggingOptions'
           - description: The current settings of the AWS IoT Events logging options.
-    UnsupportedOperationException: {}
     LoggingOptions:
       type: object
       required:
@@ -299,51 +328,26 @@ components:
           - $ref: '#/components/schemas/DetectorDebugOptions'
           - description: Information that identifies those detector models and their detectors (instances) for which the logging level is given.
       description: The values of the AWS IoT Events logging options.
-    InternalFailureException: {}
-    ResourceNotFoundException: {}
-    ThrottlingException: {}
-    DetectorModelName:
-      type: string
-      pattern: ^[a-zA-Z0-9_-]+$
-      minLength: 1
-      maxLength: 128
-    InvalidRequestException: {}
-    ResourceInUseException: {}
-    LoggingEnabled:
-      type: boolean
-    DetectorDebugOption:
-      type: object
-      required:
-      - detectorModelName
-      properties:
-        detectorModelName:
-          allOf:
-          - $ref: '#/components/schemas/DetectorModelName'
-          - description: The name of the detector model.
-        keyValue:
-          allOf:
-          - $ref: '#/components/schemas/KeyValue'
-          - description: The value of the input attribute key used to create the detector (the instance of the detector model).
-      description: The detector model and the specific detectors (instances) for which the logging level is given.
-    AmazonResourceName:
-      type: string
-      minLength: 1
-      maxLength: 2048
+    UnsupportedOperationException: {}
     KeyValue:
       type: string
       pattern: ^[a-zA-Z0-9\-_:]+$
       minLength: 1
       maxLength: 128
-    ServiceUnavailableException: {}
+    DetectorModelName:
+      type: string
+      pattern: ^[a-zA-Z0-9_-]+$
+      minLength: 1
+      maxLength: 128
   parameters:
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
+    X-Amz-Signature:
+      name: X-Amz-Signature
       in: header
       schema:
         type: string
       required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
       in: header
       schema:
         type: string
@@ -354,8 +358,14 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
       in: header
       schema:
         type: string
@@ -366,14 +376,8 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-Signature:
-      name: X-Amz-Signature
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
+    X-Amz-Credential:
+      name: X-Amz-Credential
       in: header
       schema:
         type: string

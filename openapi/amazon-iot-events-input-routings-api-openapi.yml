@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  version: 1.0.0
+  version: '2018-07-27'
   x-release: v4
-  title: AWS IoT Events Alarm Models Input Routings API
+  title: AWS IoT Events Input Routings API
   description: AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur. You can use AWS IoT Events API operations to create, read, update, and delete inputs and detector models, and to list their versions.
   x-logo:
     url: https://twitter.com/awscloud/profile_image?size=original
@@ -24,6 +24,7 @@ info:
     url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/iotevents-2018-07-27.normal.json
     converter:
       url: https://github.com/mermade/aws2openapi
+      version: 1.0.0
     x-apisguru-driver: external
   x-apiClientRegistration:
     url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
@@ -125,7 +126,7 @@ paths:
     - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: ListInputRoutings
-      description: ' Lists one or more input routings. '
+      description: Lists one or more input routings.
       responses:
         '200':
           description: Success
@@ -200,14 +201,53 @@ paths:
       tags:
       - Input Routings
 components:
+  parameters:
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
   schemas:
-    InputName:
+    AssetModelId:
       type: string
-      pattern: ^[a-zA-Z][a-zA-Z0-9_]*$
-      minLength: 1
-      maxLength: 128
-    NextToken:
-      type: string
+    InvalidRequestException: {}
     ResourceName:
       type: string
     IotEventsInputIdentifier:
@@ -220,28 +260,8 @@ components:
           - $ref: '#/components/schemas/InputName'
           - description: ' The name of the input routed to AWS IoT Events. '
       description: ' The identifier of the input routed to AWS IoT Events. '
-    RoutedResource:
-      type: object
-      properties:
-        name:
-          allOf:
-          - $ref: '#/components/schemas/ResourceName'
-          - description: ' The name of the routed resource. '
-        arn:
-          allOf:
-          - $ref: '#/components/schemas/AmazonResourceName'
-          - description: ' The ARN of the routed resource. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>. '
-      description: ' Contains information about the routed resource. '
     InternalFailureException: {}
-    RoutedResources:
-      type: array
-      items:
-        $ref: '#/components/schemas/RoutedResource'
-    AssetPropertyId:
-      type: string
-    ResourceNotFoundException: {}
-    ThrottlingException: {}
-    InvalidRequestException: {}
+    ServiceUnavailableException: {}
     IotSiteWiseInputIdentifier:
       type: object
       properties:
@@ -250,6 +270,13 @@ components:
           - $ref: '#/components/schemas/IotSiteWiseAssetModelPropertyIdentifier'
           - description: ' The identifier of the AWS IoT SiteWise asset model property. '
       description: ' The identifer of the input routed from AWS IoT SiteWise. '
+    ThrottlingException: {}
+    ResourceNotFoundException: {}
+    InputName:
+      type: string
+      pattern: ^[a-zA-Z][a-zA-Z0-9_]*$
+      minLength: 1
+      maxLength: 128
     IotSiteWiseAssetModelPropertyIdentifier:
       type: object
       required:
@@ -265,8 +292,10 @@ components:
           - $ref: '#/components/schemas/AssetPropertyId'
           - description: ' The ID of the AWS IoT SiteWise asset property. '
       description: ' The asset model property identifer of the input routed from AWS IoT SiteWise. '
-    AssetModelId:
-      type: string
+    RoutedResources:
+      type: array
+      items:
+        $ref: '#/components/schemas/RoutedResource'
     ListInputRoutingsResponse:
       type: object
       properties:
@@ -278,54 +307,26 @@ components:
           allOf:
           - $ref: '#/components/schemas/NextToken'
           - description: ' The token that you can use to return the next set of results, or <code>null</code> if there are no more results. '
+    NextToken:
+      type: string
+    RoutedResource:
+      type: object
+      properties:
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ResourceName'
+          - description: ' The name of the routed resource. '
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/AmazonResourceName'
+          - description: ' The ARN of the routed resource. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>. '
+      description: ' Contains information about the routed resource. '
     AmazonResourceName:
       type: string
       minLength: 1
       maxLength: 2048
-    ServiceUnavailableException: {}
-  parameters:
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Algorithm:
-      name: X-Amz-Algorithm
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Date:
-      name: X-Amz-Date
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Signature:
-      name: X-Amz-Signature
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
-      in: header
-      schema:
-        type: string
-      required: false
+    AssetPropertyId:
+      type: string
   securitySchemes:
     hmac:
       type: apiKey
