@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   version: '2018-07-27'
   x-release: v4
-  title: AWS IoT Events Tags#resource Arn&tag Keys API
+  title: AWS IoT Events Tags API
   description: AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur. You can use AWS IoT Events API operations to create, read, update, and delete inputs and detector models, and to list their versions.
   x-logo:
     url: https://twitter.com/awscloud/profile_image?size=original
@@ -113,8 +113,147 @@ servers:
 security:
 - hmac: []
 tags:
-- name: Tags#resource Arn&tag Keys
+- name: Tags
 paths:
+  /tags#resourceArn:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags (metadata) you have assigned to the resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+      - name: resourceArn
+        in: query
+        required: true
+        description: The ARN of the resource.
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 2048
+      summary: Amazon IoT Events List Tags for Resource
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Tags
+    post:
+      operationId: TagResource
+      description: Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+      - name: resourceArn
+        in: query
+        required: true
+        description: The ARN of the resource.
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 2048
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - tags
+              properties:
+                tags:
+                  description: The new or modified tags for the resource.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+      summary: Amazon IoT Events Tag Resource
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Tags
   /tags#resourceArn&tagKeys:
     parameters:
     - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -186,9 +325,62 @@ paths:
         delay: 0
         dispatcher: FALLBACK
       tags:
-      - Tags#resource Arn&tag Keys
+      - Tags
 components:
+  schemas:
+    Tags:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    InvalidRequestException: {}
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    LimitExceededException: {}
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/Tags'
+          - description: The list of tags assigned to the resource.
+    ThrottlingException: {}
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    ResourceInUseException: {}
+    InternalFailureException: {}
+    Tag:
+      type: object
+      required:
+      - key
+      - value
+      properties:
+        key:
+          allOf:
+          - $ref: '#/components/schemas/TagKey'
+          - description: The tag's key.
+        value:
+          allOf:
+          - $ref: '#/components/schemas/TagValue'
+          - description: The tag's value.
+      description: Metadata that can be used to manage the resource.
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagResourceResponse:
+      type: object
+      properties: {}
+    ResourceNotFoundException: {}
   parameters:
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
     X-Amz-Signature:
       name: X-Amz-Signature
       in: header
@@ -201,20 +393,8 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
-      in: header
-      schema:
-        type: string
-      required: false
     X-Amz-Algorithm:
       name: X-Amz-Algorithm
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
       in: header
       schema:
         type: string
@@ -225,25 +405,18 @@ components:
       schema:
         type: string
       required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
     X-Amz-Content-Sha256:
       name: X-Amz-Content-Sha256
       in: header
       schema:
         type: string
       required: false
-  schemas:
-    InternalFailureException: {}
-    UntagResourceResponse:
-      type: object
-      properties: {}
-    ThrottlingException: {}
-    InvalidRequestException: {}
-    ResourceNotFoundException: {}
-    TagKey:
-      type: string
-      minLength: 1
-      maxLength: 128
-    ResourceInUseException: {}
   securitySchemes:
     hmac:
       type: apiKey

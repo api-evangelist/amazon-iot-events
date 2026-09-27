@@ -471,13 +471,9 @@ paths:
       - Inputs
 components:
   schemas:
-    InputStatus:
+    Timestamp:
       type: string
-      enum:
-      - CREATING
-      - UPDATING
-      - ACTIVE
-      - DELETING
+      format: date-time
     DescribeInputResponse:
       type: object
       properties:
@@ -485,14 +481,33 @@ components:
           allOf:
           - $ref: '#/components/schemas/Input'
           - description: Information about the input.
+    DeleteInputResponse:
+      type: object
+      properties: {}
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    InvalidRequestException: {}
+    InputSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/InputSummary'
     ResourceAlreadyExistsException: {}
-    UpdateInputResponse:
+    InputDescription:
+      type: string
+      maxLength: 128
+    ServiceUnavailableException: {}
+    InputArn:
+      type: string
+    CreateInputResponse:
       type: object
       properties:
         inputConfiguration:
           allOf:
           - $ref: '#/components/schemas/InputConfiguration'
           - description: Information about the configuration of the input.
+    ThrottlingException: {}
     InputDefinition:
       type: object
       required:
@@ -503,64 +518,10 @@ components:
           - $ref: '#/components/schemas/Attributes'
           - description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the <code>condition</code> expressions used by detectors that monitor this input. '
       description: The definition of the input.
-    InvalidRequestException: {}
     TagKey:
       type: string
       minLength: 1
       maxLength: 128
-    Attributes:
-      type: array
-      items:
-        $ref: '#/components/schemas/Attribute'
-      minItems: 1
-      maxItems: 200
-    InputDescription:
-      type: string
-      maxLength: 128
-    InputSummaries:
-      type: array
-      items:
-        $ref: '#/components/schemas/InputSummary'
-    InternalFailureException: {}
-    Attribute:
-      type: object
-      required:
-      - jsonPath
-      properties:
-        jsonPath:
-          allOf:
-          - $ref: '#/components/schemas/AttributeJsonPath'
-          - description: '<p>An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to AWS IoT Events (<code>BatchPutMessage</code>). Each such message contains a JSON payload. The attribute (and its paired value) specified here are available for use in the <code>condition</code> expressions used by detectors. </p> <p>Syntax: <code>&lt;field-name&gt;.&lt;field-name&gt;...</code> </p>'
-      description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload. Those attributes (and their paired values) specified here are available for use in the <code>condition</code> expressions used by detectors. '
-    Tag:
-      type: object
-      required:
-      - key
-      - value
-      properties:
-        key:
-          allOf:
-          - $ref: '#/components/schemas/TagKey'
-          - description: The tag's key.
-        value:
-          allOf:
-          - $ref: '#/components/schemas/TagValue'
-          - description: The tag's value.
-      description: Metadata that can be used to manage the resource.
-    ServiceUnavailableException: {}
-    InputArn:
-      type: string
-    DeleteInputResponse:
-      type: object
-      properties: {}
-    TagValue:
-      type: string
-      minLength: 0
-      maxLength: 256
-    Timestamp:
-      type: string
-      format: date-time
-    ThrottlingException: {}
     Input:
       type: object
       properties:
@@ -573,8 +534,19 @@ components:
           - $ref: '#/components/schemas/InputDefinition'
           - description: The definition of the input.
       description: Information about the input.
-    ResourceNotFoundException: {}
-    ResourceInUseException: {}
+    Attributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Attribute'
+      minItems: 1
+      maxItems: 200
+    InputStatus:
+      type: string
+      enum:
+      - CREATING
+      - UPDATING
+      - ACTIVE
+      - DELETING
     InputName:
       type: string
       pattern: ^[a-zA-Z][a-zA-Z0-9_]*$
@@ -591,6 +563,61 @@ components:
           allOf:
           - $ref: '#/components/schemas/NextToken'
           - description: The token that you can use to return the next set of results, or <code>null</code> if there are no more results.
+    ResourceInUseException: {}
+    InternalFailureException: {}
+    InputSummary:
+      type: object
+      properties:
+        inputName:
+          allOf:
+          - $ref: '#/components/schemas/InputName'
+          - description: The name of the input.
+        inputDescription:
+          allOf:
+          - $ref: '#/components/schemas/InputDescription'
+          - description: A brief description of the input.
+        inputArn:
+          allOf:
+          - $ref: '#/components/schemas/InputArn'
+          - description: The ARN of the input.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The time the input was created.
+        lastUpdateTime:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The last time the input was updated.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/InputStatus'
+          - description: The status of the input.
+      description: Information about the input.
+    Tag:
+      type: object
+      required:
+      - key
+      - value
+      properties:
+        key:
+          allOf:
+          - $ref: '#/components/schemas/TagKey'
+          - description: The tag's key.
+        value:
+          allOf:
+          - $ref: '#/components/schemas/TagValue'
+          - description: The tag's value.
+      description: Metadata that can be used to manage the resource.
+    Attribute:
+      type: object
+      required:
+      - jsonPath
+      properties:
+        jsonPath:
+          allOf:
+          - $ref: '#/components/schemas/AttributeJsonPath'
+          - description: '<p>An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to AWS IoT Events (<code>BatchPutMessage</code>). Each such message contains a JSON payload. The attribute (and its paired value) specified here are available for use in the <code>condition</code> expressions used by detectors. </p> <p>Syntax: <code>&lt;field-name&gt;.&lt;field-name&gt;...</code> </p>'
+      description: 'The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using <code>BatchPutMessage</code>. Each such message contains a JSON payload. Those attributes (and their paired values) specified here are available for use in the <code>condition</code> expressions used by detectors. '
     InputConfiguration:
       type: object
       required:
@@ -625,7 +652,7 @@ components:
           - $ref: '#/components/schemas/InputStatus'
           - description: The status of the input.
       description: Information about the configuration of an input.
-    CreateInputResponse:
+    UpdateInputResponse:
       type: object
       properties:
         inputConfiguration:
@@ -634,40 +661,19 @@ components:
           - description: Information about the configuration of the input.
     NextToken:
       type: string
+    ResourceNotFoundException: {}
     AttributeJsonPath:
       type: string
       pattern: ^((`[\w\- ]+`)|([\w\-]+))(\.((`[\w- ]+`)|([\w\-]+)))*$
       minLength: 1
       maxLength: 128
-    InputSummary:
-      type: object
-      properties:
-        inputName:
-          allOf:
-          - $ref: '#/components/schemas/InputName'
-          - description: The name of the input.
-        inputDescription:
-          allOf:
-          - $ref: '#/components/schemas/InputDescription'
-          - description: A brief description of the input.
-        inputArn:
-          allOf:
-          - $ref: '#/components/schemas/InputArn'
-          - description: The ARN of the input.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/Timestamp'
-          - description: The time the input was created.
-        lastUpdateTime:
-          allOf:
-          - $ref: '#/components/schemas/Timestamp'
-          - description: The last time the input was updated.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/InputStatus'
-          - description: The status of the input.
-      description: Information about the input.
   parameters:
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
     X-Amz-Signature:
       name: X-Amz-Signature
       in: header
@@ -686,18 +692,6 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
-      in: header
-      schema:
-        type: string
-      required: false
     X-Amz-Date:
       name: X-Amz-Date
       in: header
@@ -706,6 +700,12 @@ components:
       required: false
     X-Amz-Credential:
       name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
       in: header
       schema:
         type: string

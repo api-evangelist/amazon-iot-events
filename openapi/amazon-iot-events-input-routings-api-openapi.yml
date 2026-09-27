@@ -201,7 +201,96 @@ paths:
       tags:
       - Input Routings
 components:
+  schemas:
+    RoutedResources:
+      type: array
+      items:
+        $ref: '#/components/schemas/RoutedResource'
+    IotEventsInputIdentifier:
+      type: object
+      required:
+      - inputName
+      properties:
+        inputName:
+          allOf:
+          - $ref: '#/components/schemas/InputName'
+          - description: ' The name of the input routed to AWS IoT Events. '
+      description: ' The identifier of the input routed to AWS IoT Events. '
+    RoutedResource:
+      type: object
+      properties:
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ResourceName'
+          - description: ' The name of the routed resource. '
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/AmazonResourceName'
+          - description: ' The ARN of the routed resource. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>. '
+      description: ' Contains information about the routed resource. '
+    InvalidRequestException: {}
+    AssetModelId:
+      type: string
+    ResourceName:
+      type: string
+    ServiceUnavailableException: {}
+    ListInputRoutingsResponse:
+      type: object
+      properties:
+        routedResources:
+          allOf:
+          - $ref: '#/components/schemas/RoutedResources'
+          - description: ' Summary information about the routed resources. '
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: ' The token that you can use to return the next set of results, or <code>null</code> if there are no more results. '
+    ThrottlingException: {}
+    InputName:
+      type: string
+      pattern: ^[a-zA-Z][a-zA-Z0-9_]*$
+      minLength: 1
+      maxLength: 128
+    AmazonResourceName:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    InternalFailureException: {}
+    IotSiteWiseInputIdentifier:
+      type: object
+      properties:
+        iotSiteWiseAssetModelPropertyIdentifier:
+          allOf:
+          - $ref: '#/components/schemas/IotSiteWiseAssetModelPropertyIdentifier'
+          - description: ' The identifier of the AWS IoT SiteWise asset model property. '
+      description: ' The identifer of the input routed from AWS IoT SiteWise. '
+    IotSiteWiseAssetModelPropertyIdentifier:
+      type: object
+      required:
+      - assetModelId
+      - propertyId
+      properties:
+        assetModelId:
+          allOf:
+          - $ref: '#/components/schemas/AssetModelId'
+          - description: ' The ID of the AWS IoT SiteWise asset model. '
+        propertyId:
+          allOf:
+          - $ref: '#/components/schemas/AssetPropertyId'
+          - description: ' The ID of the AWS IoT SiteWise asset property. '
+      description: ' The asset model property identifer of the input routed from AWS IoT SiteWise. '
+    NextToken:
+      type: string
+    ResourceNotFoundException: {}
+    AssetPropertyId:
+      type: string
   parameters:
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
     X-Amz-Signature:
       name: X-Amz-Signature
       in: header
@@ -220,18 +309,6 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
-      in: header
-      schema:
-        type: string
-      required: false
     X-Amz-Date:
       name: X-Amz-Date
       in: header
@@ -244,89 +321,12 @@ components:
       schema:
         type: string
       required: false
-  schemas:
-    AssetModelId:
-      type: string
-    InvalidRequestException: {}
-    ResourceName:
-      type: string
-    IotEventsInputIdentifier:
-      type: object
-      required:
-      - inputName
-      properties:
-        inputName:
-          allOf:
-          - $ref: '#/components/schemas/InputName'
-          - description: ' The name of the input routed to AWS IoT Events. '
-      description: ' The identifier of the input routed to AWS IoT Events. '
-    InternalFailureException: {}
-    ServiceUnavailableException: {}
-    IotSiteWiseInputIdentifier:
-      type: object
-      properties:
-        iotSiteWiseAssetModelPropertyIdentifier:
-          allOf:
-          - $ref: '#/components/schemas/IotSiteWiseAssetModelPropertyIdentifier'
-          - description: ' The identifier of the AWS IoT SiteWise asset model property. '
-      description: ' The identifer of the input routed from AWS IoT SiteWise. '
-    ThrottlingException: {}
-    ResourceNotFoundException: {}
-    InputName:
-      type: string
-      pattern: ^[a-zA-Z][a-zA-Z0-9_]*$
-      minLength: 1
-      maxLength: 128
-    IotSiteWiseAssetModelPropertyIdentifier:
-      type: object
-      required:
-      - assetModelId
-      - propertyId
-      properties:
-        assetModelId:
-          allOf:
-          - $ref: '#/components/schemas/AssetModelId'
-          - description: ' The ID of the AWS IoT SiteWise asset model. '
-        propertyId:
-          allOf:
-          - $ref: '#/components/schemas/AssetPropertyId'
-          - description: ' The ID of the AWS IoT SiteWise asset property. '
-      description: ' The asset model property identifer of the input routed from AWS IoT SiteWise. '
-    RoutedResources:
-      type: array
-      items:
-        $ref: '#/components/schemas/RoutedResource'
-    ListInputRoutingsResponse:
-      type: object
-      properties:
-        routedResources:
-          allOf:
-          - $ref: '#/components/schemas/RoutedResources'
-          - description: ' Summary information about the routed resources. '
-        nextToken:
-          allOf:
-          - $ref: '#/components/schemas/NextToken'
-          - description: ' The token that you can use to return the next set of results, or <code>null</code> if there are no more results. '
-    NextToken:
-      type: string
-    RoutedResource:
-      type: object
-      properties:
-        name:
-          allOf:
-          - $ref: '#/components/schemas/ResourceName'
-          - description: ' The name of the routed resource. '
-        arn:
-          allOf:
-          - $ref: '#/components/schemas/AmazonResourceName'
-          - description: ' The ARN of the routed resource. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>. '
-      description: ' Contains information about the routed resource. '
-    AmazonResourceName:
-      type: string
-      minLength: 1
-      maxLength: 2048
-    AssetPropertyId:
-      type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
   securitySchemes:
     hmac:
       type: apiKey

@@ -10,11 +10,10 @@
     "amazon-iot-events-input-routings-api-openapi.yml",
     "amazon-iot-events-inputs-api-openapi.yml",
     "amazon-iot-events-logging-api-openapi.yml",
-    "amazon-iot-events-tags-resourcearn-api-openapi.yml",
-    "amazon-iot-events-tags-resourcearn-tagkeys-api-openapi.yml"
+    "amazon-iot-events-tags-api-openapi.yml"
   ],
   "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
+    "deleted 2 superseded output(s) from the previous generation"
   ],
   "errors": [],
   "warnings": [],
@@ -43,20 +42,19 @@
     "amazon-iot-events-openapi-original.yml: tagged paths GET /alarm-models/{alarmModelName}/versions -> Alarm Models",
     "amazon-iot-events-openapi-original.yml: tagged paths GET /detector-models/{detectorModelName}/versions -> Detector Models",
     "amazon-iot-events-openapi-original.yml: tagged paths POST /input-routings -> Input Routings",
-    "amazon-iot-events-openapi-original.yml: tagged paths GET /tags#resourceArn -> Tags#resourceArn",
-    "amazon-iot-events-openapi-original.yml: tagged paths POST /tags#resourceArn -> Tags#resourceArn",
+    "amazon-iot-events-openapi-original.yml: tagged paths GET /tags#resourceArn -> Tags",
+    "amazon-iot-events-openapi-original.yml: tagged paths POST /tags#resourceArn -> Tags",
     "amazon-iot-events-openapi-original.yml: tagged paths POST /analysis/detector-models/ -> Analysis",
-    "amazon-iot-events-openapi-original.yml: tagged paths DELETE /tags#resourceArn&tagKeys -> Tags#resourceArn&tagKeys",
+    "amazon-iot-events-openapi-original.yml: tagged paths DELETE /tags#resourceArn&tagKeys -> Tags",
     "amazon-iot-events-openapi-original.yml: declared missing tag: Alarm Models",
     "amazon-iot-events-openapi-original.yml: declared missing tag: Analysis",
     "amazon-iot-events-openapi-original.yml: declared missing tag: Detector Models",
     "amazon-iot-events-openapi-original.yml: declared missing tag: Input Routings",
     "amazon-iot-events-openapi-original.yml: declared missing tag: Inputs",
     "amazon-iot-events-openapi-original.yml: declared missing tag: Logging",
-    "amazon-iot-events-openapi-original.yml: declared missing tag: Tags#resourceArn",
-    "amazon-iot-events-openapi-original.yml: declared missing tag: Tags#resourceArn&tagKeys",
-    "superseded outputs removed: amazon-iot-events-tags-resource-arn-tag-keys-api-openapi.yml",
-    "apis.yml register: written (+1 apis, 8 total)"
+    "amazon-iot-events-openapi-original.yml: declared missing tag: Tags",
+    "superseded outputs removed: amazon-iot-events-tags-resource-arn-tag-keys-api-openapi.yml, amazon-iot-events-tags-resourcearn-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 7 total)"
   ],
   "skipped": [
     "amazon-iot-events-alarm-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
