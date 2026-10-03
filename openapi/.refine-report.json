@@ -12,9 +12,7 @@
     "amazon-iot-events-logging-api-openapi.yml",
     "amazon-iot-events-tags-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 2 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -53,8 +51,7 @@
     "amazon-iot-events-openapi-original.yml: declared missing tag: Inputs",
     "amazon-iot-events-openapi-original.yml: declared missing tag: Logging",
     "amazon-iot-events-openapi-original.yml: declared missing tag: Tags",
-    "superseded outputs removed: amazon-iot-events-tags-resource-arn-tag-keys-api-openapi.yml, amazon-iot-events-tags-resourcearn-api-openapi.yml",
-    "apis.yml register: written (+1 apis, 7 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "amazon-iot-events-alarm-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -63,7 +60,6 @@
     "amazon-iot-events-input-routings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amazon-iot-events-inputs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amazon-iot-events-logging-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "amazon-iot-events-tags-resource-arn-tag-keys-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "amazon-iot-events-tags-resourcearn-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+    "amazon-iot-events-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }
