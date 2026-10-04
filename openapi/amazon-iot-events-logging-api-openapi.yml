@@ -259,72 +259,27 @@ paths:
       tags:
       - Logging
 components:
-  parameters:
-    X-Amz-Signature:
-      name: X-Amz-Signature
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Date:
-      name: X-Amz-Date
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Algorithm:
-      name: X-Amz-Algorithm
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
-      in: header
-      schema:
-        type: string
-      required: false
   schemas:
-    InvalidRequestException: {}
-    LoggingEnabled:
-      type: boolean
+    KeyValue:
+      type: string
+      pattern: ^[a-zA-Z0-9\-_:]+$
+      minLength: 1
+      maxLength: 128
     AmazonResourceName:
       type: string
       minLength: 1
       maxLength: 2048
-    LoggingLevel:
-      type: string
-      enum:
-      - ERROR
-      - INFO
-      - DEBUG
-    ResourceInUseException: {}
-    DetectorModelName:
-      type: string
-      pattern: ^[a-zA-Z0-9_-]+$
-      minLength: 1
-      maxLength: 128
-    UnsupportedOperationException: {}
-    ThrottlingException: {}
     ResourceNotFoundException: {}
+    ServiceUnavailableException: {}
+    InvalidRequestException: {}
+    DetectorDebugOptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/DetectorDebugOption'
+      minItems: 1
+    LoggingEnabled:
+      type: boolean
+    UnsupportedOperationException: {}
     DescribeLoggingOptionsResponse:
       type: object
       properties:
@@ -332,18 +287,21 @@ components:
           allOf:
           - $ref: '#/components/schemas/LoggingOptions'
           - description: The current settings of the AWS IoT Events logging options.
-    DetectorDebugOptions:
-      type: array
-      items:
-        $ref: '#/components/schemas/DetectorDebugOption'
-      minItems: 1
-    KeyValue:
-      type: string
-      pattern: ^[a-zA-Z0-9\-_:]+$
-      minLength: 1
-      maxLength: 128
-    InternalFailureException: {}
-    ServiceUnavailableException: {}
+    ResourceInUseException: {}
+    DetectorDebugOption:
+      type: object
+      required:
+      - detectorModelName
+      properties:
+        detectorModelName:
+          allOf:
+          - $ref: '#/components/schemas/DetectorModelName'
+          - description: The name of the detector model.
+        keyValue:
+          allOf:
+          - $ref: '#/components/schemas/KeyValue'
+          - description: The value of the input attribute key used to create the detector (the instance of the detector model).
+      description: The detector model and the specific detectors (instances) for which the logging level is given.
     LoggingOptions:
       type: object
       required:
@@ -368,20 +326,62 @@ components:
           - $ref: '#/components/schemas/DetectorDebugOptions'
           - description: Information that identifies those detector models and their detectors (instances) for which the logging level is given.
       description: The values of the AWS IoT Events logging options.
-    DetectorDebugOption:
-      type: object
-      required:
-      - detectorModelName
-      properties:
-        detectorModelName:
-          allOf:
-          - $ref: '#/components/schemas/DetectorModelName'
-          - description: The name of the detector model.
-        keyValue:
-          allOf:
-          - $ref: '#/components/schemas/KeyValue'
-          - description: The value of the input attribute key used to create the detector (the instance of the detector model).
-      description: The detector model and the specific detectors (instances) for which the logging level is given.
+    InternalFailureException: {}
+    LoggingLevel:
+      type: string
+      enum:
+      - ERROR
+      - INFO
+      - DEBUG
+    ThrottlingException: {}
+    DetectorModelName:
+      type: string
+      pattern: ^[a-zA-Z0-9_-]+$
+      minLength: 1
+      maxLength: 128
+  parameters:
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
   securitySchemes:
     hmac:
       type: apiKey

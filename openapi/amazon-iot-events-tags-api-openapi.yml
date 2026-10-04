@@ -327,38 +327,59 @@ paths:
       tags:
       - Tags
 components:
+  parameters:
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
   schemas:
+    ResourceNotFoundException: {}
     TagValue:
       type: string
       minLength: 0
       maxLength: 256
-    TagKey:
-      type: string
-      minLength: 1
-      maxLength: 128
-    InvalidRequestException: {}
-    ResourceInUseException: {}
-    ThrottlingException: {}
     UntagResourceResponse:
       type: object
       properties: {}
-    TagResourceResponse:
-      type: object
-      properties: {}
-    ResourceNotFoundException: {}
-    ListTagsForResourceResponse:
-      type: object
-      properties:
-        tags:
-          allOf:
-          - $ref: '#/components/schemas/Tags'
-          - description: The list of tags assigned to the resource.
     LimitExceededException: {}
-    InternalFailureException: {}
-    Tags:
-      type: array
-      items:
-        $ref: '#/components/schemas/Tag'
     Tag:
       type: object
       required:
@@ -374,49 +395,28 @@ components:
           - $ref: '#/components/schemas/TagValue'
           - description: The tag's value.
       description: Metadata that can be used to manage the resource.
-  parameters:
-    X-Amz-Signature:
-      name: X-Amz-Signature
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Date:
-      name: X-Amz-Date
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Algorithm:
-      name: X-Amz-Algorithm
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
-      in: header
-      schema:
-        type: string
-      required: false
+    InvalidRequestException: {}
+    TagResourceResponse:
+      type: object
+      properties: {}
+    ResourceInUseException: {}
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/Tags'
+          - description: The list of tags assigned to the resource.
+    InternalFailureException: {}
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    Tags:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    ThrottlingException: {}
   securitySchemes:
     hmac:
       type: apiKey
