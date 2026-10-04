@@ -176,6 +176,9 @@ apis:
   - type: FAQ
     url: https://aws.amazon.com/iot-events/faqs/
 common:
+- type: CapabilityMap
+  url: capabilities/amazon-iot-events-capability-edges.yml
+  name: Amazon IoT Events Business Capability Map
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/amazon-iot-events/overview
 - type: AgenticAccess

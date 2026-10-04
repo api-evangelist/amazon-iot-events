@@ -1,0 +1,25 @@
+slug: amazon-iot-events
+provider: Amazon IoT Events
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Alarm Models
+  spec_file: amazon-iot-events-alarm-models-api-openapi.yml
+  capability_id: BC-600.40
+  capability_id_l1: BC-600
+  capability_name: IT Operations Management
+  confidence: 0.7
+  evidence: 'CreateAlarmModel ... schemas: AlarmCapabilities, AlarmEventActions, Severity, ComparisonOperator,
+    EmailRecipients'
+  reason: Defines alarm models that monitor equipment/device telemetry and trigger notification actions
+    — operational monitoring and alerting automation, not financial-crime alerting.
