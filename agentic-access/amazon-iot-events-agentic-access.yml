@@ -1,17 +1,20 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/amazon-iot-events-openapi-original.yml
+source: openapi/amazon-iot-events-alarm-models-api-openapi.yml, openapi/amazon-iot-events-analysis-api-openapi.yml,
+  openapi/amazon-iot-events-detector-models-api-openapi.yml, openapi/amazon-iot-events-input-routings-api-openapi.yml,
+  openapi/amazon-iot-events-inputs-api-openapi.yml, openapi/amazon-iot-events-logging-api-openapi.yml,
+  openapi/amazon-iot-events-tags-resource-arn-tag-keys-api-openapi.yml, openapi/amazon-iot-events-tags-resourcearn-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 26
   by_action_class:
-    acting: 14
-    connected: 12
+    acting: 13
+    connected: 13
   by_consequence:
-    write: 14
-    read: 12
+    write: 13
+    read: 13
   human_in_the_loop_required: 0
 operations:
 - path: /alarm-models
@@ -33,58 +36,6 @@ operations:
 - path: /alarm-models
   method: get
   operationId: ListAlarmModels
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /detector-models
-  method: post
-  operationId: CreateDetectorModel
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /detector-models
-  method: get
-  operationId: ListDetectorModels
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /inputs
-  method: post
-  operationId: CreateInput
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /inputs
-  method: get
-  operationId: ListInputs
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -134,6 +85,78 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /alarm-models/{alarmModelName}/versions
+  method: get
+  operationId: ListAlarmModelVersions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analysis/detector-models/{analysisId}
+  method: get
+  operationId: DescribeDetectorModelAnalysis
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analysis/detector-models/{analysisId}/results
+  method: get
+  operationId: GetDetectorModelAnalysisResults
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analysis/detector-models/
+  method: post
+  operationId: StartDetectorModelAnalysis
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /detector-models
+  method: post
+  operationId: CreateDetectorModel
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /detector-models
+  method: get
+  operationId: ListDetectorModels
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /detector-models/{detectorModelName}
   method: delete
   operationId: DeleteDetectorModel
@@ -176,6 +199,52 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /detector-models/{detectorModelName}/versions
+  method: get
+  operationId: ListDetectorModelVersions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /input-routings
+  method: post
+  operationId: ListInputRoutings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /inputs
+  method: post
+  operationId: CreateInput
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /inputs
+  method: get
+  operationId: ListInputs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /inputs/{inputName}
   method: delete
   operationId: DeleteInput
@@ -218,16 +287,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /analysis/detector-models/{analysisId}
-  method: get
-  operationId: DescribeDetectorModelAnalysis
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /logging
   method: get
   operationId: DescribeLoggingOptions
@@ -254,39 +313,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /analysis/detector-models/{analysisId}/results
-  method: get
-  operationId: GetDetectorModelAnalysisResults
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /alarm-models/{alarmModelName}/versions
-  method: get
-  operationId: ListAlarmModelVersions
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /detector-models/{detectorModelName}/versions
-  method: get
-  operationId: ListDetectorModelVersions
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /input-routings
-  method: post
-  operationId: ListInputRoutings
+- path: /tags#resourceArn&tagKeys
+  method: delete
+  operationId: UntagResource
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -313,38 +342,6 @@ operations:
 - path: /tags#resourceArn
   method: post
   operationId: TagResource
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /analysis/detector-models/
-  method: post
-  operationId: StartDetectorModelAnalysis
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /tags#resourceArn&tagKeys
-  method: delete
-  operationId: UntagResource
   x-agentic-access:
     action-class: acting
     consequence: write
