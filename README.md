@@ -1,4 +1,4 @@
-# Amazon IoT Events (amazon-iot-events)
+# Amazon IoT Events
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,129 +64,221 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
+> **No longer operating.** This company or product has shut down, been discontinued, or been deprecated. This profile is kept as a historical record and is not maintained or rated.
+
 AWS IoT Events is a managed service that makes it easy to detect and respond to events from IoT sensors and applications. You can use it to build complex event detection logic, create state machines for IoT workflows, and trigger alerts or actions when specific conditions are met.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/amazon-iot-events/refs/heads/main/apis.yml)
+**Areas:** AWS · Event Detection · IoT · State Machine · Automation · Defunct
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## Amazon IoT Events on APIs.io (historical record)
 
-## Tags:
+Everything profiled for Amazon IoT Events is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/amazon-iot-events/](https://apis.io/providers/amazon-iot-events/)** — or go straight to one of the APIs or properties below.
 
- - AWS, Event Detection, IoT, State Machine, Automation
+### APIs (7)
 
-## Timestamps
+- [Amazon IoT Events Alarm Models API](https://apis.io/apis/amazon-iot-events/amazon-iot-events-alarm-models-api/) — The Alarm Models API from Amazon IoT Events — 3 operation(s) for alarm models.
+- [Amazon IoT Events Analysis API](https://apis.io/apis/amazon-iot-events/amazon-iot-events-analysis-api/) — The Analysis API from Amazon IoT Events — 3 operation(s) for analysis.
+- [Amazon IoT Events Detector Models API](https://apis.io/apis/amazon-iot-events/amazon-iot-events-detector-models-api/) — The Detector Models API from Amazon IoT Events — 3 operation(s) for detector models.
+- [Amazon IoT Events Input Routings API](https://apis.io/apis/amazon-iot-events/amazon-iot-events-input-routings-api/) — The Input Routings API from Amazon IoT Events — 1 operation(s) for input routings.
+- [Amazon IoT Events Inputs API](https://apis.io/apis/amazon-iot-events/amazon-iot-events-inputs-api/) — The Inputs API from Amazon IoT Events — 2 operation(s) for inputs.
+- [Amazon IoT Events Logging API](https://apis.io/apis/amazon-iot-events/amazon-iot-events-logging-api/) — The Logging API from Amazon IoT Events — 1 operation(s) for logging.
+- [Amazon IoT Events Tags API](https://apis.io/apis/amazon-iot-events/amazon-iot-events-tags-api/) — The Tags API from Amazon IoT Events — 2 operation(s) for tags.
 
-- **Created:** 2026-03-16
-- **Modified:** 2026-04-19
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### AWS IoT Events API
-The AWS IoT Events API provides access to detector models, inputs, alarms, and event detection configurations for building IoT event-driven workflows.
+#### Agentic access (1)
 
-**Human URL:** [https://aws.amazon.com/iot-events/](https://aws.amazon.com/iot-events/)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags:
+- [Amazon Iot Events Agentic Access](https://apis.io/agentic-access/amazon-iot-events/amazon-iot-events-agentic-access/)
 
- - Event Detection, IoT, State Machine
+#### JSON Schema (143)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://docs.aws.amazon.com/iotevents/latest/apireference/)
-- [OpenAPI](openapi/amazon-iot-events-openapi-original.yml)
-- [GettingStarted](https://docs.aws.amazon.com/iotevents/latest/developerguide/getting-started-iotevents.html)
-- [Pricing](https://aws.amazon.com/iot-events/pricing/)
-- [FAQ](https://aws.amazon.com/iot-events/faqs/)
+- [AcknowledgeFlow](https://apis.io/schemas/amazon-iot-events/iot-events-acknowledge-flow/)
+- [Action](https://apis.io/schemas/amazon-iot-events/iot-events-action/)
+- [Actions](https://apis.io/schemas/amazon-iot-events/iot-events-actions/)
+- [AlarmAction](https://apis.io/schemas/amazon-iot-events/iot-events-alarm-action/)
+- [AlarmActions](https://apis.io/schemas/amazon-iot-events/iot-events-alarm-actions/)
+- [AlarmCapabilities](https://apis.io/schemas/amazon-iot-events/iot-events-alarm-capabilities/)
+- [AlarmEventActions](https://apis.io/schemas/amazon-iot-events/iot-events-alarm-event-actions/)
+- [AlarmModelSummaries](https://apis.io/schemas/amazon-iot-events/iot-events-alarm-model-summaries/)
+- [AlarmModelSummary](https://apis.io/schemas/amazon-iot-events/iot-events-alarm-model-summary/)
+- [AlarmModelVersionStatus](https://apis.io/schemas/amazon-iot-events/iot-events-alarm-model-version-status/)
+- [AlarmModelVersionSummaries](https://apis.io/schemas/amazon-iot-events/iot-events-alarm-model-version-summaries/)
+- [AlarmModelVersionSummary](https://apis.io/schemas/amazon-iot-events/iot-events-alarm-model-version-summary/)
+- [AlarmNotification](https://apis.io/schemas/amazon-iot-events/iot-events-alarm-notification/)
+- [AlarmRule](https://apis.io/schemas/amazon-iot-events/iot-events-alarm-rule/)
+- [AnalysisResult](https://apis.io/schemas/amazon-iot-events/iot-events-analysis-result/)
+- [AnalysisResultLevel](https://apis.io/schemas/amazon-iot-events/iot-events-analysis-result-level/)
+- [AnalysisResultLocation](https://apis.io/schemas/amazon-iot-events/iot-events-analysis-result-location/)
+- [AnalysisResultLocations](https://apis.io/schemas/amazon-iot-events/iot-events-analysis-result-locations/)
+- [AnalysisResults](https://apis.io/schemas/amazon-iot-events/iot-events-analysis-results/)
+- [AnalysisStatus](https://apis.io/schemas/amazon-iot-events/iot-events-analysis-status/)
+- [AssetPropertyTimestamp](https://apis.io/schemas/amazon-iot-events/iot-events-asset-property-timestamp/)
+- [AssetPropertyValue](https://apis.io/schemas/amazon-iot-events/iot-events-asset-property-value/)
+- [AssetPropertyVariant](https://apis.io/schemas/amazon-iot-events/iot-events-asset-property-variant/)
+- [Attribute](https://apis.io/schemas/amazon-iot-events/iot-events-attribute/)
+- [Attributes](https://apis.io/schemas/amazon-iot-events/iot-events-attributes/)
+- …and 118 more published on APIs.io
 
-## Common Properties
+#### JSON Structure (143)
 
-- [Portal](https://aws.amazon.com/iot-events/)
+Data models expressed in JSON Structure.
+
+- [Iot Events Acknowledge Flow Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-acknowledge-flow-structure/)
+- [Iot Events Action Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-action-structure/)
+- [Iot Events Actions Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-actions-structure/)
+- [Iot Events Alarm Action Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-alarm-action-structure/)
+- [Iot Events Alarm Actions Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-alarm-actions-structure/)
+- [Iot Events Alarm Capabilities Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-alarm-capabilities-structure/)
+- [Iot Events Alarm Event Actions Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-alarm-event-actions-structure/)
+- [Iot Events Alarm Model Summaries Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-alarm-model-summaries-structure/)
+- [Iot Events Alarm Model Summary Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-alarm-model-summary-structure/)
+- [Iot Events Alarm Model Version Status Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-alarm-model-version-status-structure/)
+- [Iot Events Alarm Model Version Summaries Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-alarm-model-version-summaries-structure/)
+- [Iot Events Alarm Model Version Summary Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-alarm-model-version-summary-structure/)
+- [Iot Events Alarm Notification Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-alarm-notification-structure/)
+- [Iot Events Alarm Rule Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-alarm-rule-structure/)
+- [Iot Events Analysis Result Level Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-analysis-result-level-structure/)
+- [Iot Events Analysis Result Location Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-analysis-result-location-structure/)
+- [Iot Events Analysis Result Locations Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-analysis-result-locations-structure/)
+- [Iot Events Analysis Result Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-analysis-result-structure/)
+- [Iot Events Analysis Results Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-analysis-results-structure/)
+- [Iot Events Analysis Status Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-analysis-status-structure/)
+- [Iot Events Asset Property Timestamp Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-asset-property-timestamp-structure/)
+- [Iot Events Asset Property Value Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-asset-property-value-structure/)
+- [Iot Events Asset Property Variant Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-asset-property-variant-structure/)
+- [Iot Events Attribute Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-attribute-structure/)
+- [Iot Events Attributes Structure](https://apis.io/json-structure/amazon-iot-events/iot-events-attributes-structure/)
+- …and 118 more published on APIs.io
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Amazon Iot Events Context](https://apis.io/jsonld/amazon-iot-events/amazon-iot-events-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Amazon Iot Events Vocabulary](https://apis.io/vocabularies/amazon-iot-events/amazon-iot-events-vocabulary/)
+
+#### Examples (134)
+
+Example requests and responses.
+
+- [Iot Events Acknowledge Flow Example](https://apis.io/examples/amazon-iot-events/iot-events-acknowledge-flow-example/)
+- [Iot Events Action Example](https://apis.io/examples/amazon-iot-events/iot-events-action-example/)
+- [Iot Events Actions Example](https://apis.io/examples/amazon-iot-events/iot-events-actions-example/)
+- [Iot Events Alarm Action Example](https://apis.io/examples/amazon-iot-events/iot-events-alarm-action-example/)
+- [Iot Events Alarm Actions Example](https://apis.io/examples/amazon-iot-events/iot-events-alarm-actions-example/)
+- [Iot Events Alarm Capabilities Example](https://apis.io/examples/amazon-iot-events/iot-events-alarm-capabilities-example/)
+- [Iot Events Alarm Event Actions Example](https://apis.io/examples/amazon-iot-events/iot-events-alarm-event-actions-example/)
+- [Iot Events Alarm Model Summaries Example](https://apis.io/examples/amazon-iot-events/iot-events-alarm-model-summaries-example/)
+- [Iot Events Alarm Model Summary Example](https://apis.io/examples/amazon-iot-events/iot-events-alarm-model-summary-example/)
+- [Iot Events Alarm Model Version Summaries Example](https://apis.io/examples/amazon-iot-events/iot-events-alarm-model-version-summaries-example/)
+- [Iot Events Alarm Model Version Summary Example](https://apis.io/examples/amazon-iot-events/iot-events-alarm-model-version-summary-example/)
+- [Iot Events Alarm Notification Example](https://apis.io/examples/amazon-iot-events/iot-events-alarm-notification-example/)
+- [Iot Events Alarm Rule Example](https://apis.io/examples/amazon-iot-events/iot-events-alarm-rule-example/)
+- [Iot Events Analysis Result Example](https://apis.io/examples/amazon-iot-events/iot-events-analysis-result-example/)
+- [Iot Events Analysis Result Location Example](https://apis.io/examples/amazon-iot-events/iot-events-analysis-result-location-example/)
+- [Iot Events Analysis Result Locations Example](https://apis.io/examples/amazon-iot-events/iot-events-analysis-result-locations-example/)
+- [Iot Events Analysis Results Example](https://apis.io/examples/amazon-iot-events/iot-events-analysis-results-example/)
+- [Iot Events Asset Property Timestamp Example](https://apis.io/examples/amazon-iot-events/iot-events-asset-property-timestamp-example/)
+- [Iot Events Asset Property Value Example](https://apis.io/examples/amazon-iot-events/iot-events-asset-property-value-example/)
+- [Iot Events Asset Property Variant Example](https://apis.io/examples/amazon-iot-events/iot-events-asset-property-variant-example/)
+- [Iot Events Attribute Example](https://apis.io/examples/amazon-iot-events/iot-events-attribute-example/)
+- [Iot Events Attributes Example](https://apis.io/examples/amazon-iot-events/iot-events-attributes-example/)
+- [Iot Events Clear Timer Action Example](https://apis.io/examples/amazon-iot-events/iot-events-clear-timer-action-example/)
+- [Iot Events Create Alarm Model Request Example](https://apis.io/examples/amazon-iot-events/iot-events-create-alarm-model-request-example/)
+- [Iot Events Create Alarm Model Response Example](https://apis.io/examples/amazon-iot-events/iot-events-create-alarm-model-response-example/)
+- …and 109 more published on APIs.io
+
+#### Collections (16)
+
+Postman and Open Collection request collections.
+
+- [AWS IoT Events Alarm Models API](https://apis.io/collections/amazon-iot-events/open-amazon-iot-events-alarm-models-api/)
+- [AWS IoT Events Alarm Models Analysis API](https://apis.io/collections/amazon-iot-events/open-amazon-iot-events-analysis-api/)
+- [AWS IoT Events Alarm Models Detector Models API](https://apis.io/collections/amazon-iot-events/open-amazon-iot-events-detector-models-api/)
+- [AWS IoT Events Alarm Models Input Routings API](https://apis.io/collections/amazon-iot-events/open-amazon-iot-events-input-routings-api/)
+- [AWS IoT Events Alarm Models Inputs API](https://apis.io/collections/amazon-iot-events/open-amazon-iot-events-inputs-api/)
+- [AWS IoT Events Alarm Models Logging API](https://apis.io/collections/amazon-iot-events/open-amazon-iot-events-logging-api/)
+- [AWS IoT Events Alarm Models Tags#resourceArn API](https://apis.io/collections/amazon-iot-events/open-amazon-iot-events-tags-resourcearn-api/)
+- [AWS IoT Events Alarm Models Tags#resourceArn&tagKeys API](https://apis.io/collections/amazon-iot-events/open-amazon-iot-events-tags-resourcearn-tagkeys-api/)
+- [AWS IoT Events Alarm Models API](https://apis.io/collections/amazon-iot-events/postman-amazon-iot-events-alarm-models-api/)
+- [AWS IoT Events Alarm Models Analysis API](https://apis.io/collections/amazon-iot-events/postman-amazon-iot-events-analysis-api/)
+- [AWS IoT Events Alarm Models Detector Models API](https://apis.io/collections/amazon-iot-events/postman-amazon-iot-events-detector-models-api/)
+- [AWS IoT Events Alarm Models Input Routings API](https://apis.io/collections/amazon-iot-events/postman-amazon-iot-events-input-routings-api/)
+- [AWS IoT Events Alarm Models Inputs API](https://apis.io/collections/amazon-iot-events/postman-amazon-iot-events-inputs-api/)
+- [AWS IoT Events Alarm Models Logging API](https://apis.io/collections/amazon-iot-events/postman-amazon-iot-events-logging-api/)
+- [AWS IoT Events Alarm Models Tags#resourceArn API](https://apis.io/collections/amazon-iot-events/postman-amazon-iot-events-tags-resourcearn-api/)
+- [AWS IoT Events Alarm Models Tags#resourceArn&tagKeys API](https://apis.io/collections/amazon-iot-events/postman-amazon-iot-events-tags-resourcearn-tagkeys-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Amazon IoT Events — jsonschema rules](https://apis.io/rules/amazon-iot-events/amazon-iot-events-jsonschema-spectral-rules/)
+- [Amazon IoT Events API Rules](https://apis.io/rules/amazon-iot-events/amazon-iot-events-spectral-rules/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Amazon Iot Events Authentication](https://apis.io/security/amazon-iot-events/amazon-iot-events-authentication/)
+- [Amazon Iot Events Domain Security](https://apis.io/security/amazon-iot-events/amazon-iot-events-domain-security/)
+- [Amazon Iot Events Trust Center](https://apis.io/security/amazon-iot-events/amazon-iot-events-trust-center/)
+- [Amazon Iot Events Vulnerability Disclosure](https://apis.io/security/amazon-iot-events/amazon-iot-events-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Amazon Iot Events Plans Pricing](https://apis.io/plans/amazon-iot-events/amazon-iot-events-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Amazon Iot Events Rate Limits](https://apis.io/rate-limits/amazon-iot-events/amazon-iot-events-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Amazon Iot Events Finops](https://apis.io/finops/amazon-iot-events/amazon-iot-events-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://aws.amazon.com/iot-events/)
 - [Documentation](https://docs.aws.amazon.com/iotevents/)
-- [TermsOfService](https://aws.amazon.com/service-terms/)
-- [PrivacyPolicy](https://aws.amazon.com/privacy/)
 - [Support](https://aws.amazon.com/premiumsupport/)
 - [Blog](https://aws.amazon.com/blogs/iot/tag/aws-iot-events/)
-- [GitHubOrganization](https://github.com/aws)
-- [Console](https://console.aws.amazon.com/iotevents/)
-- [SignUp](https://portal.aws.amazon.com/billing/signup)
-- [Login](https://signin.aws.amazon.com/)
-- [StatusPage](https://health.aws.amazon.com/health/status)
-- [Contact](https://aws.amazon.com/contact-us/)
+- [Terms of service](https://aws.amazon.com/service-terms/)
+- [Privacy policy](https://aws.amazon.com/privacy/)
+- [GitHub](https://github.com/aws)
+- [Status](https://health.aws.amazon.com/health/status)
 
-## Features
+## API Evangelist rating
 
-| Name | Description |
-|------|-------------|
-| Detector Models | Create state machines to detect complex event patterns across IoT data streams. |
-| Alarm Management | Built-in alarm management for monitoring IoT sensor thresholds. |
-| Event Inputs | Define structured event inputs and route IoT data to detector models. |
-| Multi-Trigger Actions | Trigger actions to SNS, SQS, Lambda, and other services when events are detected. |
+**Not rated** — this company is recorded as no longer operating, so no score is published. If it is in fact operating, say so on this repository and it will be re-profiled.
 
-## Use Cases
+## How this profile is made
 
-| Name | Description |
-|------|-------------|
-| Industrial Alarm Management | Detect equipment failures and trigger maintenance workflows automatically. |
-| Complex Event Processing | Detect patterns across multiple sensor streams over time. |
-| Predictive Maintenance | Alert operations teams when device metrics indicate impending failure. |
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-## Integrations
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Amazon IoT Events: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-| Name | Description |
-|------|-------------|
-| AWS IoT Core | Receives message data from IoT Core for event detection. |
-| Amazon SNS | Sends alerts and notifications when events are detected. |
-| AWS Lambda | Triggers Lambda functions to execute response workflows. |
+## Open an issue
 
-## Artifacts
-
-Machine-readable API specifications organized by format.
-
-### OpenAPI
-
-- [AWS IoT Events API](openapi/amazon-iot-events-openapi-original.yml)
-
-### JSON Schema
-
-143 schema files covering key resources and operations.
-
-### JSON Structure
-
-143 JSON Structure files converted from JSON Schema.
-
-### JSON-LD
-
-- [Amazon IoT Events Context](json-ld/amazon-iot-events-context.jsonld)
-
-### Examples
-
-143 example JSON files generated from schemas.
-
-## Capabilities
-
-Naftiko capabilities organized as shared per-API definitions composed into customer-facing workflows.
-
-### Shared Per-API Definitions
-
-- [AWS IoT Events API](capabilities/shared/iot-events.yaml) — operations for amazon iot events management
-
-### Workflow Capabilities
-
-| Workflow | APIs Combined | Tools | Persona |
-|----------|--------------|-------|---------|
-| [Iot Event Management](capabilities/iot-event-management.yaml) | Amazon IoT Events | 8 | IoT Developer, Solutions Architect |
-
-## Vocabulary
-
-- [Amazon IoT Events Vocabulary](vocabulary/amazon-iot-events-vocabulary.yaml) — Unified taxonomy mapping resources, actions, workflows, and personas
-
-## Rules
-
-- [Amazon IoT Events Spectral Rules](rules/amazon-iot-events-spectral-rules.yml) — 14 rules across 6 categories enforcing Amazon IoT Events API conventions
-
-## Maintainers
-
-**FN:** Kin Lane
-
-**Email:** kin@apievangelist.com
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/amazon-iot-events/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
